@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=4 format=3]
+
+[ext_resource type="PackedScene" uid="uid://d3wfa8u20bx20" path="res://Player_Controller/Spawnable_Objects/bullet.tscn" id="1_cfg46"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="2_gpxoe"]
+[ext_resource type="PackedScene" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_L.tscn" id="2_wkn8h"]
+
+[resource]
+script = ExtResource("2_gpxoe")
+Weapon_Name = "blasterL"
+Pick_Up_Anim = "blasterL Activate"
+Shoot_Anim = "blasterL Shoot"
+Reload_Anim = "blasterL Reload"
+Change_Anim = "blasterL De-Activate"
+Drop_Anim = "blasterL Drop"
+Out_Of_Ammo_Anim = "blasterL OOA"
+Current_Ammo = 30
+Reserve_Ammo = 30
+Magazine = 30
+Max_Ammo = 60
+Damage = 5
+AutoFire = true
+Projectile_To_Load = ExtResource("1_cfg46")
+Projectile_Velocity = 200
+Type = 2
+Can_Be_Dropped = true
+Weapon_Drop = ExtResource("2_wkn8h")

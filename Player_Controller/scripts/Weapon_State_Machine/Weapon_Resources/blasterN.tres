@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="1_oiqq5"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_oxrhl"]
+
+[resource]
+script = ExtResource("1_oxrhl")
+Weapon_Name = "blasterN"
+Pick_Up_Anim = "blasterN Active"
+Shoot_Anim = "blasterN Shoot"
+Reload_Anim = "blasterN Reload"
+Change_Anim = "blasterN De-Activate"
+Drop_Anim = "blasterN Drop"
+Out_Of_Ammo_Anim = "blasterN OOA"
+Current_Ammo = 5
+Reserve_Ammo = 10
+Magazine = 5
+Max_Ammo = 15
+Damage = 1
+AutoFire = false
+Projectile_Velocity = 0
+Type = 1
+Can_Be_Dropped = true
+Weapon_Drop = ExtResource("1_oiqq5")

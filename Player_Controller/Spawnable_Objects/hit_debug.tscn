@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://uidicgaojgdi" path="res://Player_Controller/HUD ASSETS/crosshair046.png" id="1_co67c"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/hit_debug.gd" id="2_gvqnn"]
+
+[node name="Node3D" type="Sprite3D"]
+modulate = Color(0.976471, 0, 0.00784314, 1)
+texture = ExtResource("1_co67c")
+script = ExtResource("2_gvqnn")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_jgxyc"]
+[ext_resource type="PackedScene" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="1_ohyk1"]
+
+[resource]
+script = ExtResource("1_jgxyc")
+Weapon_Name = "blasterI"
+Pick_Up_Anim = "blasterI Active"
+Shoot_Anim = "blasterI Shoot"
+Reload_Anim = "blasterI Reload"
+Change_Anim = "blasterI De-Activate"
+Drop_Anim = "blasterI Drop"
+Out_Of_Ammo_Anim = "blasterI OOA"
+Current_Ammo = 30
+Reserve_Ammo = 60
+Magazine = 30
+Max_Ammo = 60
+Damage = 2
+AutoFire = true
+Projectile_Velocity = 0
+Type = 1
+Can_Be_Dropped = true
+Weapon_Drop = ExtResource("1_ohyk1")
