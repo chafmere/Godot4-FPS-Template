@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://bwc28g513sfim"]
 
 [ext_resource type="Script" path="res://Example World/Scripts/physic_objects/targetable_objects.gd" id="1_kuesi"]
 [ext_resource type="Texture2D" uid="uid://dxsynf14s3j6x" path="res://Example World/Models/Boxes/cardboard_box1_Box_21-256x256.png" id="1_pdymq"]

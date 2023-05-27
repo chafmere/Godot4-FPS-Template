@@ -3,10 +3,16 @@ extends Node3D
 signal Weapon_Changed
 signal Update_Ammo
 signal Update_WeaponStack
+signal Hit_Successfull
+signal Add_Signal_To_HUD
+
+var Move_Back = false
+var Move_Forward = false
 
 @onready var Animation_Player = get_node("%AnimationPlayer")
 @onready var Bullet_Point = get_node("%BulletPoint")
 @onready var Debug_Bullet = preload("res://Player_Controller/Spawnable_Objects/hit_debug.tscn")
+
 
 var Current_Weapon = null
 
@@ -50,7 +56,7 @@ func _input(event):
 
 	if event.is_action_pressed("Drop_Weapon"):
 		drop(Current_Weapon.Weapon_Name)
-
+		
 func Initialize(_Start_Weapons: Array):
 	for Weapons in _weapon_resources:
 		Weapons_List[Weapons.Weapon_Name] = Weapons
@@ -177,6 +183,7 @@ func HitScanCollision(Point: Vector3):
 
 func HitScanDamage(Collider, Direction, Position):
 	if Collider.is_in_group("Target") and Collider.has_method("Hit_Successful"):
+		emit_signal("Hit_Successfull")
 		Collider.Hit_Successful(Current_Weapon.Damage, Direction, Position)
 
 func LaunchProjectile(Point: Vector3):
@@ -184,6 +191,7 @@ func LaunchProjectile(Point: Vector3):
 	var Projectile = Current_Weapon.Projectile_To_Load.instantiate()
 
 	Bullet_Point.add_child(Projectile)
+	emit_signal("Add_Signal_To_HUD",Projectile)
 	Projectile.set_linear_velocity(Direction*Current_Weapon.Projectile_Velocity)
 	Projectile.Damage = Current_Weapon.Damage
 
@@ -194,15 +202,13 @@ func _on_pick_up_detection_body_entered(body):
 		var Weapon_In_Stack = WeaponStack.find(body._weapon_name,0)
 
 		if Weapon_In_Stack != -1:
-			var remaining = Add_Ammo(body._weapon_name, body._reserve_ammo)
-			body._reserve_ammo = remaining
+			var remaining = Add_Ammo(body._weapon_name, body._current_ammo+body._reserve_ammo)
 			if remaining == 0:
-				if body._current_ammo != 0:
-					body._reserve_ammo = body._current_ammo
-					body._current_ammo = 0
-				else:
-					body.queue_free()
-
+				body.queue_free()
+				
+			body._current_ammo = min(remaining, Weapons_List[body._weapon_name].Magazine)
+			body._reserve_ammo = max(remaining - body._current_ammo,0)
+			
 		else:
 			WeaponStack.push_front(body._weapon_name)
 
@@ -226,5 +232,4 @@ func Add_Ammo(_Weapon: String, Ammo: int)->int:
 
 	emit_signal("Update_Ammo",[Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 	return Remaining
-
-
+	

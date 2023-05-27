@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://gtthejj2wmyj"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/PickUp Weapons/Weapon_Pick_Up.gd" id="1_v38gi"]
 
@@ -153,10 +153,8 @@ _current_ammo = 5
 _reserve_ammo = 10
 
 [node name="blasterN2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 mesh = SubResource("ArrayMesh_1ovk8")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 shape = SubResource("ConvexPolygonShape3D_gr7x2")
