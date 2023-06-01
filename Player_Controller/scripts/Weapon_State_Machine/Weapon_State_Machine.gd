@@ -18,7 +18,7 @@ var Current_Weapon = null
 
 var WeaponStack = [] #An Array of weapons currently in possesion by the player
 
-var WeaponIndicator = 0
+#var WeaponIndicator = 0
 var Next_Weapon: String
 
 #WEAPON TYPE ENUMERATOR TO HELP WITH CODE READABILITY
@@ -39,14 +39,20 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("WeaponUp"):
-		WeaponIndicator = min(WeaponIndicator+1,WeaponStack.size()-1)
-		var NewWeapon = WeaponStack[WeaponIndicator]
-		exit(NewWeapon)
+		var GetRef = WeaponStack.find(Current_Weapon.Weapon_Name)
+		GetRef = min(GetRef+1,WeaponStack.size()-1)
+		#var Front = WeaponStack.pop_front()
+		#WeaponStack.push_back(Front)
+
+		exit(WeaponStack[GetRef])
 
 	if event.is_action_pressed("WeaponDown"):
-		WeaponIndicator = max(WeaponIndicator-1,0)
-		var NewWeapon = WeaponStack[WeaponIndicator]
-		exit(NewWeapon)
+		var GetRef = WeaponStack.find(Current_Weapon.Weapon_Name)
+		GetRef = max(GetRef-1,0)
+		#var Back = WeaponStack.pop_back()
+		#WeaponStack.push_front(Back)
+
+		exit(WeaponStack[GetRef])
 
 	if event.is_action_pressed("Shoot"):
 		shoot()
@@ -138,7 +144,8 @@ func drop(_name: String):
 				get_tree().get_root().add_child(Weapon_Dropped)
 
 				Animation_Player.play(Current_Weapon.Drop_Anim)
-				exit(WeaponStack[0])
+				Weapon_Ref  = max(Weapon_Ref-1,0)
+				exit(WeaponStack[Weapon_Ref])
 	else:
 		return
 
@@ -195,22 +202,26 @@ func LaunchProjectile(Point: Vector3):
 	Projectile.set_linear_velocity(Direction*Current_Weapon.Projectile_Velocity)
 	Projectile.Damage = Current_Weapon.Damage
 
-
 func _on_pick_up_detection_body_entered(body):
-	#Check if Weapon Held
-	if body.Pick_Up_Ready == true:
-		var Weapon_In_Stack = WeaponStack.find(body._weapon_name,0)
-
-		if Weapon_In_Stack != -1:
-			var remaining = Add_Ammo(body._weapon_name, body._current_ammo+body._reserve_ammo)
-			if remaining == 0:
-				body.queue_free()
-				
+	var Weapon_In_Stack = WeaponStack.find(body._weapon_name,0)
+	if Weapon_In_Stack != -1:
+		var remaining
+		if body.TYPE == "Weapon":
+			remaining = Add_Ammo(body._weapon_name, body._current_ammo+body._reserve_ammo)
 			body._current_ammo = min(remaining, Weapons_List[body._weapon_name].Magazine)
 			body._reserve_ammo = max(remaining - body._current_ammo,0)
 			
-		else:
-			WeaponStack.push_front(body._weapon_name)
+		elif body.TYPE == "Ammo":
+			remaining = Add_Ammo(body._weapon_name, body._current_ammo)
+			body._current_ammo = remaining
+			
+		if remaining == 0:
+			body.queue_free()
+		
+	elif body.TYPE == "Weapon":
+		if body.Pick_Up_Ready == true:
+			var GetRef = WeaponStack.find(Current_Weapon.Weapon_Name)
+			WeaponStack.insert(GetRef,body._weapon_name)
 
 			#Zero Out Ammo From the Resource
 			Weapons_List[body._weapon_name].Current_Ammo = body._current_ammo
