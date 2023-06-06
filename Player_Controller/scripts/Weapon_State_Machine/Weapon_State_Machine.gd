@@ -41,16 +41,12 @@ func _input(event):
 	if event.is_action_pressed("WeaponUp"):
 		var GetRef = WeaponStack.find(Current_Weapon.Weapon_Name)
 		GetRef = min(GetRef+1,WeaponStack.size()-1)
-		#var Front = WeaponStack.pop_front()
-		#WeaponStack.push_back(Front)
-
+		
 		exit(WeaponStack[GetRef])
 
 	if event.is_action_pressed("WeaponDown"):
 		var GetRef = WeaponStack.find(Current_Weapon.Weapon_Name)
 		GetRef = max(GetRef-1,0)
-		#var Back = WeaponStack.pop_back()
-		#WeaponStack.push_front(Back)
 
 		exit(WeaponStack[GetRef])
 
@@ -204,17 +200,14 @@ func LaunchProjectile(Point: Vector3):
 
 func _on_pick_up_detection_body_entered(body):
 	var Weapon_In_Stack = WeaponStack.find(body._weapon_name,0)
+	
 	if Weapon_In_Stack != -1:
 		var remaining
-		if body.TYPE == "Weapon":
-			remaining = Add_Ammo(body._weapon_name, body._current_ammo+body._reserve_ammo)
-			body._current_ammo = min(remaining, Weapons_List[body._weapon_name].Magazine)
-			body._reserve_ammo = max(remaining - body._current_ammo,0)
-			
-		elif body.TYPE == "Ammo":
-			remaining = Add_Ammo(body._weapon_name, body._current_ammo)
-			body._current_ammo = remaining
-			
+
+		remaining = Add_Ammo(body._weapon_name, body._current_ammo+body._reserve_ammo)
+		body._current_ammo = min(remaining, Weapons_List[body._weapon_name].Magazine)
+		body._reserve_ammo = max(remaining - body._current_ammo,0)
+
 		if remaining == 0:
 			body.queue_free()
 		

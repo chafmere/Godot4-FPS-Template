@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var MainCamera = get_node("%MainCamera")
+@onready var ViewModelCamera = get_node("%ViewModelCamera")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -33,6 +34,9 @@ func CameraLook(Movement: Vector2):
 	rotate_object_local(Vector3(0,1,0),-CameraRotation.x) # first rotate in Y
 	MainCamera.rotate_object_local(Vector3(1,0,0), -CameraRotation.y) # then rotate in X
 	CameraRotation.y = clamp(CameraRotation.y,-1.5,1.2)
+	
+func _process(delta):
+	ViewModelCamera.set_global_transform(MainCamera.get_global_transform())
 	
 func _physics_process(delta):
 	#GunCamera.set_global_transform(MainCamera.get_global_transform())

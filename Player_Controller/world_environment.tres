@@ -11,9 +11,12 @@ sky_material = SubResource("ProceduralSkyMaterial_cotvt")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_prubo")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.88
+tonemap_mode = 2
+ssil_enabled = true
 sdfgi_use_occlusion = true
 fog_light_color = Color(0.823529, 0.807843, 0.729412, 1)
 fog_light_energy = 0.66
-fog_aerial_perspective = 0.778
 fog_sky_affect = 0.463
 volumetric_fog_emission = Color(0.266667, 0.266667, 0.266667, 1)
