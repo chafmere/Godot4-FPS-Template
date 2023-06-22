@@ -19,7 +19,7 @@ height = 1.7
 resource_name = "dark"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.432587, 0.480096, 0.526319, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -37,7 +37,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "metal"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.904365, 0.914141, 0.944534, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -55,7 +55,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "pink"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.998274, 0.505969, 0.673936, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -73,7 +73,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "darkMetal"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.793075, 0.81829, 0.89044, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -91,7 +91,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "_defaultMat"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -219,7 +219,7 @@ shadow_mesh = SubResource("ArrayMesh_pugse")
 resource_name = "metal"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.904365, 0.914141, 0.944534, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -237,7 +237,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "dark"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.432587, 0.480096, 0.526319, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -255,7 +255,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "darkMetal"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.793075, 0.81829, 0.89044, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -273,7 +273,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "purple"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(0.804665, 0.693804, 0.98256, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -291,7 +291,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 resource_name = "_defaultMat"
 render_priority = 0
 shader = ExtResource("10_81nyw")
-shader_parameter/viewmodel_fov = 60.0
+shader_parameter/viewmodel_fov = 50.0
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0
@@ -1471,6 +1471,16 @@ text = "Weapon Stack:"
 [node name="WeaponStack" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer3"]
 layout_mode = 2
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/debug_hud"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer4"]
+layout_mode = 2
+text = "FOV:"
+
+[node name="FOV Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer4"]
+layout_mode = 2
+
 [node name="FOV" type="HSlider" parent="CanvasLayer/debug_hud"]
 layout_mode = 2
 min_value = 40.0
@@ -1520,7 +1530,6 @@ Start_Weapons = Array[String](["blasterN", "blasterI"])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54919, 0)
 script = ExtResource("9_vmkih")
 Mesh_Wish_Shader = Array[NodePath]([NodePath("blasterN/blasterN2"), NodePath("blasterI/tmpParent/blasterD2"), NodePath("blasterL/tmpParent/blasterL2")])
-viewmodelfov = 60.0
 
 [node name="blasterN" type="Node3D" parent="MainCamera/Weapons_Manager/Weapons_Models"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193, 1.255, -0.643)
@@ -1605,5 +1614,6 @@ shape = SubResource("BoxShape3D_tc1ik")
 [connection signal="Update_Ammo" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
 [connection signal="Update_WeaponStack" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
 [connection signal="Weapon_Changed" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
+[connection signal="UpdateFOV" from="MainCamera/Weapons_Manager/Weapons_Models" to="CanvasLayer" method="_on_weapons_models_update_fov"]
 [connection signal="animation_finished" from="MainCamera/Weapons_Manager/Weapons_Models/AnimationPlayer" to="MainCamera/Weapons_Manager" method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Pick_Up_Detection" to="MainCamera/Weapons_Manager" method="_on_pick_up_detection_body_entered"]

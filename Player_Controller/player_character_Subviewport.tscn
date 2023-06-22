@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c83d3525xpo4b"]
+[gd_scene load_steps=54 format=3 uid="uid://c83d3525xpo4b"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_306q5"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_o0lyg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://yc1f2j7pl4vr" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterI.tres" id="6_mxipr"]
 [ext_resource type="Resource" uid="uid://bwrs8ensewkgc" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterL.tres" id="7_dwy2g"]
 [ext_resource type="Resource" uid="uid://c1jg0ifn7yvve" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterN.tres" id="8_hpdto"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/SubViewportContainer.gd" id="9_7r2s7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73v4a"]
 radius = 0.55642
@@ -1286,12 +1287,28 @@ text = "Weapon Stack:"
 [node name="WeaponStack" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer3"]
 layout_mode = 2
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/debug_hud"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer4"]
+layout_mode = 2
+text = "FOV:"
+
+[node name="FOV Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer4"]
+layout_mode = 2
+
+[node name="FOV" type="HSlider" parent="CanvasLayer/debug_hud"]
+layout_mode = 2
+min_value = 40.0
+value = 40.0
+
 [node name="Main_Sight" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_e36bb")
 stretch_mode = 3
 
@@ -1302,6 +1319,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("4_64qjc")
 stretch_mode = 3
 
@@ -1377,7 +1395,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch = true
+script = ExtResource("9_7r2s7")
 
 [node name="SubViewport" type="SubViewport" parent="MainCamera/SubViewportContainer"]
 transparent_bg = true
@@ -1405,6 +1425,7 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.389632, 0)
 shape = SubResource("BoxShape3D_tc1ik")
 
+[connection signal="value_changed" from="CanvasLayer/debug_hud/FOV" to="MainCamera/SubViewportContainer" method="_on_fov_value_changed"]
 [connection signal="timeout" from="CanvasLayer/Hit_Sight/Hit_Sight_Timer" to="CanvasLayer" method="_on_hit_sight_timer_timeout"]
 [connection signal="Add_Signal_To_HUD" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_add_signal_to_hud"]
 [connection signal="Hit_Successfull" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_hit_successfull"]
@@ -1412,4 +1433,5 @@ shape = SubResource("BoxShape3D_tc1ik")
 [connection signal="Update_WeaponStack" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
 [connection signal="Weapon_Changed" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
 [connection signal="animation_finished" from="MainCamera/Weapons_Manager/Weapons_Models/AnimationPlayer" to="MainCamera/Weapons_Manager" method="_on_animation_player_animation_finished"]
+[connection signal="UpdateFOV" from="MainCamera/SubViewportContainer" to="CanvasLayer" method="_on_weapons_models_update_fov"]
 [connection signal="body_entered" from="Pick_Up_Detection" to="MainCamera/Weapons_Manager" method="_on_pick_up_detection_body_entered"]

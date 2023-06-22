@@ -1,9 +1,14 @@
 @tool
 extends Node3D
 
+signal UpdateFOV
+
 @export var Mesh_Wish_Shader: Array[NodePath]
 
 @export var viewmodelfov: float = 50.0 :set = set_viewmodelfov
+
+func _ready():
+	emit_signal("UpdateFOV", viewmodelfov, true)
 
 func set_viewmodelfov(val: float) -> void:
 	if Engine.is_editor_hint():
@@ -18,7 +23,6 @@ func SetMeshFOV(val):
 		for i in range(n.mesh.get_surface_count()):
 			var mat: Material = n.get_active_material(i)
 			if mat is ShaderMaterial:
-				print(val)
 				mat.set_shader_parameter("viewmodel_fov", val)
 	
 func GetMeshes()->Array:
@@ -32,4 +36,5 @@ func GetMeshes()->Array:
 
 func _on_fov_value_changed(value):
 	viewmodelfov = value
+	emit_signal("UpdateFOV", viewmodelfov)
 	SetMeshFOV(viewmodelfov)
