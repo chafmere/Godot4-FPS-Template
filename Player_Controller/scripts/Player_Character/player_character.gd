@@ -39,7 +39,6 @@ func _process(delta):
 	ViewModelCamera.set_global_transform(MainCamera.get_global_transform())
 	
 func _physics_process(delta):
-	#GunCamera.set_global_transform(MainCamera.get_global_transform())
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta

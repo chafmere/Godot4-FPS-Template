@@ -24,13 +24,14 @@ var Next_Weapon: String
 #WEAPON TYPE ENUMERATOR TO HELP WITH CODE READABILITY
 enum {NULL,HITSCAN, PROJECTILE}
 
+var Collision_Exclusion: Array
+
 #The List of All Available weapons in the game
 var Weapons_List = {
 }
 
 #An Array of weapon resources to make dictionary creation easier
 @export var _weapon_resources: Array[Weapon_Resource]
-
 
 @export var Start_Weapons: Array[String]
 
@@ -83,10 +84,7 @@ func exit(_next_weapon: String):
 			Next_Weapon = _next_weapon
 
 func Change_Weapon(weapon_name: String):
-	var Weapon_Index = WeaponStack.find(weapon_name,0)
-	if Weapon_Index != -1:
-		Current_Weapon = Weapons_List[WeaponStack[Weapon_Index]]
-
+	Current_Weapon = Weapons_List[weapon_name]
 	Next_Weapon = ""
 	enter()
 
@@ -161,6 +159,7 @@ func GetCameraCollision()->Vector3:
 	var Ray_End = (Ray_Origin + _Camera.project_ray_normal(_Viewport/2)*2000)
 
 	var New_Intersection = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
+	New_Intersection.set_exclude(Collision_Exclusion)
 	var Intersection = get_world_3d().direct_space_state.intersect_ray(New_Intersection)
 	if not Intersection.is_empty():
 		var Col_Point = Intersection.position
@@ -195,8 +194,17 @@ func LaunchProjectile(Point: Vector3):
 
 	Bullet_Point.add_child(Projectile)
 	emit_signal("Add_Signal_To_HUD",Projectile)
+	
+	var Projectile_RID = Projectile.get_rid()
+	
+	Collision_Exclusion.push_back(Projectile_RID)
+	Projectile.tree_exited.connect(Remove_Exclusion.bind(Projectile_RID))
+	
 	Projectile.set_linear_velocity(Direction*Current_Weapon.Projectile_Velocity)
 	Projectile.Damage = Current_Weapon.Damage
+
+func Remove_Exclusion(_RID):
+	Collision_Exclusion.erase(_RID)
 
 func _on_pick_up_detection_body_entered(body):
 	var Weapon_In_Stack = WeaponStack.find(body._weapon_name,0)

@@ -23,4 +23,4 @@ Can_Be_Dropped = true
 Weapon_Drop = ExtResource("2_wkn8h")
 Type = 2
 Projectile_To_Load = ExtResource("1_cfg46")
-Projectile_Velocity = 200
+Projectile_Velocity = 50

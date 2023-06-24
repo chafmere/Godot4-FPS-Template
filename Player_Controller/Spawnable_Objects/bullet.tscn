@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/bullet.gd" id="1_l4wtt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bix2d"]
-radius = 0.0741791
-height = 0.408874
+radius = 0.258743
+height = 0.517487
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0fj0"]
 resource_name = "yellow"
@@ -47,9 +47,10 @@ shadow_mesh = SubResource("ArrayMesh_ly6dy")
 
 [node name="bullet" type="RigidBody3D"]
 top_level = true
-collision_layer = 0
+collision_layer = 4
 collision_mask = 5
 mass = 0.1
+gravity_scale = 0.0
 continuous_cd = true
 max_contacts_reported = 10
 contact_monitor = true
@@ -60,7 +61,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 shape = SubResource("CapsuleShape3D_bix2d")
 
 [node name="foamBulletA2" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, -2.18557e-07, -20, 0, 5, -8.74228e-07, 0, 0, 0)
 mesh = SubResource("ArrayMesh_sqgwv")
 skeleton = NodePath("")
 
