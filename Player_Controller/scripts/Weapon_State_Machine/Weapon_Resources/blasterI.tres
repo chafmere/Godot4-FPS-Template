@@ -1,7 +1,12 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3 uid="uid://yc1f2j7pl4vr"]
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=5 format=3 uid="uid://yc1f2j7pl4vr"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_jgxyc"]
+[ext_resource type="PackedScene" uid="uid://cb4a7oqdaebvu" path="res://Player_Controller/scripts/Weapon_State_Machine/Spray Paths/spray_1.tscn" id="1_jtijw"]
 [ext_resource type="PackedScene" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="1_ohyk1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cbo4w"]
+frequency = 0.052
+fractal_ping_pong_strength = 2.918
 
 [resource]
 script = ExtResource("1_jgxyc")
@@ -22,3 +27,10 @@ Can_Be_Dropped = true
 Weapon_Drop = ExtResource("1_ohyk1")
 Type = 1
 Projectile_Velocity = 0
+Spray_Type = "Spray_Path"
+Spray_Path = ExtResource("1_jtijw")
+Random_Spray_Noise = SubResource("FastNoiseLite_cbo4w")
+Base_Magnetude = 1.0
+x_Magnetude = 0.624
+y_Magnetude = 1.05
+z_Magnetude = 1.581

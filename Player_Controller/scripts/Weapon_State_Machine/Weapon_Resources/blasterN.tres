@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3 uid="uid://c1jg0ifn7yvve"]
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=4 format=3 uid="uid://c1jg0ifn7yvve"]
 
 [ext_resource type="PackedScene" uid="uid://gtthejj2wmyj" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="1_oiqq5"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_oxrhl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_stf4i"]
+noise_type = 2
+frequency = 0.005
+fractal_type = 3
+fractal_lacunarity = 1.562
 
 [resource]
 script = ExtResource("1_oxrhl")
@@ -22,3 +28,9 @@ Can_Be_Dropped = true
 Weapon_Drop = ExtResource("1_oiqq5")
 Type = 1
 Projectile_Velocity = 0
+Spray_Type = "Spray_Random"
+Random_Spray_Noise = SubResource("FastNoiseLite_stf4i")
+Base_Magnetude = 2.432
+x_Magnetude = 1.505
+y_Magnetude = 5.0
+z_Magnetude = 1.621

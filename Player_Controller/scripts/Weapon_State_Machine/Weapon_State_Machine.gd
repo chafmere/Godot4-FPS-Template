@@ -5,9 +5,8 @@ signal Update_Ammo
 signal Update_WeaponStack
 signal Hit_Successfull
 signal Add_Signal_To_HUD
-
-var Move_Back = false
-var Move_Forward = false
+signal Spray_Rotation
+signal Reset_Spray
 
 @onready var Animation_Player = get_node("%AnimationPlayer")
 @onready var Bullet_Point = get_node("%BulletPoint")
@@ -53,6 +52,9 @@ func _input(event):
 
 	if event.is_action_pressed("Shoot"):
 		shoot()
+		
+	if event.is_action_released("Shoot"):
+		Current_Weapon.Spray_Count_Update()
 
 	if event.is_action_pressed("Reload"):
 		reload()
@@ -62,6 +64,7 @@ func _input(event):
 		
 func Initialize(_Start_Weapons: Array):
 	for Weapons in _weapon_resources:
+		Weapons.ready()
 		Weapons_List[Weapons.Weapon_Name] = Weapons
 		
 	for child in _Start_Weapons:
@@ -74,6 +77,7 @@ func Initialize(_Start_Weapons: Array):
 
 func enter():
 	Animation_Player.queue(Current_Weapon.Pick_Up_Anim)
+	Current_Weapon.Spray_Count_Update()
 	emit_signal("Weapon_Changed",Current_Weapon.Weapon_Name)
 	emit_signal("Update_Ammo",[Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 
@@ -103,6 +107,7 @@ func shoot():
 				PROJECTILE:
 					LaunchProjectile(CollissionPoint)
 	else:
+		Reset_Spray.emit()
 		reload()
 
 func reload():
@@ -116,8 +121,10 @@ func reload():
 
 			Current_Weapon.Current_Ammo = Current_Weapon.Current_Ammo+Reload_Amount
 			Current_Weapon.Reserve_Ammo = Current_Weapon.Reserve_Ammo-Reload_Amount
-
+			Current_Weapon.Spray_Count_Update()
+			
 			emit_signal("Update_Ammo",[Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
+		
 		else:
 			Animation_Player.queue(Current_Weapon.Out_Of_Ammo_Anim)
 
@@ -144,9 +151,14 @@ func drop(_name: String):
 		return
 
 func _on_animation_player_animation_finished(anim_name):
-	if Current_Weapon.AutoFire == true && anim_name == Current_Weapon.Shoot_Anim:
-			if Input.is_action_pressed("Shoot"):
-				shoot()
+	if anim_name == Current_Weapon.Shoot_Anim:
+		if Current_Weapon.AutoFire == true:
+				if Input.is_action_pressed("Shoot"):
+					shoot()
+				else:
+					Reset_Spray.emit()
+		else:
+			Reset_Spray.emit()
 
 	if anim_name == Current_Weapon.Change_Anim:
 		Change_Weapon(Next_Weapon)
@@ -154,9 +166,12 @@ func _on_animation_player_animation_finished(anim_name):
 func GetCameraCollision()->Vector3:
 	var _Camera = get_viewport().get_camera_3d()
 	var _Viewport = get_viewport().get_size()
+	
+	var Spray = Current_Weapon.Get_Spray()
+	Spray_Rotation.emit(Spray, Current_Weapon.x_Magnetude,Current_Weapon.y_Magnetude,Current_Weapon.z_Magnetude,Current_Weapon.Base_Magnetude,Current_Weapon.count)
 
 	var Ray_Origin = _Camera.project_ray_origin(_Viewport/2)
-	var Ray_End = (Ray_Origin + _Camera.project_ray_normal(_Viewport/2)*2000)
+	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(Spray))*2000)
 
 	var New_Intersection = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
 	New_Intersection.set_exclude(Collision_Exclusion)
