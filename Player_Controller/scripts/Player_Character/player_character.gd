@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 @onready var MainCamera = get_node("%Camera")
-@onready var ViewModelCamera = get_node("%ViewModelCamera")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -9,7 +8,7 @@ const JUMP_VELOCITY = 4.5
 var CameraRotation = Vector2(0.0,0.0)
 var MouseSensitivity = 0.001
 
-var shake_rotation =0 
+var shake_rotation = 0 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -38,11 +37,8 @@ func CameraLook(Movement: Vector2):
 	MainCamera.rotate_object_local(Vector3(1,0,0), -CameraRotation.y) # then rotate in X
 	CameraRotation.y = clamp(CameraRotation.y,-1.5,1.2)
 	
-func _process(_delta):
-	if ViewModelCamera:
-		ViewModelCamera.set_global_transform(MainCamera.get_global_transform())
-	
 func _physics_process(delta):
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -66,7 +62,7 @@ func _on_camera_camera_reset(_x_rotation):
 		return
 	else:
 		var rotation_x = CameraRotation.y - _x_rotation
-		var _tween = get_tree().create_tween().tween_property(MainCamera,"rotation:x",-rotation_x,.1)
+		var _tween = get_tree().create_tween().tween_property(MainCamera,"rotation:x",-rotation_x,.2)
 		_tween.finished.connect(ResetShake)
 
 func ResetShake():

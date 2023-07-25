@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=5 format=3 uid="uid://bwrs8ensewkgc"]
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=6 format=3 uid="uid://bwrs8ensewkgc"]
 
 [ext_resource type="PackedScene" uid="uid://dxlkgbr1p580" path="res://Player_Controller/Spawnable_Objects/bullet.tscn" id="1_cfg46"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="2_gpxoe"]
-[ext_resource type="PackedScene" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_L.tscn" id="2_wkn8h"]
+[ext_resource type="Resource" uid="uid://b0t3y2dh5vx46" path="res://Player_Controller/scripts/Weapon_State_Machine/Secondary_Fire_Scripts/grenadelauncher.tres" id="2_qxj5h"]
+[ext_resource type="PackedScene" uid="uid://catx2kysw47d8" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_L.tscn" id="2_wkn8h"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vdyb1"]
 noise_type = 3
@@ -12,12 +13,12 @@ fractal_type = 3
 [resource]
 script = ExtResource("2_gpxoe")
 Weapon_Name = "blasterL"
-Pick_Up_Anim = "blasterL Activate"
-Shoot_Anim = "blasterL Shoot"
-Reload_Anim = "blasterL Reload"
-Change_Anim = "blasterL De-Activate"
-Drop_Anim = "blasterL Drop"
-Out_Of_Ammo_Anim = "blasterL OOA"
+Pick_Up_Anim = "Global/blasterL Activate"
+Shoot_Anim = "Global/blasterL Shoot"
+Reload_Anim = "Global/blasterL Reload"
+Change_Anim = "Global/blasterL De-Activate"
+Drop_Anim = "Global/blasterL Drop"
+Out_Of_Ammo_Anim = "Global/blasterL OOA"
 Current_Ammo = 30
 Reserve_Ammo = 30
 Magazine = 30
@@ -34,4 +35,5 @@ Random_Spray_Noise = SubResource("FastNoiseLite_vdyb1")
 Base_Magnetude = 1.0
 x_Magnetude = 0.076
 y_Magnetude = 0.758
-z_Magnetude = 1.971
+z_Magnetude = 1.138
+Secondary_Fire_Resource = ExtResource("2_qxj5h")

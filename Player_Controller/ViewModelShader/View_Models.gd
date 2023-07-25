@@ -1,40 +1,33 @@
 @tool
+#Credit to 2nafish117
+#https://github.com/2nafish117/godot-viewmodel-render-test
+#https://www.youtube.com/@2nafish117
+#They solved this issue, I just converted to G4 and Made the tool script suit this project.
+
 extends Node3D
 
 signal UpdateFOV
 
-@export var Mesh_Wish_Shader: Array[NodePath]
+@export var Mesh_With_Shader: Array[MeshInstance3D]
 
 @export var viewmodelfov: float = 50.0 :set = set_viewmodelfov
 
 func _ready():
-	emit_signal("UpdateFOV", viewmodelfov, true)
+	UpdateFOV.emit(viewmodelfov, true)
 
-func set_viewmodelfov(val: float) -> void:
-	if Engine.is_editor_hint():
-		viewmodelfov = val
-		SetMeshFOV(viewmodelfov)
-	else:
-		viewmodelfov = val
-
+func set_viewmodelfov(val: float):
+	viewmodelfov = val
+	SetMeshFOV(viewmodelfov)
+		
 func SetMeshFOV(val):
-	var Meshes = GetMeshes()
-	for n in Meshes:
-		for i in range(n.mesh.get_surface_count()):
-			var mat: Material = n.get_active_material(i)
-			if mat is ShaderMaterial:
-				mat.set_shader_parameter("viewmodel_fov", val)
-	
-func GetMeshes()->Array:
-	var MeshArray = []
-
-	for NP in Mesh_Wish_Shader:
-		var n = get_node(NP)
-		MeshArray.push_front(n)
-
-	return MeshArray
+	for n in Mesh_With_Shader:
+		if n != null:
+			for i in range(n.mesh.get_surface_count()):
+				var mat: Material = n.get_active_material(i)
+				if mat is ShaderMaterial:
+					mat.set_shader_parameter("viewmodel_fov", val)
 
 func _on_fov_value_changed(value):
 	viewmodelfov = value
-	emit_signal("UpdateFOV", viewmodelfov)
-	SetMeshFOV(viewmodelfov)
+	UpdateFOV.emit(viewmodelfov)
+

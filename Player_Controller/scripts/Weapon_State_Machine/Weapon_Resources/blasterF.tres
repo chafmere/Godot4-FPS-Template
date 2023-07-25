@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=7 format=3 uid="uid://btevd73xy61sy"]
+
+[ext_resource type="PackedScene" uid="uid://biv77tnbun43s" path="res://Player_Controller/Spawnable_Objects/sniper_bullet.tscn" id="1_7clf6"]
+[ext_resource type="PackedScene" uid="uid://vd8ltko62o5v" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_F.tscn" id="2_1bixn"]
+[ext_resource type="PackedScene" uid="uid://c1euncyge7j1i" path="res://Player_Controller/scripts/Weapon_State_Machine/Spray Paths/spray_Sniper.tscn" id="2_e8qs6"]
+[ext_resource type="Resource" uid="uid://dcesg481t865s" path="res://Player_Controller/scripts/Weapon_State_Machine/Secondary_Fire_Scripts/SniperZoom.tres" id="2_ui8jk"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="3_fhv4a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a6wja"]
+noise_type = 3
+frequency = 0.022
+
+[resource]
+script = ExtResource("3_fhv4a")
+Weapon_Name = "blasterF"
+Pick_Up_Anim = "Global/blasterF Activate"
+Shoot_Anim = "Global/blasterF Shoot"
+Reload_Anim = "Global/blasterF Reload"
+Change_Anim = "Global/blasterF De-Activate"
+Drop_Anim = "Global/blasterF Drop"
+Out_Of_Ammo_Anim = "Global/blasterF OOA"
+Current_Ammo = 5
+Reserve_Ammo = 10
+Magazine = 5
+Max_Ammo = 10
+Damage = 2
+AutoFire = false
+Can_Be_Dropped = true
+Weapon_Drop = ExtResource("2_1bixn")
+Type = 2
+Projectile_To_Load = ExtResource("1_7clf6")
+Projectile_Velocity = 1000
+Spray_Type = "Spray_Path"
+Spray_Path = ExtResource("2_e8qs6")
+Random_Spray_Noise = SubResource("FastNoiseLite_a6wja")
+Base_Magnetude = 5.0
+x_Magnetude = 0.567
+y_Magnetude = 3.332
+z_Magnetude = 1.833
+Secondary_Fire_Resource = ExtResource("2_ui8jk")

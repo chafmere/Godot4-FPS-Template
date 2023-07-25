@@ -1,9 +1,10 @@
-[gd_scene load_steps=53 format=3 uid="uid://d4k6yww5ew1by"]
+[gd_scene load_steps=54 format=3 uid="uid://d4k6yww5ew1by"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_ng48c"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_1356h"]
 [ext_resource type="Texture2D" uid="uid://bjh5ic6qy4jtl" path="res://Player_Controller/HUD ASSETS/crosshair001.png" id="3_iu2b6"]
 [ext_resource type="Texture2D" uid="uid://uidicgaojgdi" path="res://Player_Controller/HUD ASSETS/crosshair046.png" id="4_p1557"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Camera.gd" id="5_3w1pd"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_State_Machine.gd" id="5_k61kt"]
 [ext_resource type="Resource" uid="uid://yc1f2j7pl4vr" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterI.tres" id="7_t0lkj"]
 [ext_resource type="Resource" uid="uid://bwrs8ensewkgc" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterL.tres" id="8_y1j8o"]
@@ -12,6 +13,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73v4a"]
 radius = 0.55642
 height = 1.7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tc1ik"]
+size = Vector3(1.38169, 1.17019, 1.48678)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evnw0"]
 resource_name = "dark"
@@ -1239,9 +1243,6 @@ _data = {
 "blasterN Shoot": SubResource("Animation_hvbst")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tc1ik"]
-size = Vector3(1.38169, 1.17019, 1.48678)
-
 [node name="Player_Character" type="CharacterBody3D"]
 collision_layer = 2
 floor_max_angle = 0.872665
@@ -1313,87 +1314,6 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_73v4a")
 
-[node name="MainCamera" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55045, 0)
-cull_mask = 524287
-current = true
-
-[node name="Weapons_Manager" type="Node3D" parent="MainCamera"]
-script = ExtResource("5_k61kt")
-_weapon_resources = Array[Resource("res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd")]([ExtResource("7_t0lkj"), ExtResource("8_y1j8o"), ExtResource("9_vju81")])
-Start_Weapons = Array[String](["blasterN", "blasterI"])
-
-[node name="Weapons_Models" type="Node3D" parent="MainCamera/Weapons_Manager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54919, 0)
-
-[node name="blasterN" type="Node3D" parent="MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193, 1.255, -0.643)
-visible = false
-
-[node name="blasterN2" type="MeshInstance3D" parent="MainCamera/Weapons_Manager/Weapons_Models/blasterN"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
-mesh = SubResource("ArrayMesh_4bqx7")
-skeleton = NodePath("")
-
-[node name="blasterI" type="Node3D" parent="MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
-visible = false
-
-[node name="tmpParent" type="Node3D" parent="MainCamera/Weapons_Manager/Weapons_Models/blasterI"]
-
-[node name="blasterD2" type="MeshInstance3D" parent="MainCamera/Weapons_Manager/Weapons_Models/blasterI/tmpParent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
-mesh = SubResource("ArrayMesh_uv12n")
-skeleton = NodePath("")
-
-[node name="blasterL" type="Node3D" parent="MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0.113247, 1.40658, -0.449017)
-visible = false
-
-[node name="tmpParent" type="Node3D" parent="MainCamera/Weapons_Manager/Weapons_Models/blasterL"]
-
-[node name="blasterL2" type="MeshInstance3D" parent="MainCamera/Weapons_Manager/Weapons_Models/blasterL/tmpParent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
-mesh = SubResource("ArrayMesh_1nwqd")
-skeleton = NodePath("")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainCamera/Weapons_Manager/Weapons_Models"]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_i804t")
-}
-
-[node name="BulletPoint" type="Marker3D" parent="MainCamera/Weapons_Manager"]
-unique_name_in_owner = true
-gizmo_extents = 0.21
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainCamera"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="MainCamera/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-sdf_scale = 0
-positional_shadow_atlas_size = 4096
-positional_shadow_atlas_16_bits = false
-positional_shadow_atlas_quad_0 = 4
-positional_shadow_atlas_quad_1 = 5
-positional_shadow_atlas_quad_2 = 5
-positional_shadow_atlas_quad_3 = 6
-size = Vector2i(1280, 720)
-render_target_update_mode = 4
-
-[node name="ViewModelCamera" type="Camera3D" parent="MainCamera/SubViewportContainer/SubViewport"]
-unique_name_in_owner = true
-cull_mask = 0
-fov = 60.0
-
 [node name="Pick_Up_Detection" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -1402,11 +1322,74 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.389632, 0)
 shape = SubResource("BoxShape3D_tc1ik")
 
+[node name="Camera" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+script = ExtResource("5_3w1pd")
+
+[node name="MainCamera" type="Camera3D" parent="Camera"]
+unique_name_in_owner = true
+cull_mask = 524287
+current = true
+
+[node name="Weapons_Manager" type="Node3D" parent="Camera/MainCamera"]
+script = ExtResource("5_k61kt")
+_weapon_resources = Array[Resource("res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd")]([ExtResource("7_t0lkj"), ExtResource("8_y1j8o"), ExtResource("9_vju81")])
+Start_Weapons = Array[String](["blasterN", "blasterI"])
+
+[node name="Weapons_Models" type="Node3D" parent="Camera/MainCamera/Weapons_Manager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54919, 0)
+
+[node name="blasterN" type="Node3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193, 1.255, -0.643)
+visible = false
+
+[node name="blasterN2" type="MeshInstance3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models/blasterN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
+mesh = SubResource("ArrayMesh_4bqx7")
+skeleton = NodePath("")
+
+[node name="blasterI" type="Node3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models"]
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="tmpParent" type="Node3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models/blasterI"]
+
+[node name="blasterD2" type="MeshInstance3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models/blasterI/tmpParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
+mesh = SubResource("ArrayMesh_uv12n")
+skeleton = NodePath("")
+
+[node name="blasterL" type="Node3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models"]
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0.113247, 1.40658, -0.449017)
+visible = false
+
+[node name="tmpParent" type="Node3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models/blasterL"]
+
+[node name="blasterL2" type="MeshInstance3D" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models/blasterL/tmpParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
+mesh = SubResource("ArrayMesh_1nwqd")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_i804t")
+}
+
+[node name="BulletPoint" type="Marker3D" parent="Camera/MainCamera/Weapons_Manager"]
+unique_name_in_owner = true
+gizmo_extents = 0.21
+
 [connection signal="timeout" from="CanvasLayer/Hit_Sight/Hit_Sight_Timer" to="CanvasLayer" method="_on_hit_sight_timer_timeout"]
-[connection signal="Add_Signal_To_HUD" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_add_signal_to_hud"]
-[connection signal="Hit_Successfull" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_hit_successfull"]
-[connection signal="Update_Ammo" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
-[connection signal="Update_WeaponStack" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
-[connection signal="Weapon_Changed" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
-[connection signal="animation_finished" from="MainCamera/Weapons_Manager/Weapons_Models/AnimationPlayer" to="MainCamera/Weapons_Manager" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Pick_Up_Detection" to="MainCamera/Weapons_Manager" method="_on_pick_up_detection_body_entered"]
+[connection signal="body_entered" from="Pick_Up_Detection" to="Camera/MainCamera/Weapons_Manager" method="_on_pick_up_detection_body_entered"]
+[connection signal="camera_reset" from="Camera" to="." method="_on_camera_camera_reset"]
+[connection signal="start_shake" from="Camera" to="." method="_on_camera_start_shake"]
+[connection signal="Add_Signal_To_HUD" from="Camera/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_add_signal_to_hud"]
+[connection signal="Hit_Successfull" from="Camera/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_hit_successfull"]
+[connection signal="Reset_Spray" from="Camera/MainCamera/Weapons_Manager" to="Camera" method="_on_weapons_manager_reset_spray"]
+[connection signal="Spray_Rotation" from="Camera/MainCamera/Weapons_Manager" to="Camera" method="_on_weapons_manager_spray_rotation"]
+[connection signal="Update_Ammo" from="Camera/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
+[connection signal="Update_WeaponStack" from="Camera/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
+[connection signal="Weapon_Changed" from="Camera/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
+[connection signal="animation_finished" from="Camera/MainCamera/Weapons_Manager/Weapons_Models/AnimationPlayer" to="Camera/MainCamera/Weapons_Manager" method="_on_animation_player_animation_finished"]

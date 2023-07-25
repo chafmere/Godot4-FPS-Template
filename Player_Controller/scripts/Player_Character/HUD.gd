@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var Hit_Sight = $Hit_Sight
 @onready var Hit_Sight_Timer = $Hit_Sight/Hit_Sight_Timer
 @onready var FOVSlider = $debug_hud/FOV
+@onready var OverLay = $Overlay
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -39,3 +40,10 @@ func _on_weapons_models_update_fov(Fov, UpdateSlider: bool = false):
 	CurrentFOV.set_text(str(Fov))
 	if UpdateSlider:
 		FOVSlider.set_value_no_signal(Fov)
+
+func LoadOverLayTexture(Active:bool, txtr: Texture2D = null):
+		OverLay.set_texture(txtr)
+		OverLay.set_visible(Active)
+
+func _on_weapons_manager_connect_weapon_to_hud(_weapon_resouce):
+	_weapon_resouce.connect("UpdateOverlay", Callable(self, "LoadOverLayTexture"))

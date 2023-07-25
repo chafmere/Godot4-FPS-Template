@@ -3,6 +3,9 @@ extends Resource
 
 class_name Weapon_Resource
 
+signal UpdateOverlay
+signal Zoom
+
 @export_group("Weapon Animations")
 @export var Weapon_Name: String
 @export var Pick_Up_Anim: String
@@ -37,19 +40,29 @@ class_name Weapon_Resource
 @export_range(0,5) var y_Magnetude = .3
 @export_range(0,5) var z_Magnetude = .3
 
+@export var Secondary_Fire_Resource: secondary_fire_resource
+
 var Spray_Vector
+var Base_Spray_Vector: Vector4
+var Base_Property: Dictionary
 var ShotCount = Current_Ammo
 var count
+var Secondary_Mode = false
 
 func ready():
+	Base_Spray_Vector = Vector4(x_Magnetude,y_Magnetude,z_Magnetude,Base_Magnetude)
 	if Spray_Path:
 		var path =  Spray_Path.instantiate()
 		Spray_Vector = path.get_curve()
 		ShotCount = Magazine
+		
 	
 func Get_Spray():
 	count = ShotCount - Current_Ammo
-
+	
+	if Secondary_Mode && Secondary_Fire_Resource.Secondary_Fire_Shoot:
+		count = 1*Base_Magnetude
+		
 	match Spray_Type:
 		"Spray_Random":
 			Random_Spray_Noise.set_seed(Current_Ammo)
@@ -67,3 +80,50 @@ func Get_Spray():
 
 func Spray_Count_Update():
 	ShotCount = Current_Ammo
+
+func Secondary_Fire():
+	if Secondary_Fire_Resource:
+		Secondary_Mode = true
+		
+		if Secondary_Fire_Resource.LoadOverlay:
+			UpdateOverlay.emit(true,Secondary_Fire_Resource.Overlay)
+			
+		if Secondary_Fire_Resource.Zoom:
+			Zoom.emit(Secondary_Fire_Resource.Zoom_Amount)
+			
+		if Secondary_Fire_Resource.ChangeSpray:
+			ChangeSprayVector(Secondary_Fire_Resource.NewSprayVector)
+			
+		if Secondary_Fire_Resource.UpdateFlags:
+			CheckFlags(Secondary_Fire_Resource.Flags)
+
+func Secondary_Fire_Released():
+	if Secondary_Fire_Resource:
+		Secondary_Mode = false
+		
+		if Secondary_Fire_Resource.LoadOverlay:
+			UpdateOverlay.emit(false)
+			
+		if Secondary_Fire_Resource.Zoom:
+			Zoom.emit()
+			
+		if Secondary_Fire_Resource.ChangeSpray:
+			ChangeSprayVector(Base_Spray_Vector)
+			
+		if Secondary_Fire_Resource.UpdateFlags:
+			ResetFlags()
+
+func CheckFlags(flags: Dictionary):
+	for f in flags:
+		Base_Property[f] = get(f)
+		set(f,flags[f])
+
+func ResetFlags():
+	for p in Base_Property:
+		set(p,Base_Property[p])
+
+func ChangeSprayVector(NewVec4: Vector4):
+	Base_Magnetude = NewVec4.w
+	x_Magnetude = NewVec4.x
+	y_Magnetude = NewVec4.y
+	z_Magnetude = NewVec4.z	
