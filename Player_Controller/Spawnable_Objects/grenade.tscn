@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://yn6g8tshi3nc"]
+[gd_scene load_steps=6 format=3 uid="uid://yn6g8tshi3nc"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/bullet.gd" id="1_8ma8m"]
+[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/grenade.gd" id="1_n7klh"]
+[ext_resource type="PackedScene" uid="uid://c5e5y2dc2e6bb" path="res://Player_Controller/Spawnable_Objects/grenade_explosion.tscn" id="2_207aq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt1yf"]
 albedo_color = Color(1, 0, 0, 1)
@@ -24,7 +25,8 @@ mass = 5.0
 continuous_cd = true
 max_contacts_reported = 5
 contact_monitor = true
-script = ExtResource("1_8ma8m")
+script = ExtResource("1_n7klh")
+Explosion = ExtResource("2_207aq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ptrpq")

@@ -112,14 +112,14 @@ func shoot():
 			Animation_Player.play(Current_Weapon.Shoot_Anim)
 			Current_Weapon.Current_Ammo -= 1
 			Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
-			var CollissionPoint =  GetCameraCollision()
+			var Camera_Collission =  GetCameraCollision()
 			match Current_Weapon.Type:
 				NULL:
 					print("not chosen")
 				HITSCAN:
-					HitScanCollision(CollissionPoint)
+					HitScanCollision(Camera_Collission)
 				PROJECTILE:
-					LaunchProjectile(CollissionPoint)
+					LaunchProjectile(Camera_Collission[1])
 	else:
 		Reset_Spray.emit()
 		reload()
@@ -185,7 +185,7 @@ func _on_animation_player_animation_finished(anim_name):
 		if !Input.is_action_pressed("Secondary_Fire"):
 			reset_secondary()
 
-func GetCameraCollision()->Vector3:
+func GetCameraCollision()->Array:
 	var _Camera = get_viewport().get_camera_3d()
 	var _Viewport = get_viewport().get_size()
 	
@@ -202,27 +202,30 @@ func GetCameraCollision()->Vector3:
 	var New_Intersection = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
 	New_Intersection.set_exclude(Collision_Exclusion)
 	var Intersection = get_world_3d().direct_space_state.intersect_ray(New_Intersection)
+	
 	if not Intersection.is_empty():
-		var Col_Point = Intersection.position
-		return Col_Point
-	else:
-		return Ray_End
-
-func HitScanCollision(Point: Vector3):
-	var Bullet = get_world_3d().direct_space_state
-
-	var Bullet_Direction = (Point - Bullet_Point.global_transform.origin).normalized()
-	var New_Intersection = PhysicsRayQueryParameters3D.create(Bullet_Point.global_transform.origin,Point+Bullet_Direction*2)
-
-	var Bullet_Collision = Bullet.intersect_ray(New_Intersection)
-
-	if Bullet_Collision:
+		var Collision = [Intersection.collider,Intersection.position]
 		var rd = Debug_Bullet.instantiate()
 		var world = get_tree().get_root()
 		world.add_child(rd)
-		rd.global_translate(Bullet_Collision.position)
+		rd.global_translate(Intersection.position)
+		return Collision
+	else:
+		return [null,Ray_End]
 
-		HitScanDamage(Bullet_Collision.collider, Bullet_Direction,Bullet_Collision.position)
+func HitScanCollision(Collision: Array):
+	var Point = Collision[1]
+	if Collision[0]:
+		if Collision[0].is_in_group("Target"):
+			var Bullet = get_world_3d().direct_space_state
+
+			var Bullet_Direction = (Point - Bullet_Point.global_transform.origin).normalized()
+			var New_Intersection = PhysicsRayQueryParameters3D.create(Bullet_Point.global_transform.origin,Point+Bullet_Direction*2)
+
+			var Bullet_Collision = Bullet.intersect_ray(New_Intersection)
+
+			if Bullet_Collision:
+				HitScanDamage(Bullet_Collision.collider, Bullet_Direction,Bullet_Collision.position)
 
 func HitScanDamage(Collider, Direction, Position):
 	if Collider.is_in_group("Target") and Collider.has_method("Hit_Successful"):

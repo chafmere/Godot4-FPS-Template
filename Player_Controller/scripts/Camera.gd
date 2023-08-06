@@ -29,9 +29,15 @@ func Shake_Camera(Spray, x_mag, y_mag, z_mag, Magnetude):
 	tween.finished.connect(BounceBack)
 
 func Reset_Camera():
-	camera_reset.emit(MainCamera.get_rotation().x)
+	camera_reset.emit(MainCamera.get_rotation().x,MainCamera.get_rotation().y)
+	
+func Camera_Position_Tween_To_Zero():
 	tween = get_tree().create_tween().tween_property(MainCamera,"rotation_degrees:x",0.0,.2)
 	tween = get_tree().create_tween().tween_property(MainCamera,"rotation_degrees:y",0.0,.2)
+
+func Camera_Position_To_Zero():
+	MainCamera.rotation.x = 0
+	MainCamera.rotation.y = 0
 
 func _on_weapons_manager_spray_rotation(Spray_Rotation, x_mag, y_mag, z_mag, Magnetude, count):
 	if count == 1:

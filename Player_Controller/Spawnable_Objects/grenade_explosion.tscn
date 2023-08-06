@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://c5e5y2dc2e6bb"]
+
+[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/grenade_explosion.gd" id="1_tdxl1"]
+[ext_resource type="Shader" path="res://Player_Controller/Spawnable_Objects/grenade_explosion.gdshader" id="2_j7ke7"]
+[ext_resource type="Texture2D" uid="uid://j51cqwbi00i2" path="res://Example World/Particles/Kenney Particle Pack/light_01.png" id="2_t7fbp"]
+
+[sub_resource type="Curve" id="Curve_l8o3v"]
+max_value = 20.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 7.1579), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wufl6"]
+curve = SubResource("Curve_l8o3v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cjm7e"]
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_wufl6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1l576"]
+render_priority = 0
+shader = ExtResource("2_j7ke7")
+shader_parameter/light_color = Color(0.611765, 0, 0, 0.501961)
+shader_parameter/arc_color = Color(1, 0, 0.0156863, 1)
+shader_parameter/seed = Vector2(0, 0)
+shader_parameter/speed = 5.1
+shader_parameter/random_scale = 4.495
+shader_parameter/electro_scale = 21.569
+
+[sub_resource type="SphereMesh" id="SphereMesh_0kk1t"]
+material = SubResource("ShaderMaterial_1l576")
+
+[sub_resource type="Curve" id="Curve_3ul8c"]
+max_value = 30.0
+_data = [Vector2(0, 2.52632), 0.0, 0.0, 0, 0, Vector2(1, 7.57895), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gy4qm"]
+curve = SubResource("Curve_3ul8c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h3cun"]
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_gy4qm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukdm1"]
+transparency = 1
+albedo_color = Color(0.611765, 0.168627, 0.129412, 1)
+albedo_texture = ExtResource("2_t7fbp")
+emission_enabled = true
+emission = Color(1, 0.121569, 0.121569, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_hd6jn"]
+material = SubResource("StandardMaterial3D_ukdm1")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sxwv0"]
+radius = 2.81731
+
+[node name="Grenade_Explosion" type="Node3D"]
+script = ExtResource("1_tdxl1")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_cjm7e")
+draw_pass_1 = SubResource("SphereMesh_0kk1t")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.18
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_h3cun")
+draw_pass_1 = SubResource("QuadMesh_hd6jn")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_sxwv0")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

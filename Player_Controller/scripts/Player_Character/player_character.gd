@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var MainCamera = get_node("%Camera")
+@onready var Camera = get_node("%Camera")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -31,14 +31,14 @@ func CameraLook(Movement: Vector2):
 	CameraRotation += Movement
 	
 	transform.basis = Basis()
-	MainCamera.transform.basis = Basis()
+	Camera.transform.basis = Basis()
 	
 	rotate_object_local(Vector3(0,1,0),-CameraRotation.x) # first rotate in Y
-	MainCamera.rotate_object_local(Vector3(1,0,0), -CameraRotation.y) # then rotate in X
+	Camera.rotate_object_local(Vector3(1,0,0), -CameraRotation.y) # then rotate in X
 	CameraRotation.y = clamp(CameraRotation.y,-1.5,1.2)
-	
-func _physics_process(delta):
 
+func _physics_process(delta):
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -57,17 +57,24 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func _on_camera_camera_reset(_x_rotation):
+func _on_camera_camera_reset(_x_rotation, _y_rotation):
 	if is_zero_approx(shake_rotation-CameraRotation.y):
-		return
+		Camera.Camera_Position_Tween_To_Zero()
 	else:
 		var rotation_x = CameraRotation.y - _x_rotation
-		var _tween = get_tree().create_tween().tween_property(MainCamera,"rotation:x",-rotation_x,.2)
-		_tween.finished.connect(ResetShake)
+		var rotation_y = CameraRotation.x - _y_rotation
+
+		Camera.rotation.x = -rotation_x
+		rotation.y = -rotation_y
+
+		
+		Camera.Camera_Position_To_Zero()
+		ResetShake()
 
 func ResetShake():
 	shake_rotation = 0
-	CameraRotation.y = -MainCamera.get_rotation().x
+	CameraRotation.y = -Camera.get_rotation().x
+	CameraRotation.x = -get_rotation().y
 
 func _on_camera_start_shake():
 	shake_rotation = CameraRotation.y
