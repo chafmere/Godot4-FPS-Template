@@ -53,24 +53,27 @@ func _input(event):
 		GetRef = max(GetRef-1,0)
 
 		exit(WeaponStack[GetRef])
-
-	if event.is_action_pressed("Shoot"):
-		shoot()
-		
-	if event.is_action_released("Shoot"):
-		Current_Weapon.Spray_Count_Update()
 		
 	if event.is_action_pressed("Secondary_Fire"):
 		secondary()
 		
 	if event.is_action_released("Secondary_Fire"):
 		reset_secondary()
-
+		
+	if event.is_action_pressed("Shoot"):
+		shoot()
+		
+	if event.is_action_released("Shoot"):
+		Current_Weapon.Spray_Count_Update()
+		
 	if event.is_action_pressed("Reload"):
 		reload()
 
 	if event.is_action_pressed("Drop_Weapon"):
 		drop(Current_Weapon.Weapon_Name)
+		
+	if event.is_action_pressed("Melee"):
+		melee()
 		
 func Initialize(_Start_Weapons: Array):
 	for Weapons in _weapon_resources:
@@ -112,29 +115,30 @@ func shoot():
 			Animation_Player.play(Current_Weapon.Shoot_Anim)
 			Current_Weapon.Current_Ammo -= 1
 			Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
-			var Camera_Collission =  GetCameraCollision()
+			var Camera_Collission =  GetCameraCollision(Current_Weapon.Fire_Range)
 			match Current_Weapon.Type:
 				NULL:
-					print("not chosen")
+					pass
 				HITSCAN:
 					HitScanCollision(Camera_Collission)
 				PROJECTILE:
 					LaunchProjectile(Camera_Collission[1])
 	else:
-		Reset_Spray.emit()
 		reload()
 
 func reload():
 	if Current_Weapon.Current_Ammo == Current_Weapon.Magazine:
 		return
 	elif not Animation_Player.is_playing():
+		
 		if Current_Weapon.Reserve_Ammo != 0:
-			
+			Reset_Spray.emit()
 			if Current_Weapon.Secondary_Mode == true:
 				reset_secondary()
 				
 			Animation_Player.queue(Current_Weapon.Reload_Anim)
-
+			
+			
 			var Reload_Amount = min(Current_Weapon.Magazine-Current_Weapon.Current_Ammo,Current_Weapon.Magazine,Current_Weapon.Reserve_Ammo)
 
 			Current_Weapon.Current_Ammo = Current_Weapon.Current_Ammo+Reload_Amount
@@ -146,6 +150,20 @@ func reload():
 		else:
 			Animation_Player.queue(Current_Weapon.Out_Of_Ammo_Anim)
 
+func melee():
+	if Current_Weapon.Secondary_Mode:
+		reset_secondary()
+		
+	var Current_Anim = Animation_Player.get_current_animation()
+	
+	if Current_Anim != Current_Weapon.Melee_Anim:
+		Animation_Player.play(Current_Weapon.Melee_Anim)
+		var Camera_Collission =  GetCameraCollision(2)
+		Spray_Rotation.emit(Vector2(1,0), Current_Weapon.x_Magnetude,Current_Weapon.y_Magnetude,Current_Weapon.z_Magnetude,Current_Weapon.Base_Magnetude,1)
+		if Camera_Collission[0]:
+			var Direction = (Camera_Collission[1] - owner.global_transform.origin).normalized()
+			HitScanDamage(Camera_Collission[0],Direction,Camera_Collission[1], Current_Weapon.Melee_Damage)
+			
 func drop(_name: String):
 	
 	if Weapons_List[_name].Can_Be_Dropped and WeaponStack.size() != 1:
@@ -177,7 +195,10 @@ func _on_animation_player_animation_finished(anim_name):
 					Reset_Spray.emit()
 		else:
 			Reset_Spray.emit()
-			
+	
+	if anim_name == Current_Weapon.Melee_Anim:
+		Reset_Spray.emit()
+	
 	if anim_name == Current_Weapon.Change_Anim:
 		Change_Weapon(Next_Weapon)
 		
@@ -185,19 +206,18 @@ func _on_animation_player_animation_finished(anim_name):
 		if !Input.is_action_pressed("Secondary_Fire"):
 			reset_secondary()
 
-func GetCameraCollision()->Array:
+func GetCameraCollision(_fire_range: int)->Array:
 	var _Camera = get_viewport().get_camera_3d()
 	var _Viewport = get_viewport().get_size()
 	
 	var Spray = Current_Weapon.Get_Spray()
-	
 	Spray_Rotation.emit(Spray, Current_Weapon.x_Magnetude,Current_Weapon.y_Magnetude,Current_Weapon.z_Magnetude,Current_Weapon.Base_Magnetude,Current_Weapon.count)
 	
 	if Current_Weapon.Secondary_Mode == true:
 		Spray = Vector2.ZERO
 	
 	var Ray_Origin = _Camera.project_ray_origin(_Viewport/2)
-	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(Spray))*2000)
+	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(Spray))*_fire_range)
 
 	var New_Intersection = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
 	New_Intersection.set_exclude(Collision_Exclusion)
@@ -225,12 +245,12 @@ func HitScanCollision(Collision: Array):
 			var Bullet_Collision = Bullet.intersect_ray(New_Intersection)
 
 			if Bullet_Collision:
-				HitScanDamage(Bullet_Collision.collider, Bullet_Direction,Bullet_Collision.position)
+				HitScanDamage(Bullet_Collision.collider, Bullet_Direction,Bullet_Collision.position,Current_Weapon.Damage)
 
-func HitScanDamage(Collider, Direction, Position):
+func HitScanDamage(Collider, Direction, Position, Damage):
 	if Collider.is_in_group("Target") and Collider.has_method("Hit_Successful"):
 		Hit_Successfull.emit()
-		Collider.Hit_Successful(Current_Weapon.Damage, Direction, Position)
+		Collider.Hit_Successful(Damage, Direction, Position)
 
 func LaunchProjectile(Point: Vector3):
 	var Direction = (Point - Bullet_Point.global_transform.origin).normalized()
@@ -308,10 +328,11 @@ func reset_secondary():
 func Secondary_Shoot(secondary_resource):
 	if secondary_resource.Ammo != 0:
 		secondary_resource.Ammo  -= 1
-		var CollissionPoint =  GetCameraCollision()
+		var CollissionPoint =  GetCameraCollision(Current_Weapon.Fire_Range)
 		
 		match secondary_resource.Fire_Type:
 			"Hitscan":
 				HitScanCollision(CollissionPoint)
 			"Projectile":
-				LaunchProjectile(CollissionPoint)
+				LaunchProjectile(CollissionPoint[1])
+	reset_secondary()

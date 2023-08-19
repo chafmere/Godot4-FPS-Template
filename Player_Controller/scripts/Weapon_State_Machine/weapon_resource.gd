@@ -14,6 +14,7 @@ signal Zoom
 @export var Change_Anim: String
 @export var Drop_Anim: String
 @export var Out_Of_Ammo_Anim: String
+@export var Melee_Anim: String
 
 @export_group("Weapon Stats")
 @export var Current_Ammo: int
@@ -21,7 +22,9 @@ signal Zoom
 @export var Magazine: int
 @export var Max_Ammo: int
 @export var Damage: int
+@export var Melee_Damage: float
 @export var AutoFire: bool
+@export var Fire_Range: int
 
 @export_group("Weapon Behaviour")
 @export var Can_Be_Dropped: bool

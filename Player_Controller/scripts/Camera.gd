@@ -23,7 +23,7 @@ func Shake_Camera(Spray, x_mag, y_mag, z_mag, Magnetude):
 	var z_rot = min(abs(Spray.x*z_mag),max_z)
 
 	var Shake_Rotation = Vector3(x_rot,y_rot,z_rot)*Magnetude
-	
+
 	tween  = get_tree().create_tween().tween_property(MainCamera,"rotation_degrees",Shake_Rotation,.1)
 	tween.set_trans(Tween.TRANS_LINEAR)
 	tween.finished.connect(BounceBack)
