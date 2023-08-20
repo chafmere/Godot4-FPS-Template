@@ -124,6 +124,7 @@ func shoot():
 				PROJECTILE:
 					LaunchProjectile(Camera_Collission[1])
 	else:
+		Reset_Spray.emit()
 		reload()
 
 func reload():
@@ -131,24 +132,24 @@ func reload():
 		return
 	elif not Animation_Player.is_playing():
 		
-		if Current_Weapon.Reserve_Ammo != 0:
-			Reset_Spray.emit()
+		if Current_Weapon.Reserve_Ammo != 0:		
 			if Current_Weapon.Secondary_Mode == true:
 				reset_secondary()
 				
 			Animation_Player.queue(Current_Weapon.Reload_Anim)
-			
-			
-			var Reload_Amount = min(Current_Weapon.Magazine-Current_Weapon.Current_Ammo,Current_Weapon.Magazine,Current_Weapon.Reserve_Ammo)
 
-			Current_Weapon.Current_Ammo = Current_Weapon.Current_Ammo+Reload_Amount
-			Current_Weapon.Reserve_Ammo = Current_Weapon.Reserve_Ammo-Reload_Amount
-			Current_Weapon.Spray_Count_Update()
-			
-			Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
-		
 		else:
 			Animation_Player.queue(Current_Weapon.Out_Of_Ammo_Anim)
+
+func Calculate_Reload():
+	var Reload_Amount = min(Current_Weapon.Magazine-Current_Weapon.Current_Ammo,Current_Weapon.Magazine,Current_Weapon.Reserve_Ammo)
+
+	Current_Weapon.Current_Ammo = Current_Weapon.Current_Ammo+Reload_Amount
+	Current_Weapon.Reserve_Ammo = Current_Weapon.Reserve_Ammo-Reload_Amount
+	Current_Weapon.Spray_Count_Update()
+	
+	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
+
 
 func melee():
 	if Current_Weapon.Secondary_Mode:
@@ -165,7 +166,6 @@ func melee():
 			HitScanDamage(Camera_Collission[0],Direction,Camera_Collission[1], Current_Weapon.Melee_Damage)
 			
 func drop(_name: String):
-	
 	if Weapons_List[_name].Can_Be_Dropped and WeaponStack.size() != 1:
 		var Weapon_Ref = WeaponStack.find(_name,0)
 		if Weapon_Ref != -1:
@@ -201,10 +201,16 @@ func _on_animation_player_animation_finished(anim_name):
 	
 	if anim_name == Current_Weapon.Change_Anim:
 		Change_Weapon(Next_Weapon)
-		
+	
+	if anim_name == Current_Weapon.Reload_Anim:
+		Calculate_Reload()
+	
+	CheckSecondaryMode()
+	
+func CheckSecondaryMode():	
 	if Current_Weapon.Secondary_Mode == true:
 		if !Input.is_action_pressed("Secondary_Fire"):
-			reset_secondary()
+			reset_secondary()	
 
 func GetCameraCollision(_fire_range: int)->Array:
 	var _Camera = get_viewport().get_camera_3d()
@@ -320,16 +326,16 @@ func secondary():
 
 func reset_secondary():
 	if Current_Weapon.Secondary_Fire_Resource:
-		if not Animation_Player.is_playing():
-			Current_Weapon.Secondary_Fire_Released()
-			if Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation_Reset:
-				Animation_Player.play(Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation_Reset)
+		if Current_Weapon.Secondary_Mode:
+			if not Animation_Player.is_playing():
+				Current_Weapon.Secondary_Fire_Released()
+				if Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation_Reset:
+					Animation_Player.play(Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation_Reset)
 
 func Secondary_Shoot(secondary_resource):
 	if secondary_resource.Ammo != 0:
 		secondary_resource.Ammo  -= 1
 		var CollissionPoint =  GetCameraCollision(Current_Weapon.Fire_Range)
-		
 		match secondary_resource.Fire_Type:
 			"Hitscan":
 				HitScanCollision(CollissionPoint)
