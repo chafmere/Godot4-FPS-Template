@@ -6,14 +6,14 @@ signal Update_WeaponStack
 signal Hit_Successfull
 signal Add_Signal_To_HUD
 
-signal Spray_Rotation
-signal Reset_Spray
 signal Connect_Weapon_To_HUD
-signal Connect_Weapon_To_Camera
 
-@onready var Animation_Player = get_node("%AnimationPlayer")
+@export var Animation_Player: AnimationPlayer
 @onready var Bullet_Point = get_node("%BulletPoint")
 @onready var Debug_Bullet = preload("res://Player_Controller/Spawnable_Objects/hit_debug.tscn")
+
+var Melee_Shake:= Vector3(0,0,2.5)
+var Melee_Shake_Magnetude:= Vector4(1,1,1,1)
 
 #var Secondary_Mode = false
 
@@ -39,6 +39,7 @@ var Weapons_List = {
 @export var Start_Weapons: Array[String]
 
 func _ready():
+	Animation_Player.animation_finished.connect(_on_animation_finished)
 	Initialize(Start_Weapons) #current starts on the first weapon in the stack
 
 func _input(event):
@@ -80,7 +81,6 @@ func Initialize(_Start_Weapons: Array):
 		Weapons.ready()
 		Weapons_List[Weapons.Weapon_Name] = Weapons
 		Connect_Weapon_To_HUD.emit(Weapons)
-		Connect_Weapon_To_Camera.emit(Weapons)
 		
 	for child in _Start_Weapons:
 		WeaponStack.push_back(child)
@@ -124,7 +124,6 @@ func shoot():
 				PROJECTILE:
 					LaunchProjectile(Camera_Collission[1])
 	else:
-		Reset_Spray.emit()
 		reload()
 
 func reload():
@@ -157,10 +156,12 @@ func melee():
 		
 	var Current_Anim = Animation_Player.get_current_animation()
 	
+	if Current_Anim == Current_Weapon.Shoot_Anim:
+		return
+		
 	if Current_Anim != Current_Weapon.Melee_Anim:
 		Animation_Player.play(Current_Weapon.Melee_Anim)
 		var Camera_Collission =  GetCameraCollision(2)
-		Spray_Rotation.emit(Vector2(1,0), Current_Weapon.x_Magnetude,Current_Weapon.y_Magnetude,Current_Weapon.z_Magnetude,Current_Weapon.Base_Magnetude,1)
 		if Camera_Collission[0]:
 			var Direction = (Camera_Collission[1] - owner.global_transform.origin).normalized()
 			HitScanDamage(Camera_Collission[0],Direction,Camera_Collission[1], Current_Weapon.Melee_Damage)
@@ -185,19 +186,13 @@ func drop(_name: String):
 				exit(WeaponStack[Weapon_Ref])
 	else:
 		return
-
-func _on_animation_player_animation_finished(anim_name):
+		
+func _on_animation_finished(anim_name):
 	if anim_name == Current_Weapon.Shoot_Anim:
 		if Current_Weapon.AutoFire == true:
 				if Input.is_action_pressed("Shoot"):
 					shoot()
-				else:
-					Reset_Spray.emit()
-		else:
-			Reset_Spray.emit()
-	
-	if anim_name == Current_Weapon.Melee_Anim:
-		Reset_Spray.emit()
+
 	
 	if anim_name == Current_Weapon.Change_Anim:
 		Change_Weapon(Next_Weapon)
@@ -217,7 +212,6 @@ func GetCameraCollision(_fire_range: int)->Array:
 	var _Viewport = get_viewport().get_size()
 	
 	var Spray = Current_Weapon.Get_Spray()
-	Spray_Rotation.emit(Spray, Current_Weapon.x_Magnetude,Current_Weapon.y_Magnetude,Current_Weapon.z_Magnetude,Current_Weapon.Base_Magnetude,Current_Weapon.count)
 	
 	if Current_Weapon.Secondary_Mode == true:
 		Spray = Vector2.ZERO

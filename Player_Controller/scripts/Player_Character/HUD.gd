@@ -4,16 +4,9 @@ extends CanvasLayer
 @onready var CurrentWeaponLabel = $debug_hud/HBoxContainer/CurrentWeapon
 @onready var CurrentAmmoLabel = $debug_hud/HBoxContainer2/CurrentAmmo
 @onready var CurrentWeaponStack = $debug_hud/HBoxContainer3/WeaponStack
-@onready var CurrentFOV = $"debug_hud/HBoxContainer4/FOV Label"
 @onready var Hit_Sight = $Hit_Sight
 @onready var Hit_Sight_Timer = $Hit_Sight/Hit_Sight_Timer
-@onready var FOVSlider = $debug_hud/FOV
 @onready var OverLay = $Overlay
-
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		if FOVSlider:
-			FOVSlider.release_focus()
 
 func _on_weapons_manager_update_weapon_stack(WeaponStack):
 	CurrentWeaponStack.text = ""
@@ -36,10 +29,6 @@ func _on_weapons_manager_hit_successfull():
 	Hit_Sight.set_visible(true)
 	Hit_Sight_Timer.start()
 
-func _on_weapons_models_update_fov(Fov, UpdateSlider: bool = false):
-	CurrentFOV.set_text(str(Fov))
-	if UpdateSlider:
-		FOVSlider.set_value_no_signal(Fov)
 
 func LoadOverLayTexture(Active:bool, txtr: Texture2D = null):
 		OverLay.set_texture(txtr)

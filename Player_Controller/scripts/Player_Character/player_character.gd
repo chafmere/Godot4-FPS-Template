@@ -57,30 +57,3 @@ func _physics_process(delta):
 	velocity.z = move_toward(velocity.z, direction.z * SPEED, SPEED)
 
 	move_and_slide()
-
-func _on_camera_camera_reset(_x_rotation, _y_rotation):
-	if (abs(shake_rotation-CameraRotation.y))<.05:
-		Camera.Camera_Position_Tween_To_Zero()
-		var rotation_x = Start_Shake_Rotation - (CameraRotation.y - Start_Shake_Rotation)
-		Start_Shake_Rotation = 0
-		var _tween = get_tree().create_tween().tween_property(Camera,"rotation:x",-rotation_x,.2)
-		_tween.finished.connect(ResetShake)
-	else:
-		var rotation_x = CameraRotation.y - _x_rotation
-		var rotation_y = CameraRotation.x - _y_rotation
-
-		Camera.rotation.x = -rotation_x
-		rotation.y = -rotation_y
-
-		Camera.Camera_Position_To_Zero()
-		ResetShake()
-
-func ResetShake():
-	shake_rotation = 0
-	CameraRotation.y = -Camera.get_rotation().x
-	CameraRotation.x = -get_rotation().y
-
-func _on_camera_start_shake():
-	Start_Shake_Rotation = -Camera.get_rotation().x
-	shake_rotation = CameraRotation.y
-	
