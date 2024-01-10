@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://bsd3snvekvhgc" path="res://Player_Controller/scripts/Weapon_State_Machine/Secondary_Fire_Scripts/ADS.tres" id="1_bp8i3"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_jgxyc"]
 [ext_resource type="PackedScene" uid="uid://cb4a7oqdaebvu" path="res://Player_Controller/scripts/Weapon_State_Machine/Spray Paths/spray_1.tscn" id="1_jtijw"]
-[ext_resource type="PackedScene" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="1_ohyk1"]
+[ext_resource type="PackedScene" uid="uid://cvbk5bxenpxey" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="1_ohyk1"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_cbo4w"]
 frequency = 0.052

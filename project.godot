@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Godot 4 Fps Controller"
 run/main_scene="res://Example World/Objects/World/world.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Title.png"
 
 [display]
