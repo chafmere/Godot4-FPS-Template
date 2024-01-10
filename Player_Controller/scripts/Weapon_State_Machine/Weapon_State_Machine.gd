@@ -54,18 +54,9 @@ func _input(event):
 		GetRef = max(GetRef-1,0)
 
 		exit(WeaponStack[GetRef])
-		
-	if event.is_action_pressed("Secondary_Fire"):
-		secondary()
-		
-	if event.is_action_released("Secondary_Fire"):
-		reset_secondary()
-		
+
 	if event.is_action_pressed("Shoot"):
 		shoot()
-		
-	if event.is_action_released("Shoot"):
-		Current_Weapon.Spray_Count_Update()
 		
 	if event.is_action_pressed("Reload"):
 		reload()
@@ -78,7 +69,6 @@ func _input(event):
 		
 func Initialize(_Start_Weapons: Array):
 	for Weapons in _weapon_resources:
-		Weapons.ready()
 		Weapons_List[Weapons.Weapon_Name] = Weapons
 		Connect_Weapon_To_HUD.emit(Weapons)
 		
@@ -92,15 +82,12 @@ func Initialize(_Start_Weapons: Array):
 
 func enter():
 	Animation_Player.queue(Current_Weapon.Pick_Up_Anim)
-	Current_Weapon.Spray_Count_Update()
 	Weapon_Changed.emit(Current_Weapon.Weapon_Name)
 	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 
 func exit(_next_weapon: String):
 	if _next_weapon != Current_Weapon.Weapon_Name:
 		if Animation_Player.get_current_animation() != Current_Weapon.Change_Anim:
-			if Current_Weapon.Secondary_Mode == true:
-				reset_secondary()
 			Animation_Player.queue(Current_Weapon.Change_Anim)
 			Next_Weapon = _next_weapon
 
@@ -132,8 +119,6 @@ func reload():
 	elif not Animation_Player.is_playing():
 		
 		if Current_Weapon.Reserve_Ammo != 0:		
-			if Current_Weapon.Secondary_Mode == true:
-				reset_secondary()
 				
 			Animation_Player.queue(Current_Weapon.Reload_Anim)
 
@@ -145,15 +130,11 @@ func Calculate_Reload():
 
 	Current_Weapon.Current_Ammo = Current_Weapon.Current_Ammo+Reload_Amount
 	Current_Weapon.Reserve_Ammo = Current_Weapon.Reserve_Ammo-Reload_Amount
-	Current_Weapon.Spray_Count_Update()
 	
 	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 
 
 func melee():
-	if Current_Weapon.Secondary_Mode:
-		reset_secondary()
-		
 	var Current_Anim = Animation_Player.get_current_animation()
 	
 	if Current_Anim == Current_Weapon.Shoot_Anim:
@@ -193,31 +174,18 @@ func _on_animation_finished(anim_name):
 				if Input.is_action_pressed("Shoot"):
 					shoot()
 
-	
 	if anim_name == Current_Weapon.Change_Anim:
 		Change_Weapon(Next_Weapon)
 	
 	if anim_name == Current_Weapon.Reload_Anim:
 		Calculate_Reload()
-	
-	CheckSecondaryMode()
-	
-func CheckSecondaryMode():	
-	if Current_Weapon.Secondary_Mode == true:
-		if !Input.is_action_pressed("Secondary_Fire"):
-			reset_secondary()	
 
 func GetCameraCollision(_fire_range: int)->Array:
 	var _Camera = get_viewport().get_camera_3d()
 	var _Viewport = get_viewport().get_size()
 	
-	var Spray = Current_Weapon.Get_Spray()
-	
-	if Current_Weapon.Secondary_Mode == true:
-		Spray = Vector2.ZERO
-	
 	var Ray_Origin = _Camera.project_ray_origin(_Viewport/2)
-	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(Spray))*_fire_range)
+	var Ray_End = (Ray_Origin + _Camera.project_ray_normal(_Viewport/2)*_fire_range)
 
 	var New_Intersection = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
 	New_Intersection.set_exclude(Collision_Exclusion)
@@ -308,31 +276,4 @@ func Add_Ammo(_Weapon: String, Ammo: int)->int:
 	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 	return Remaining
 	
-func secondary():
-	if Current_Weapon.Secondary_Fire_Resource:
-		if not Animation_Player.is_playing():
-			Current_Weapon.Secondary_Fire()
-			
-			if Current_Weapon.Secondary_Fire_Resource.Secondary_Fire_Shoot:
-				Secondary_Shoot(Current_Weapon.Secondary_Fire_Resource)
-				
-			Animation_Player.play(Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation)
 
-func reset_secondary():
-	if Current_Weapon.Secondary_Fire_Resource:
-		if Current_Weapon.Secondary_Mode:
-			if not Animation_Player.is_playing():
-				Current_Weapon.Secondary_Fire_Released()
-				if Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation_Reset:
-					Animation_Player.play(Current_Weapon.Secondary_Fire_Resource.Seconday_Fire_Animation_Reset)
-
-func Secondary_Shoot(secondary_resource):
-	if secondary_resource.Ammo != 0:
-		secondary_resource.Ammo  -= 1
-		var CollissionPoint =  GetCameraCollision(Current_Weapon.Fire_Range)
-		match secondary_resource.Fire_Type:
-			"Hitscan":
-				HitScanCollision(CollissionPoint)
-			"Projectile":
-				LaunchProjectile(CollissionPoint[1])
-	reset_secondary()
