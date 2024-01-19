@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gktg3a7j8wmd"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Bullets/Hitscan_Bullet.gd" id="1_eoeg8"]
+
+[node name="Hitscan_Bullet" type="Node3D"]
+script = ExtResource("1_eoeg8")

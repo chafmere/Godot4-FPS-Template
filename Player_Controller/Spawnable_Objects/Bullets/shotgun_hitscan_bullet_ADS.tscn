@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://by22j0388oa2v"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Bullets/shotgun_hitscan_bullet.gd" id="1_wnw8m"]
+
+[sub_resource type="Curve2D" id="Curve2D_4qxhl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, -4, 0, 0, 0, 0, -3, -2, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, -2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, -3, 2, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[node name="Shotgun_Hitscan_Bullet" type="Node3D" node_paths=PackedStringArray("Spread_Pattern")]
+script = ExtResource("1_wnw8m")
+Spread_Pattern = NodePath("shotgun_spread")
+randomness = 0.0
+Split_Damage = true
+Projectile_Velocity = 200
+
+[node name="shotgun_spread" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4qxhl")

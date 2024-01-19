@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://brvfyahytwd8m"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Projectiles/shotgun_projectile.gd" id="1_idx2q"]
+
+[sub_resource type="Curve2D" id="Curve2D_2lhxk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 7, 3, 0, 0, 0, 0, -30, -11, 0, 0, 0, 0, -8, -18, 0, 0, 0, 0, 8, -9, -2.50282, -11.0124, 2.50282, 11.0124, 19, 13, 0, 0, 0, 0, -21, 1, 0, 0, 0, 0, 22, 22, 0, 0, 0, 0, 12, 21, 0, 0, 0, 0, -33, 4)
+}
+point_count = 9
+
+[node name="shotgun_projectile" type="Node3D"]
+script = ExtResource("1_idx2q")
+Randomness = 2.941
+Split_Damage = true
+
+[node name="shotgun_pattern" type="Path2D" parent="."]
+curve = SubResource("Curve2D_2lhxk")

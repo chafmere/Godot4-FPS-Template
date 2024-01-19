@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://diar6crqlr25n"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Bullets/shotgun_bullet.gd" id="1_tcwd3"]
+[ext_resource type="PackedScene" uid="uid://cbr8e2ut8ttyh" path="res://Player_Controller/Spawnable_Objects/Bullets/physics_bullet.tscn" id="2_jlvsk"]
+
+[sub_resource type="Curve2D" id="Curve2D_mxqpf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -17, -12, 0, 0, 0, 0, -6, -4, 0, 0, 0, 0, -12, -25, 0, 0, 0, 0, -1, -13, 0, 0, 0, 0, 16, 10, 0, 0, 0, 0, 15, -23, 0, 0, 0, 0, -20, 8, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 12, -5)
+}
+point_count = 9
+
+[node name="Shotgun_Bullet" type="Node3D" node_paths=PackedStringArray("Spread_Pattern")]
+script = ExtResource("1_tcwd3")
+Spread_Pattern = NodePath("shotgun_spread")
+Projectile_Type = "Projectile"
+Projectile_Velocity = 200
+Rigid_Body_Projectile = ExtResource("2_jlvsk")
+
+[node name="shotgun_spread" type="Path2D" parent="."]
+curve = SubResource("Curve2D_mxqpf")

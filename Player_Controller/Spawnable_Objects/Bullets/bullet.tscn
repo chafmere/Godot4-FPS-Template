@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxlkgbr1p580"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Bullets/bullet.gd" id="1_mmagd"]
+[ext_resource type="PackedScene" uid="uid://cbr8e2ut8ttyh" path="res://Player_Controller/Spawnable_Objects/Bullets/physics_bullet.tscn" id="2_6jeo5"]
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_mmagd")
+Projectile_Type = "Rigidbody_Projectile"
+Projectile_Velocity = 10
+Rigid_Body_Projectile = ExtResource("2_6jeo5")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://oc13h3au02ro"]
+[gd_scene load_steps=30 format=3 uid="uid://oc13h3au02ro"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_h0t42"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_tvwwj"]
@@ -8,14 +8,41 @@
 [ext_resource type="Resource" uid="uid://yc1f2j7pl4vr" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterI.tres" id="6_tpjp5"]
 [ext_resource type="Resource" uid="uid://bwrs8ensewkgc" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterL.tres" id="7_gf6gb"]
 [ext_resource type="Resource" uid="uid://c1jg0ifn7yvve" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterN.tres" id="8_vhb8h"]
+[ext_resource type="PackedScene" uid="uid://brvfyahytwd8m" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/shotgun_projectile.tscn" id="9_amg60"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="9_exr07"]
+[ext_resource type="PackedScene" uid="uid://x8nhs2cer2to" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_m.tscn" id="10_e1kpx"]
 [ext_resource type="PackedScene" uid="uid://bvlnghquw6pe2" path="res://Player_Controller/Weapon_Models/blasterN.glb" id="11_ql478"]
 [ext_resource type="PackedScene" uid="uid://c7sp7l3lsswwa" path="res://Player_Controller/Weapon_Models/blasterD.glb" id="12_876w4"]
+[ext_resource type="PackedScene" uid="uid://c8butdxucm35y" path="res://Example World/Models/Kenney Weapons/blasterM.glb" id="12_khnoc"]
 [ext_resource type="PackedScene" uid="uid://drns2kevx2ak2" path="res://Player_Controller/Weapon_Models/blasterA.glb" id="13_4xj2x"]
 [ext_resource type="AnimationLibrary" uid="uid://uybino34n0sj" path="res://Player_Controller/weapon_animation.res" id="13_lmhsg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73v4a"]
 radius = 0.55642
 height = 1.7
+
+[sub_resource type="Resource" id="Resource_ko4c3"]
+script = ExtResource("9_exr07")
+Weapon_Name = "blasterM"
+Pick_Up_Anim = "blasterM_activate"
+Shoot_Anim = "blasterM_Shoot"
+Reload_Anim = "blasterM_Reload"
+Change_Anim = "blasterM_Deactive"
+Drop_Anim = "blasterM_Drop"
+Out_Of_Ammo_Anim = "blasterM_OOA"
+Melee_Anim = "blasterM_Melee"
+Current_Ammo = 6
+Reserve_Ammo = 24
+Magazine = 6
+Max_Ammo = 24
+Damage = 10
+Melee_Damage = 1.0
+AutoFire = false
+Fire_Range = 100
+Can_Be_Dropped = true
+Weapon_Drop = ExtResource("10_e1kpx")
+Projectile_To_Load = ExtResource("9_amg60")
+Incremental_Reload = true
 
 [sub_resource type="Animation" id="Animation_tvd50"]
 length = 0.001
@@ -79,11 +106,323 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(0, 3.14159, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("blasterM:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("blasterM:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("blasterM:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gqwbi"]
+resource_name = "blasterM_Deactive"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, -0.405), Vector3(0, 1.15, -0.313), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0.383972, 3.25678, -0.602139), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterM:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_3ckq2"]
+resource_name = "blasterM_Drop"
+length = 0.02
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, -0.405), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterM:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_fjnab"]
+resource_name = "blasterM_Melee"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0.303687, 4.72984, -1.31772), Vector3(0.364774, 4.75602, -1.31772), Vector3(0, 3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, -0.405), Vector3(-0.15, 1.14, -0.465), Vector3(-0.095, 1.2, -0.465), Vector3(0, 1.3, -0.405)]
+}
+
+[sub_resource type="Animation" id="Animation_pwqu6"]
+resource_name = "blasterM_OOA"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.06),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, -0.405), Vector3(0, 1.3, -0.335), Vector3(0, 1.3, -0.405)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.06),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, -0.0610865), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sx31e"]
+resource_name = "blasterM_Reload"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9, 2, 2.2, 2.3, 2.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, -0.405), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.415, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.415, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.415, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.415, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.415, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0.005, 1.415, -0.46), Vector3(0.005, 1.35, -0.46), Vector3(0, 1.3, -0.405)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9, 2, 2.2, 2.3, 2.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(-0.15708, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(-0.15708, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(-0.15708, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(-0.15708, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(-0.15708, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(-0.15708, 3.14159, 0), Vector3(0.1309, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 1.1, 1.5, 1.9, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"Calculate_Reload"
+}, {
+"args": [],
+"method": &"Calculate_Reload"
+}, {
+"args": [],
+"method": &"Calculate_Reload"
+}, {
+"args": [],
+"method": &"Calculate_Reload"
+}, {
+"args": [],
+"method": &"Calculate_Reload"
+}, {
+"args": [],
+"method": &"Calculate_Reload"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3ky4l"]
+resource_name = "blasterM_Shoot"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.39, 0.62, 0.88, 0.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3, -0.405), Vector3(0, 1.515, -0.405), Vector3(0, 1.43163, -0.405), Vector3(0, 1.43, -0.485), Vector3(0, 1.43, -0.362), Vector3(0, 1.3, -0.405)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.39, 0.88, 0.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(-0.514872, 3.14159, 0), Vector3(-0.315228, 3.14159, 0), Vector3(-0.315228, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t03yb"]
+resource_name = "blasterM_activate"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterM:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.245, -0.011), Vector3(0, 1.3, -0.405)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterM:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2.61799, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterM:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ys4uk"]
 _data = {
-"RESET": SubResource("Animation_tvd50")
+"RESET": SubResource("Animation_tvd50"),
+"blasterM_Deactive": SubResource("Animation_gqwbi"),
+"blasterM_Drop": SubResource("Animation_3ckq2"),
+"blasterM_Melee": SubResource("Animation_fjnab"),
+"blasterM_OOA": SubResource("Animation_pwqu6"),
+"blasterM_Reload": SubResource("Animation_sx31e"),
+"blasterM_Shoot": SubResource("Animation_3ky4l"),
+"blasterM_activate": SubResource("Animation_t03yb")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_to3sp"]
+size = Vector3(0.645, 0.315, 0.405)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tc1ik"]
 size = Vector3(1.60191, 1.70789, 1.83518)
@@ -181,10 +520,11 @@ unique_name_in_owner = true
 cull_mask = 524287
 current = true
 
-[node name="Weapons_Manager" type="Node3D" parent="Camera/MainCamera" node_paths=PackedStringArray("Animation_Player")]
+[node name="Weapons_Manager" type="Node3D" parent="Camera/MainCamera" node_paths=PackedStringArray("Animation_Player", "Melee_Hitbox")]
 script = ExtResource("5_wuueu")
 Animation_Player = NodePath("Weapons_Models/AnimationPlayer")
-_weapon_resources = Array[Resource("res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd")]([ExtResource("6_tpjp5"), ExtResource("7_gf6gb"), ExtResource("8_vhb8h")])
+Melee_Hitbox = NodePath("Melee_Hitbox")
+_weapon_resources = Array[ExtResource("9_exr07")]([ExtResource("6_tpjp5"), ExtResource("7_gf6gb"), ExtResource("8_vhb8h"), SubResource("Resource_ko4c3")])
 Start_Weapons = Array[String](["blasterN", "blasterI"])
 
 [node name="Weapons_Models" type="Node3D" parent="Camera/MainCamera/Weapons_Manager"]
@@ -208,6 +548,9 @@ visible = false
 
 [node name="blasterA" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models/blasterL" instance=ExtResource("13_4xj2x")]
 
+[node name="blasterM" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models" instance=ExtResource("12_khnoc")]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/MainCamera/Weapons_Manager/Weapons_Models"]
 unique_name_in_owner = true
 libraries = {
@@ -219,6 +562,11 @@ libraries = {
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.313352, -0.240567, -0.907474)
 gizmo_extents = 0.21
+
+[node name="Melee_Hitbox" type="ShapeCast3D" parent="Camera/MainCamera/Weapons_Manager"]
+shape = SubResource("BoxShape3D_to3sp")
+target_position = Vector3(0, 0, -0.7)
+collision_mask = 36
 
 [node name="Pick_Up_Detection" type="Area3D" parent="."]
 collision_layer = 0
