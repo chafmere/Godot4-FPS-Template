@@ -19,7 +19,6 @@ var Melee_Shake_Magnetude:= Vector4(1,1,1,1)
 var Current_Weapon = null
 
 var WeaponStack = [] #An Array of weapons currently in possesion by the player
-#var WeaponIndicator = 0
 var Next_Weapon: String
 
 #The List of All Available weapons in the game
