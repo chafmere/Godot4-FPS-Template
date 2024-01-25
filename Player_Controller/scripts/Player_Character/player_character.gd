@@ -66,7 +66,7 @@ func Crouch():
 			else:
 				Blend = 1
 		var blend_tween = get_tree().create_tween()
-		blend_tween.tween_property(animation_tree,"parameters/Crouch_Blend/blend_amount",Blend,.2)
+		blend_tween.tween_property(animation_tree,"parameters/Crouch_Blend/blend_amount",Blend,Crouch_Blend_Speed)
 		Crouched = !Crouched
 	else:
 		Crounch_Blocked = true
@@ -84,7 +84,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 		_speed = SPEED
 	else:
-		_speed = SPEED / (1+(float(Crouched)*Crouch_Speed_Reduction))
+		_speed = SPEED / max((float(Crouched)*Crouch_Speed_Reduction),1)
 		
 
 	# Handle Jump.

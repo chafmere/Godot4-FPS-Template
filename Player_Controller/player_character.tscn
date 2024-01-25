@@ -747,6 +747,8 @@ floor_max_angle = 0.872665
 script = ExtResource("1_h0t42")
 animation_tree = NodePath("AnimationTree")
 Crouch_Detection = NodePath("Crouch_Detection")
+Crouch_Blend_Speed = 0.11
+Crouch_Speed_Reduction = 3.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
