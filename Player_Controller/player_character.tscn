@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://oc13h3au02ro"]
+[gd_scene load_steps=41 format=3 uid="uid://oc13h3au02ro"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_h0t42"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_tvwwj"]
@@ -421,15 +421,332 @@ _data = {
 size = Vector3(0.645, 0.315, 0.405)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73v4a"]
+radius = 0.4
 height = 1.7
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mvomp"]
 size = Vector3(2.04688, 1.54346, 1.80408)
 
-[node name="Player_Character" type="CharacterBody3D"]
+[sub_resource type="Animation" id="Animation_nwarb"]
+resource_name = "Crouch_Reset"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body_collision:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body_collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.85, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body_collision:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.55, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Crouch_Detection:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.85, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Crouch_Detection:target_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.45, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l2exb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body_collision:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body_collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.85, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body_collision:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.55, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Crouch_Detection:target_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.3, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Crouch_Detection:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rh76h"]
+resource_name = "crouch_air"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body_collision:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body_collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.25, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crouch_Detection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Crouch_Detection:target_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ay4ef"]
+resource_name = "crouch_ground"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body_collision:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body_collision:shape:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body_collision:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.45, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.75, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Crouch_Detection:target_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.45, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Crouch_Detection:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.85, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5s7yb"]
+_data = {
+"Crouch_Reset": SubResource("Animation_nwarb"),
+"RESET": SubResource("Animation_l2exb"),
+"crouch_air": SubResource("Animation_rh76h"),
+"crouch_ground": SubResource("Animation_ay4ef")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u11c5"]
+animation = &"crouch_air"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_5u4b3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ewjrk"]
+animation = &"crouch_ground"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1blpf"]
+animation = &"Crouch_Reset"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6jxba"]
+graph_offset = Vector2(-251.923, 20.0269)
+nodes/Air/node = SubResource("AnimationNodeAnimation_u11c5")
+nodes/Air/position = Vector2(100, 360)
+nodes/Crouch_Blend/node = SubResource("AnimationNodeBlend3_5u4b3")
+nodes/Crouch_Blend/position = Vector2(400, 120)
+nodes/ground/node = SubResource("AnimationNodeAnimation_ewjrk")
+nodes/ground/position = Vector2(80, 80)
+nodes/output/position = Vector2(680, 140)
+nodes/reset/node = SubResource("AnimationNodeAnimation_1blpf")
+nodes/reset/position = Vector2(80, 220)
+node_connections = [&"Crouch_Blend", 0, &"ground", &"Crouch_Blend", 1, &"reset", &"Crouch_Blend", 2, &"Air", &"output", 0, &"Crouch_Blend"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_25woj"]
+radius = 0.4
+
+[node name="Player_Character" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree", "Crouch_Detection")]
 collision_layer = 2
 floor_max_angle = 0.872665
 script = ExtResource("1_h0t42")
+animation_tree = NodePath("AnimationTree")
+Crouch_Detection = NodePath("Crouch_Detection")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -562,7 +879,7 @@ shape = SubResource("BoxShape3D_to3sp")
 target_position = Vector3(0, 0, -0.7)
 collision_mask = 36
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="body_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_73v4a")
 
@@ -573,6 +890,23 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pick_up_detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015625, 0.271729, 0.085144)
 shape = SubResource("BoxShape3D_mvomp")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5s7yb")
+}
+tree_root = SubResource("AnimationNodeBlendTree_6jxba")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Crouch_Blend/blend_amount = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5s7yb")
+}
+
+[node name="Crouch_Detection" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_25woj")
+target_position = Vector3(0, 1.3, 0)
 
 [connection signal="timeout" from="CanvasLayer/Hit_Sight/Hit_Sight_Timer" to="CanvasLayer" method="_on_hit_sight_timer_timeout"]
 [connection signal="Add_Signal_To_HUD" from="Camera/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_add_signal_to_hud"]
