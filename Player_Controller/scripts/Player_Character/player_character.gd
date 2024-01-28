@@ -15,11 +15,19 @@ var Start_Shake_Rotation = 0
 
 var Crouched: bool = false
 var Crouch_Blocked: bool = false
+
 @export_category("Crouch Parametres")
 @export var Crouch_Toggle: bool = false
 @export var Crouch_Collision: ShapeCast3D
 @export_range(0.0,3.0) var Crouch_Speed_Reduction = 2.0
 @export_range(0.0,0.50) var Crouch_Blend_Speed = .2
+
+@export_category("Lean Parametres")
+@export_range(0.0,1.0) var Lean_Speed: float = .20
+@export var Lean_Left_Collider: ShapeCast3D
+@export var Lean_Right_Collider: ShapeCast3D
+enum {LEFT = -1, CENTRE = 0, RIGHT = 1}
+var lean_tween
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -43,6 +51,30 @@ func _input(event):
 	if event.is_action_released("crouch"):
 		if !Crouch_Toggle and Crouched:
 			Crouch()
+			
+	if Input.is_action_just_released("lean_left") or Input.is_action_just_released("lean_right"):
+		if !(Input.is_action_pressed("lean_left") or Input.is_action_pressed("lean_right")):
+			Lean(CENTRE)			
+	if Input.is_action_just_pressed("lean_left"):
+		Lean(LEFT)
+	if Input.is_action_just_pressed("lean_right"):
+		Lean(RIGHT)
+
+func Lean(blend_amount: int):
+	if is_on_floor():
+		if lean_tween:
+			lean_tween.kill()
+			
+		lean_tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		lean_tween.tween_property(animation_tree,"parameters/lean_blend/blend_amount",blend_amount,Lean_Speed)
+
+func Lean_Collision():
+	animation_tree["parameters/left_collision_blend/blend_amount"] = lerp(
+		float(animation_tree["parameters/left_collision_blend/blend_amount"]),float(Lean_Left_Collider.is_colliding()),Lean_Speed
+	)
+	animation_tree["parameters/right_collision_blend/blend_amount"] = lerp(
+		float(animation_tree["parameters/right_collision_blend/blend_amount"]),float(Lean_Right_Collider.is_colliding()),Lean_Speed
+	)
 
 func Crouch():
 	var Blend
@@ -72,6 +104,8 @@ func CameraLook(Movement: Vector2):
 	CameraRotation.y = clamp(CameraRotation.y,-1.5,1.2)
 
 func _physics_process(delta):
+	Lean_Collision()
+	
 	if Crouched and Crouch_Blocked:
 		if !Crouch_Collision.is_colliding():
 			Crouch_Blocked = false
@@ -90,6 +124,7 @@ func _physics_process(delta):
 		if Crouched:
 			Crouch()
 		else:
+			Lean(CENTRE)
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
