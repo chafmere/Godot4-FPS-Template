@@ -21,6 +21,13 @@ var Crouch_Blocked: bool = false
 @export_range(0.0,3.0) var Crouch_Speed_Reduction = 2.0
 @export_range(0.0,0.50) var Crouch_Blend_Speed = .2
 
+@export_category("Lean Parametres")
+@export_range(0.0,1.0) var Lean_Speed: float = .2
+@export var Right_Lean_Collision: ShapeCast3D
+@export var Left_Lean_Collision: ShapeCast3D
+var lean_tween
+enum {LEFT = 1, CENTRE = 0, RIGHT = -1}
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -43,6 +50,31 @@ func _input(event):
 	if event.is_action_released("crouch"):
 		if !Crouch_Toggle and Crouched:
 			Crouch()
+	
+		
+	if Input.is_action_just_released("lean_left") or Input.is_action_just_released("lean_right"):
+		if !(Input.is_action_pressed("lean_right") or Input.is_action_pressed("lean_left")):
+			lean(CENTRE)
+	if Input.is_action_just_pressed("lean_left"):
+		lean(LEFT)
+	if Input.is_action_just_pressed("lean_right"):
+		lean(RIGHT)
+
+func lean(blend_amount: int):
+	if is_on_floor():
+		if lean_tween:
+			lean_tween.kill()
+		
+		lean_tween = get_tree().create_tween()
+		lean_tween.tween_property(animation_tree,"parameters/lean_blend/blend_amount", blend_amount, Lean_Speed)
+
+func lean_collision():
+	animation_tree["parameters/left_collision_blend/blend_amount"] = lerp(
+		float(animation_tree["parameters/left_collision_blend/blend_amount"]),float(Left_Lean_Collision.is_colliding()),Lean_Speed
+	)
+	animation_tree["parameters/right_collision_blend/blend_amount"] = lerp(
+		float(animation_tree["parameters/right_collision_blend/blend_amount"]),float(Right_Lean_Collision.is_colliding()),Lean_Speed
+	)
 
 func Crouch():
 	var Blend
@@ -72,6 +104,9 @@ func CameraLook(Movement: Vector2):
 	CameraRotation.y = clamp(CameraRotation.y,-1.5,1.2)
 
 func _physics_process(delta):
+
+	lean_collision()
+	
 	if Crouched and Crouch_Blocked:
 		if !Crouch_Collision.is_colliding():
 			Crouch_Blocked = false
@@ -81,15 +116,15 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		_speed = SPEED
 	else:
-		_speed = SPEED / max((float(Crouched)*Crouch_Speed_Reduction),1)
+		_speed = (SPEED / max((float(Crouched)*Crouch_Speed_Reduction),1))
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		if Crouched:
 			Crouch()
 		else:
+			lean(CENTRE)
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
