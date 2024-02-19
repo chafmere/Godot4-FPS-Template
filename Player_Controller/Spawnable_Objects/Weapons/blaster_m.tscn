@@ -14,7 +14,7 @@ metallic = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trcaa"]
 resource_name = "yellow"
-albedo_color = Color(0.998274, 0.894448, 0.505969, 1)
+albedo_color = Color(1, 0.894118, 0.505882, 1)
 metallic = 1.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bnntu"]

@@ -1,8 +1,3 @@
-Update 1.1 - Added Viewmodel Examples.
-
-One scene with a view model shader that forces the weapon to render over everything.
-One with a Subviewport - There is currently a bug in Godot 4 that prevents shadows being rendered on the subviewport models.
-
 Are you a game developer looking for a free FPS template for Godot 4? Look no further than this Godot 4 FPS Template! With basic shooting mechanics and movement controls, this template provides a great starting point for
 your own FPS game.
 

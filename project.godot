@@ -15,14 +15,6 @@ run/main_scene="res://Example World/Objects/World/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Title.png"
 
-[display]
-
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/size/resizable=false
-window/size/window_width_override=1280
-window/size/window_height_override=720
-
 [filesystem]
 
 import/fbx/enabled=false
@@ -128,15 +120,3 @@ walk={
 3d_physics/layer_4="Weapons"
 3d_physics/layer_5="Rigid Body Projectiles"
 3d_physics/layer_6="Enemys"
-
-[rendering]
-
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
-lights_and_shadows/directional_shadow/16_bits=false
-lights_and_shadows/positional_shadow/soft_shadow_filter_quality=4
-textures/default_filters/anisotropic_filtering_level=3
-lights_and_shadows/positional_shadow/atlas_16_bits=false
-lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=4
-lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=5
-lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=5
-lights_and_shadows/positional_shadow/atlas_quadrant_3_subdiv=6

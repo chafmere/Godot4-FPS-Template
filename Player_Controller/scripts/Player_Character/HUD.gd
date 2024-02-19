@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var Hit_Sight_Timer = $Hit_Sight/Hit_Sight_Timer
 @onready var OverLay = $Overlay
 
+
 func _on_weapons_manager_update_weapon_stack(WeaponStack):
 	CurrentWeaponStack.text = ""
 	for i in WeaponStack:
@@ -29,10 +30,10 @@ func _on_weapons_manager_hit_successfull():
 	Hit_Sight.set_visible(true)
 	Hit_Sight_Timer.start()
 
-
 func LoadOverLayTexture(Active:bool, txtr: Texture2D = null):
 		OverLay.set_texture(txtr)
 		OverLay.set_visible(Active)
 
 func _on_weapons_manager_connect_weapon_to_hud(_weapon_resouce):
 	_weapon_resouce.connect("UpdateOverlay", Callable(self, "LoadOverLayTexture"))
+

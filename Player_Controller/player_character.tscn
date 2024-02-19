@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://oc13h3au02ro"]
+[gd_scene load_steps=81 format=3 uid="uid://oc13h3au02ro"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_h0t42"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_tvwwj"]
@@ -12,6 +12,19 @@
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="9_exr07"]
 [ext_resource type="PackedScene" uid="uid://x8nhs2cer2to" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_m.tscn" id="10_e1kpx"]
 [ext_resource type="AnimationLibrary" uid="uid://uybino34n0sj" path="res://Player_Controller/weapon_animation.res" id="13_lmhsg"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_rj3p7"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_j4t2g"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8ilid"]
+color = Color(0, 0, 0, 0)
+grow_begin = 6.0
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_drrrm"]
+color = Color(1, 1, 1, 1)
+thickness = 10
 
 [sub_resource type="Resource" id="Resource_ko4c3"]
 script = ExtResource("9_exr07")
@@ -1551,7 +1564,7 @@ node_connections = [&"Crouch_Blend", 0, &"ground", &"Crouch_Blend", 1, &"crouch 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cx3sy"]
 radius = 0.45
 
-[node name="Player_Character" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree", "Crouch_Collision", "Right_Lean_Collision", "Left_Lean_Collision")]
+[node name="Player_Character" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree", "Crouch_Collision", "Right_Lean_Collision", "Left_Lean_Collision", "Sprint_Timer")]
 collision_layer = 2
 floor_max_angle = 0.872665
 script = ExtResource("1_h0t42")
@@ -1559,8 +1572,17 @@ animation_tree = NodePath("AnimationTree")
 Crouch_Toggle = true
 Crouch_Collision = NodePath("ShapeCast3D")
 Crouch_Speed_Reduction = 3.0
+Lean_Speed = 0.253
 Right_Lean_Collision = NodePath("Camera/lean_right_collision")
 Left_Lean_Collision = NodePath("Camera/lean_left_collision")
+Sprint_Timer = NodePath("Sprint_Timer")
+Sprint_Replenish_rate = 0.28
+Sprint_Speed = 1.5
+Jump_Peak_Time = 0.35
+Jump_Fall_Time = 0.45
+Jump_Distance = 5.0
+Coyote_Time = 0.2
+metadata/_edit_group_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -1636,6 +1658,26 @@ stretch_mode = 3
 [node name="Hit_Sight_Timer" type="Timer" parent="CanvasLayer/Hit_Sight"]
 wait_time = 0.05
 one_shot = true
+
+[node name="Sprint_Bar" type="HSlider" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_icons/grabber = SubResource("ImageTexture_rj3p7")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_j4t2g")
+theme_override_styles/slider = SubResource("StyleBoxLine_8ilid")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_drrrm")
+value = 100.0
+editable = false
+scrollable = false
 
 [node name="Camera" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -1759,6 +1801,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("SphereShape3D_cx3sy")
 target_position = Vector3(0, 0.4, 0)
 
+[node name="Sprint_Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Coyote_Timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="CanvasLayer/Hit_Sight/Hit_Sight_Timer" to="CanvasLayer" method="_on_hit_sight_timer_timeout"]
 [connection signal="Add_Signal_To_HUD" from="Camera/lean_pivot/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_add_signal_to_hud"]
 [connection signal="Connect_Weapon_To_HUD" from="Camera/lean_pivot/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_connect_weapon_to_hud"]
@@ -1767,3 +1815,5 @@ target_position = Vector3(0, 0.4, 0)
 [connection signal="Update_WeaponStack" from="Camera/lean_pivot/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
 [connection signal="Weapon_Changed" from="Camera/lean_pivot/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
 [connection signal="body_entered" from="pick_up_detection" to="Camera/lean_pivot/MainCamera/Weapons_Manager" method="_on_pick_up_detection_body_entered"]
+[connection signal="timeout" from="Sprint_Timer" to="." method="_on_sprint_timer_timeout"]
+[connection signal="timeout" from="Coyote_Timer" to="." method="_on_coyote_timer_timeout"]

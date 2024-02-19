@@ -16,14 +16,13 @@ signal Connect_Weapon_To_HUD
 var Melee_Shake:= Vector3(0,0,2.5)
 var Melee_Shake_Magnetude:= Vector4(1,1,1,1)
 
-var Current_Weapon = null
+var Current_Weapon: Weapon_Resource = null
 
-var WeaponStack = [] #An Array of weapons currently in possesion by the player
+var WeaponStack:Array = [] #An Array of weapons currently in possesion by the player
 var Next_Weapon: String
 
 #The List of All Available weapons in the game
-var Weapons_List = {
-}
+var Weapons_List: Dictionary = {}
 
 #An Array of weapon resources to make dictionary creation easier
 @export var _weapon_resources: Array[Weapon_Resource]
@@ -64,8 +63,8 @@ func Initialize(_Start_Weapons: Array):
 		Weapons_List[Weapons.Weapon_Name] = Weapons
 		Connect_Weapon_To_HUD.emit(Weapons)
 		
-	for child in _Start_Weapons:
-		WeaponStack.push_back(child)
+	for weapon_name in _Start_Weapons:
+		WeaponStack.push_back(weapon_name)
 
 	Current_Weapon = Weapons_List[WeaponStack[0]]
 
