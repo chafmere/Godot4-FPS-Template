@@ -136,10 +136,8 @@ _current_ammo = 30
 _reserve_ammo = 30
 
 [node name="blasterA2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 mesh = SubResource("ArrayMesh_dqoe4")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 shape = SubResource("ConvexPolygonShape3D_ftdt3")

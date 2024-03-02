@@ -24,6 +24,9 @@ var Next_Weapon: String
 #The List of All Available weapons in the game
 var Weapons_List: Dictionary = {}
 
+#Spray Profiles For Each Weapon
+var Spray_Profiles: Dictionary = {}
+var ShotCount = 0
 #An Array of weapon resources to make dictionary creation easier
 @export var _weapon_resources: Array[Weapon_Resource]
 
@@ -48,7 +51,10 @@ func _input(event):
 
 	if event.is_action_pressed("Shoot"):
 		shoot()
-		
+	
+	if event.is_action_released("Shoot"):
+		Shot_Count_Update()
+	
 	if event.is_action_pressed("Reload"):
 		reload()
 
@@ -61,6 +67,10 @@ func _input(event):
 func Initialize(_Start_Weapons: Array):
 	for Weapons in _weapon_resources:
 		Weapons_List[Weapons.Weapon_Name] = Weapons
+		
+		if Weapons.Weapon_Spray:
+			Spray_Profiles[Weapons.Weapon_Name] = Weapons.Weapon_Spray.instantiate()
+			
 		Connect_Weapon_To_HUD.emit(Weapons)
 		
 	for weapon_name in _Start_Weapons:
@@ -75,6 +85,7 @@ func enter():
 	Animation_Player.queue(Current_Weapon.Pick_Up_Anim)
 	Weapon_Changed.emit(Current_Weapon.Weapon_Name)
 	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
+	Shot_Count_Update()
 
 func exit(_next_weapon: String):
 	if _next_weapon != Current_Weapon.Weapon_Name:
@@ -86,7 +97,10 @@ func Change_Weapon(weapon_name: String):
 	Current_Weapon = Weapons_List[weapon_name]
 	Next_Weapon = ""
 	enter()
-
+	
+func Shot_Count_Update():
+	ShotCount = Current_Weapon.Current_Ammo
+	
 func shoot():
 	if Current_Weapon.Current_Ammo != 0:
 		if Current_Weapon.Incremental_Reload and Animation_Player.current_animation == Current_Weapon.Reload_Anim:
@@ -97,6 +111,9 @@ func shoot():
 			Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 			
 			var Spread = Vector2.ZERO
+			if Current_Weapon.Weapon_Spray:
+				var _count = ShotCount - Current_Weapon.Current_Ammo
+				Spread = Spray_Profiles[Current_Weapon.Weapon_Name].Get_Spray(_count)
 			Load_Projectile(Spread)
 	else:
 		reload()
@@ -136,7 +153,7 @@ func Calculate_Reload():
 	Current_Weapon.Reserve_Ammo = Current_Weapon.Reserve_Ammo-Reload_Amount
 	
 	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
-
+	Shot_Count_Update()
 
 func melee():
 	var Current_Anim = Animation_Player.get_current_animation()

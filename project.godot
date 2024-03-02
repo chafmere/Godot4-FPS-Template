@@ -15,6 +15,10 @@ run/main_scene="res://Example World/Objects/World/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Title.png"
 
+[display]
+
+window/size/mode=3
+
 [filesystem]
 
 import/fbx/enabled=false

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3mb12hvruajh"]
+
+[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_35g6m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4msk4"]
+noise_type = 0
+
+[node name="Spray_Profile" type="Node"]
+script = ExtResource("1_35g6m")
+Spray_Noise = SubResource("FastNoiseLite_4msk4")
+Random_Spray_Multiplier = 2.0

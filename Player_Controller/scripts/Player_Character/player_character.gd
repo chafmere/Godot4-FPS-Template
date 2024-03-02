@@ -51,7 +51,9 @@ var Speed_Modifier: float = NORMAL_SPEED
 @export var Jump_Height: float = 2.0
 @export var Jump_Distance: float = 4.0
 @export var Coyote_Time: float = .1
+@export var Jump_Buffer_Time: float = .2
 @onready var coyote_timer: Timer = $Coyote_Timer
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var Jump_Gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -59,6 +61,7 @@ var Fall_Gravity: float
 var Jump_Velocity: float
 var Speed: float
 var Jump_Available: bool = true
+var Jump_Buffer: bool = false
 
 
 func _ready():
@@ -212,15 +215,20 @@ func _physics_process(delta):
 		Jump_Available = true
 		coyote_timer.stop()
 		_speed = (Speed / max((float(Crouched)*Crouch_Speed_Reduction),1)) * Speed_Modifier
-
+		if Jump_Buffer:
+			Jump()
+			Jump_Buffer = false
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and Jump_Available:
-		if Crouched:
-			Crouch()
+	if Input.is_action_just_pressed("ui_accept"):
+		if Jump_Available:
+			if Crouched:
+				Crouch()
+			else:
+				lean(CENTRE)
+				Jump()
 		else:
-			lean(CENTRE)
-			velocity.y = Jump_Velocity
-			Jump_Available = false
+			Jump_Buffer = true
+			get_tree().create_timer(Jump_Buffer_Time).timeout.connect(on_jump_buffer_timeout)
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -231,6 +239,10 @@ func _physics_process(delta):
 	velocity.z = move_toward(velocity.z, direction.z * _speed, Speed)
 
 	move_and_slide()
+
+func Jump()->void:
+	velocity.y = Jump_Velocity
+	Jump_Available = false
 
 func _on_sprint_timer_timeout() -> void:
 	Sprint_On_Cooldown = true
@@ -244,3 +256,6 @@ func _on_sprint_cooldown_timeout():
 
 func _on_coyote_timer_timeout() -> void:
 	Jump_Available = false
+
+func on_jump_buffer_timeout()->void:
+	Jump_Buffer = false

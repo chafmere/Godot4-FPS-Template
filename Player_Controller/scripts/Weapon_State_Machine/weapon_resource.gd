@@ -29,7 +29,7 @@ signal Zoom
 @export_group("Weapon Behaviour")
 @export var Can_Be_Dropped: bool
 @export var Weapon_Drop: PackedScene
-
+@export var Weapon_Spray: PackedScene
 #@export_flags ("Hitscan", "Projectile") var Type = 1
 @export var Projectile_To_Load: PackedScene
 @export var Incremental_Reload: bool = false

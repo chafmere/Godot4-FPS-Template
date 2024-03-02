@@ -1,11 +1,7 @@
-Are you a game developer looking for a free FPS template for Godot 4? Look no further than this Godot 4 FPS Template! With basic shooting mechanics and movement controls, this template provides a great starting point for
-your own FPS game.
+This is an FPS Template for Godot 4. 
 
-I used resources to define each weapon and a state machine that controls which weapon resource the controller is using, the rest if just animation and stats. I've been able to swap out the default with a normal FPS rig in
-10 minutes. The idea being that this can be used to rapid prototype a game and if you wanted to add in weapons/animations it's just a matter of creating them in blender or in godot itself.
+The weapons are created via a resource called Weapon_Resource that allows you to add all the animations and stats to the weapon. The weapon manager will then load all the resources and use the small state machine to control which weapon is active.
 
-Follow the my Youtube channel for regular updates on new features and tutorials. And the best part? You can download this template for free right here!
+The purpose of this template is to make prototyping a First Person Shooter a lot faster since the gameplay and weapons can be design an art added later. This is because each weapon takes string references to each animation, you could design a large array of weapons with place holder animations and then when the Rig is ready, swap it in and replace the animation references.
 
-I also try to make regular videos to show what I've been doing behind the scenes on my Feel free to pop on over and check out some of those videos. Maybe even like and subscribe!
-
-Download the Godot 4 FPS Template today and start building your own FPS game!
+The template utilize component very heavily. The weapons themselves are components added to the state machine. The projectiles, whether hit scan or projectile are a separate component that are added to each weapon. And the spray profiles for each weapon. All can be swapped and changed without effecting the other elements.

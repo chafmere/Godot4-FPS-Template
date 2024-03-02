@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=4 format=3 uid="uid://yc1f2j7pl4vr"]
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=5 format=3 uid="uid://yc1f2j7pl4vr"]
 
 [ext_resource type="PackedScene" uid="uid://dc48o4niy1mok" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/basic_hitscan_projectile.tscn" id="1_dynpb"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_jgxyc"]
 [ext_resource type="PackedScene" uid="uid://cvbk5bxenpxey" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="1_ohyk1"]
+[ext_resource type="PackedScene" uid="uid://ciu0xkaw0ioef" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_1.tscn" id="3_txvxg"]
 
 [resource]
 script = ExtResource("1_jgxyc")
@@ -24,5 +25,6 @@ AutoFire = true
 Fire_Range = 2000
 Can_Be_Dropped = true
 Weapon_Drop = ExtResource("1_ohyk1")
+Weapon_Spray = ExtResource("3_txvxg")
 Projectile_To_Load = ExtResource("1_dynpb")
 Incremental_Reload = false
