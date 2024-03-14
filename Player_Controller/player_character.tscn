@@ -1710,7 +1710,7 @@ mesh = SubResource("ArrayMesh_4dame")
 skeleton = NodePath("")
 
 [node name="blasterI" type="Node3D" parent="Camera/lean_pivot/MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, -1.41766e-06, -2.10176e-06, 0, 0.829038, -0.559193, 2.53518e-06, -0.559193, -0.829038, -0.148, 1.379, -0.398)
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, -0.148, 1.379, -0.398)
 visible = false
 
 [node name="blasterD2" type="MeshInstance3D" parent="Camera/lean_pivot/MainCamera/Weapons_Manager/Weapons_Models/blasterI"]
@@ -1747,25 +1747,28 @@ libraries = {
 
 [node name="BulletPoint" type="Marker3D" parent="Camera/lean_pivot/MainCamera/Weapons_Manager"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.313352, -0.240567, -0.907474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283, -0.336, -0.822)
 gizmo_extents = 0.21
 
 [node name="Melee_Hitbox" type="ShapeCast3D" parent="Camera/lean_pivot/MainCamera/Weapons_Manager"]
 shape = SubResource("BoxShape3D_to3sp")
 target_position = Vector3(0, 0, -0.7)
 collision_mask = 36
+debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="lean_left_collision" type="ShapeCast3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 shape = SubResource("SphereShape3D_24b8y")
 target_position = Vector3(-0.85, 0, 0)
 collision_mask = 5
+debug_shape_custom_color = Color(0, 0, 1, 1)
 
 [node name="lean_right_collision" type="ShapeCast3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 shape = SubResource("SphereShape3D_24b8y")
 target_position = Vector3(0.85, 0, 0)
 collision_mask = 5
+debug_shape_custom_color = Color(0, 0, 1, 1)
 
 [node name="body_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)

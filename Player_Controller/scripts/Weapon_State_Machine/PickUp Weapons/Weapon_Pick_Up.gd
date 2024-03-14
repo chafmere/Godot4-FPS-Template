@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name Weapon_Pick_Up
 
 @export var _weapon_name: String
 @export var _current_ammo: int

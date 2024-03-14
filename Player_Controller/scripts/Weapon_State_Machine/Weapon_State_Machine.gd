@@ -26,7 +26,8 @@ var Weapons_List: Dictionary = {}
 
 #Spray Profiles For Each Weapon
 var Spray_Profiles: Dictionary = {}
-var ShotCount = 0
+var _count = 0
+var shot_tween
 #An Array of weapon resources to make dictionary creation easier
 @export var _weapon_resources: Array[Weapon_Resource]
 
@@ -85,7 +86,6 @@ func enter():
 	Animation_Player.queue(Current_Weapon.Pick_Up_Anim)
 	Weapon_Changed.emit(Current_Weapon.Weapon_Name)
 	Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
-	Shot_Count_Update()
 
 func exit(_next_weapon: String):
 	if _next_weapon != Current_Weapon.Weapon_Name:
@@ -99,21 +99,28 @@ func Change_Weapon(weapon_name: String):
 	enter()
 	
 func Shot_Count_Update():
-	ShotCount = Current_Weapon.Current_Ammo
+	shot_tween = get_tree().create_tween()
+	shot_tween.tween_property(self,"_count",0,1)
 	
 func shoot():
 	if Current_Weapon.Current_Ammo != 0:
 		if Current_Weapon.Incremental_Reload and Animation_Player.current_animation == Current_Weapon.Reload_Anim:
 			Animation_Player.stop()
+			
 		if not Animation_Player.is_playing():
 			Animation_Player.play(Current_Weapon.Shoot_Anim)
 			Current_Weapon.Current_Ammo -= 1
 			Update_Ammo.emit([Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 			
+			if shot_tween:
+				shot_tween.kill()
+			
 			var Spread = Vector2.ZERO
+			
 			if Current_Weapon.Weapon_Spray:
-				var _count = ShotCount - Current_Weapon.Current_Ammo
-				Spread = Spray_Profiles[Current_Weapon.Weapon_Name].Get_Spray(_count)
+				_count = _count + 1
+				Spread = Spray_Profiles[Current_Weapon.Weapon_Name].Get_Spray(_count, Current_Weapon.Magazine)
+				
 			Load_Projectile(Spread)
 	else:
 		reload()

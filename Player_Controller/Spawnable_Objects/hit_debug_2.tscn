@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj15ogfi1535l"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/hit_debug.gd" id="2_w2l74"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kr237"]
+load_path = "res://.godot/imported/crosshair046.png-adf558f9d87ef20104f2ce22346ed1b7.s3tc.ctex"
+
+[node name="Node3D" type="Sprite3D"]
+modulate = Color(0, 0, 1, 1)
+billboard = 2
+texture = SubResource("CompressedTexture2D_kr237")
+script = ExtResource("2_w2l74")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

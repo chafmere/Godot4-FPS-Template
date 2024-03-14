@@ -143,6 +143,7 @@ freeze = true
 [node name="blasterL2" parent="Weapons" instance=ExtResource("5_nih8h")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19.9483, 1.94057, 11.4826)
 freeze = true
+_reserve_ammo = 999
 
 [node name="blasterM" parent="Weapons" instance=ExtResource("7_tjj4i")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.1838, 1.99763, 11.5761)

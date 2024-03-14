@@ -1,4 +1,4 @@
-This is an FPS Template for Godot 4. 
+### This is an FPS Template for Godot 4. 
 
 The weapons are created via a resource called Weapon_Resource that allows you to add all the animations and stats to the weapon. The weapon manager will then load all the resources and use the small state machine to control which weapon is active.
 

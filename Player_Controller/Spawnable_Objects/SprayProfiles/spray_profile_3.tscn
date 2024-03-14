@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://3mb12hvruajh"]
+[gd_scene load_steps=3 format=3 uid="uid://ceuaamuau8pl8"]
 
-[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_35g6m"]
+[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_hmoot"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4msk4"]
 seed = 145
@@ -14,6 +14,7 @@ domain_warp_fractal_type = 2
 domain_warp_fractal_octaves = 1
 
 [node name="Spray_Profile" type="Node"]
-script = ExtResource("1_35g6m")
+script = ExtResource("1_hmoot")
 Spray_Noise = SubResource("FastNoiseLite_4msk4")
-Random_Spray_Multiplier = 2.371
+Random_Spray_Multiplier = 10.0
+Updwards_Lock = true
