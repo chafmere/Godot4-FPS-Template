@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 @onready var Camera = get_node("%Camera")
+@export var subviewport_camera: Camera3D
+@export var main_camera:Camera3D
 @export var animation_tree: AnimationTree
 
 #const SPEED = 5.0
@@ -191,7 +193,11 @@ func Sprint_Replenish(delta):
 		Sprint_Bar.hide()
 	else:
 		Sprint_Bar.show()
-	
+
+func _process(delta: float) -> void:
+	if subviewport_camera:
+		subviewport_camera.global_transform = main_camera.global_transform
+
 func _physics_process(delta):
 	Sprint_Replenish(delta)
 	lean_collision()

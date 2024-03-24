@@ -124,3 +124,7 @@ walk={
 3d_physics/layer_4="Weapons"
 3d_physics/layer_5="Rigid Body Projectiles"
 3d_physics/layer_6="Enemys"
+
+[rendering]
+
+renderer/rendering_method.mobile="gl_compatibility"

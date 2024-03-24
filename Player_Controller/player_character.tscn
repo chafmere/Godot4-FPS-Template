@@ -1564,10 +1564,12 @@ node_connections = [&"Crouch_Blend", 0, &"ground", &"Crouch_Blend", 1, &"crouch 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cx3sy"]
 radius = 0.45
 
-[node name="Player_Character" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree", "Crouch_Collision", "Right_Lean_Collision", "Left_Lean_Collision", "Sprint_Timer")]
+[node name="Player_Character" type="CharacterBody3D" node_paths=PackedStringArray("subviewport_camera", "main_camera", "animation_tree", "Crouch_Collision", "Right_Lean_Collision", "Left_Lean_Collision", "Sprint_Timer")]
 collision_layer = 2
 floor_max_angle = 0.872665
 script = ExtResource("1_h0t42")
+subviewport_camera = NodePath("CanvasLayer/SubViewportContainer/SubViewport/Camera3D")
+main_camera = NodePath("Camera/lean_pivot/MainCamera")
 animation_tree = NodePath("AnimationTree")
 Crouch_Toggle = true
 Crouch_Collision = NodePath("ShapeCast3D")
@@ -1679,6 +1681,24 @@ value = 100.0
 editable = false
 scrollable = false
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5451, 0)
+cull_mask = 524288
+
 [node name="Camera" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
@@ -1687,6 +1707,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 
 [node name="MainCamera" type="Camera3D" parent="Camera/lean_pivot"]
 unique_name_in_owner = true
+cull_mask = 524287
 current = true
 
 [node name="Weapons_Manager" type="Node3D" parent="Camera/lean_pivot/MainCamera" node_paths=PackedStringArray("Animation_Player", "Melee_Hitbox")]
@@ -1747,7 +1768,6 @@ libraries = {
 
 [node name="BulletPoint" type="Marker3D" parent="Camera/lean_pivot/MainCamera/Weapons_Manager"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283, -0.336, -0.822)
 gizmo_extents = 0.21
 
 [node name="Melee_Hitbox" type="ShapeCast3D" parent="Camera/lean_pivot/MainCamera/Weapons_Manager"]
