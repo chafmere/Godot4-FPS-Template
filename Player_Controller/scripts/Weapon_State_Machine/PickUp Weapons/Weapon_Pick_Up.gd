@@ -5,7 +5,7 @@ class_name Weapon_Pick_Up
 @export var _current_ammo: int
 @export var _reserve_ammo: int
 
-const TYPE = "Weapon"
+@export_enum("Weapon","Ammo") var TYPE = "Weapon"
 
 var Pick_Up_Ready: bool = false
 

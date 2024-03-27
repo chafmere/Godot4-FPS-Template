@@ -1,3 +1,7 @@
+[Back to Table of Contents](Table_Of_Contents.md)
+
+# Projectiles
+
 A Projectile to load is not a physical projectile.
 
 It can be a rigid body if you want it to be. But what it actually is, is an object that is loaded when you press the fire button and is responsible for ray casting and detecting a hit. It can be either a hit scan weapon or it can be a "rigid body projectile".

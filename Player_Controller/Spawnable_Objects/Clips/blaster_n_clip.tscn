@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjxvrad2c6vh8"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/PickUp Weapons/reload_clip.gd" id="1_j1lq6"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/PickUp Weapons/Weapon_Pick_Up.gd" id="1_d1wy0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3ik4"]
 resource_name = "metal"
@@ -102,9 +102,10 @@ points = PackedVector3Array(0.03, 0.109992, 0.075, 0.00258418, 0.119648, 0.04498
 [node name="blasterN_Clip" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 5
-script = ExtResource("1_j1lq6")
+script = ExtResource("1_d1wy0")
 _weapon_name = "blasterN"
 _current_ammo = 5
+TYPE = "Ammo"
 
 [node name="clipA2" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_py3xv")

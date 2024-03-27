@@ -1,3 +1,5 @@
+[Back to Table of Contents](Table_Of_Contents.md)
+
 ### How to Create a Weapon
 
 The weapons are all controlled by the node Weapon Manager. It is a child of Main Camera.

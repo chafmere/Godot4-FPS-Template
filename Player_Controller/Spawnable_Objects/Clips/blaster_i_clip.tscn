@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dl236agqx8rjp"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/PickUp Weapons/reload_clip.gd" id="1_pmajj"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/PickUp Weapons/Weapon_Pick_Up.gd" id="1_6xwda"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3ik4"]
 resource_name = "metal"
@@ -102,9 +102,10 @@ size = Vector3(0.0599088, 0.407185, 0.143523)
 [node name="blasterI_Clip" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 5
-script = ExtResource("1_pmajj")
+script = ExtResource("1_6xwda")
 _weapon_name = "blasterI"
 _current_ammo = 30
+TYPE = "Ammo"
 
 [node name="clipA2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.936, 0, 0, 0, 0.99, 0, 0, 0)

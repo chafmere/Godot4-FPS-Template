@@ -1,3 +1,5 @@
+[Back to Table of Contents](Table_Of_Contents.md)
+
 # **Spray Profiles**
 
 To add a spray profile to your weapon, you can add it under weapon behavior.
@@ -24,6 +26,13 @@ Spray Profiles support both random spray and pathed spray (like CSGO and Valoran
 
 ### **RANDOM SPRAY**
 
+ **Random_Spray**: Options for the Random elements of the spray.
+   - **Spray_Noise**: FastNoiseLite that can be added to generate random spread.
+   - **Random_Spray_Multiplier**: Default 1.0. The amount of random spread. Could be used to increase spread when moving.
+   - **Max_Limit**: Default 30.0. The maximum that the shot count can go.
+   - **Upwards_Lock**: Forces the animation to be always up.
+   - **True_Random**: Changes the seed of the noise before every shot.
+
 To add random spray, create a fast noise lite to the spray noise variable. Increase the Random Spray multiplier to more than zero.
 
 ![Alt Text](images/random_spray.png)
@@ -38,16 +47,15 @@ Then we have two other variables called upwards lock, which forces the random sp
 
 And true random *(still not truly random)*, which will change the seed every shot. Otherwise, the random spread would only be randomly generated.
 
-1. **Random_Spray**: Options for the Random elements of the spray.
-   - **Spray_Noise**: FastNoiseLite that can be added to generate random spread.
-   - **Random_Spray_Multiplier**: Default 1.0. The amount of random spread. Could be used to increase spread when moving.
-   - **Max_Limit**: Default 30.0. The maximum that the shot count can go.
-   - **Upwards_Lock**: Forces the animation to be always up.
-   - **True_Random**: Changes the seed of the noise before every shot.
 
 ****
 
 ### **Path Spray**
+
+**Path_Spray**: Options for the elements of the Path Spray.
+   - **Spray_Path**: Path2D that can be added to generate a path for the bullets to follow.
+   - **Path_Spray_Multiplier**: float. Default 1.0. range 0.0 to 10.0. Default 1.0. the power of the path spray.
+   - **Spray_Mix**: float. Range 0.0 to 1.0. Default 1.0. The mix between random and path spray. 0 for no random and 1 for both. To remove path, do not add a Path2D to the scene or reduce the Path_Spray_Multiplier to zero.
 
 To create a pathed spray, you need to add a Path2D to the scene. With a Path2D, we can draw a path for our bullets to follow. Every point on the path represents a point at which the bullet will hit. So be sure to add enough points for your bullets to follow.
 
@@ -65,7 +73,4 @@ Finally, we have the spray mix, which can influence the amount of path spray vs 
 
 If you do not want path spray, don't add a Path2D to the scene.
 
-**Path_Spray**: Options for the elements of the Path Spray.
-   - **Spray_Path**: Path2D that can be added to generate a path for the bullets to follow.
-   - **Path_Spray_Multiplier**: float. Default 1.0. range 0.0 to 10.0. Default 1.0. the power of the path spray.
-   - **Spray_Mix**: float. Range 0.0 to 1.0. Default 1.0. The mix between random and path spray. 0 for no random and 1 for both. To remove path, do not add a Path2D to the scene or reduce the Path_Spray_Multiplier to zero.
+
