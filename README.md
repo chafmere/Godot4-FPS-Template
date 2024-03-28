@@ -8,7 +8,7 @@ The template utilize component very heavily. The weapons themselves are componen
 
 Need help understanding?
 
-Check out the [Documentation](docs/Table_Of_Contents.md)
+Check out the [Documentation](https://docs.chaffgames.com/docs/fpstemplate/table_of_contents/)
 
 Here are some of the main features:
 
