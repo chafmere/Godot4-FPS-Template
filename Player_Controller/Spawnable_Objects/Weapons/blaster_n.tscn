@@ -158,9 +158,6 @@ points = PackedVector3Array(-0.0100039, -0.15375, -0.155049, -0.040002, 0.006230
 collision_layer = 8
 collision_mask = 13
 script = ExtResource("1_v38gi")
-_weapon_name = "blasterN"
-_current_ammo = 5
-_reserve_ammo = 10
 
 [node name="blasterN2" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1ovk8")

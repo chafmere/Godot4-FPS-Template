@@ -1,30 +1,28 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=5 format=3 uid="uid://c1jg0ifn7yvve"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://c1jg0ifn7yvve"]
 
-[ext_resource type="PackedScene" uid="uid://dc48o4niy1mok" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/basic_hitscan_projectile.tscn" id="1_58b03"]
-[ext_resource type="PackedScene" uid="uid://gtthejj2wmyj" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="1_oiqq5"]
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_oxrhl"]
-[ext_resource type="PackedScene" uid="uid://ceuaamuau8pl8" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_3.tscn" id="3_rowdl"]
+[ext_resource type="PackedScene" uid="uid://dc48o4niy1mok" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/basic_hitscan_projectile.tscn" id="1_xr7bm"]
+[ext_resource type="PackedScene" uid="uid://gtthejj2wmyj" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="3_c38hr"]
+[ext_resource type="PackedScene" uid="uid://3mb12hvruajh" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_2.tscn" id="4_rk8dx"]
 
 [resource]
 script = ExtResource("1_oxrhl")
-Weapon_Name = "blasterN"
-Pick_Up_Anim = "Global/blasterN Active"
-Shoot_Anim = "Global/blasterN Shoot"
-Reload_Anim = "Global/blasterN Reload"
-Change_Anim = "Global/blasterN De-Activate"
-Drop_Anim = "Global/blasterN Drop"
-Out_Of_Ammo_Anim = "Global/blasterN OOA"
-Melee_Anim = "Global/blasterN Melee"
-Current_Ammo = 5
-Reserve_Ammo = 10
-Magazine = 5
-Max_Ammo = 15
-Damage = 1
-Melee_Damage = 0.5
-AutoFire = false
-Fire_Range = 2000
-Can_Be_Dropped = true
-Weapon_Drop = ExtResource("1_oiqq5")
-Weapon_Spray = ExtResource("3_rowdl")
-Projectile_To_Load = ExtResource("1_58b03")
-Incremental_Reload = false
+weapon_name = "blaster_n"
+pick_up_animation = "Global/blasterN Active"
+shoot_animation = "Global/blasterN Shoot"
+reload_animation = "Global/blasterN Reload"
+change_animation = "Global/blasterN De-Activate"
+drop_animation = "Global/blasterN Drop"
+out_of_ammo_animation = "Global/blasterN OOA"
+melee_animation = "Global/blasterN Melee"
+magazine = 5
+max_ammo = 15
+damage = 1
+melee_damage = 1.0
+auto_fire = false
+fire_range = 100
+can_be_dropped = true
+weapon_drop = ExtResource("3_c38hr")
+weapon_spray = ExtResource("4_rk8dx")
+projectile_to_load = ExtResource("1_xr7bm")
+incremental_reload = false

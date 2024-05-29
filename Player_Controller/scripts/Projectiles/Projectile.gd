@@ -14,15 +14,15 @@ signal Hit_Successfull
 
 @onready var Debug_Bullet = preload("res://Player_Controller/Spawnable_Objects/hit_debug.tscn")
 
-var Damage: float = 0
+var damage: float = 0
 var Projectiles_Spawned = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_tree().create_timer(Expirey_Time).timeout.connect(_on_timer_timeout)
 
-func _Set_Projectile(_Damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: int = 1000):
-	Damage = _Damage
+func _Set_Projectile(_damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: int = 1000):
+	damage = _damage
 	Fire_Projectile(_spread,_Range,Rigid_Body_Projectile)
 
 func Fire_Projectile(_spread,_range, _proj):
@@ -30,15 +30,15 @@ func Fire_Projectile(_spread,_range, _proj):
 	
 	match Projectile_Type:
 		"Hitscan":
-			Hit_Scan_Collision(Camera_Collision, Damage)
+			Hit_Scan_Collision(Camera_Collision, damage)
 		"Rigidbody_Projectile":
 			Launch_Rigid_Body_Projectile(Camera_Collision, _proj)
 
 func Camera_Ray_Cast(_spread: Vector2 = Vector2.ZERO, _range: float = 1000):
 	var _Camera = get_viewport().get_camera_3d()
-	var _Viewport = get_viewport().size
+	var _Viewport = get_viewport().get_size()
 	
-	var Ray_Origin = _Camera.project_ray_origin((_Viewport/2))
+	var Ray_Origin = _Camera.project_ray_origin(_Viewport/2)
 	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(_spread))*_range)
 	var New_Intersection:PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
 	New_Intersection.set_collision_mask(0b11101111)
@@ -69,9 +69,9 @@ func Hit_Scan_Collision(Collision: Array,_damage):
 			var Bullet_Collision = Bullet.intersect_ray(New_Intersection)
 
 			if Bullet_Collision:
-				Hit_Scan_Damage(Bullet_Collision.collider, Bullet_Direction,Bullet_Collision.position,_damage)
+				Hit_Scan_damage(Bullet_Collision.collider, Bullet_Direction,Bullet_Collision.position,_damage)
 
-func Hit_Scan_Damage(Collider, Direction, Position, _damage):
+func Hit_Scan_damage(Collider, Direction, Position, _damage):
 	if Collider.is_in_group("Target") and Collider.has_method("Hit_Successful"):
 		Hit_Successfull.emit()
 		Collider.Hit_Successful(_damage, Direction, Position)
@@ -101,7 +101,7 @@ func Launch_Rigid_Body_Projectile(Collision_Data, _projectile):
 
 func _on_body_entered(body, _proj, _norm):
 	if body.is_in_group("Target") && body.has_method("Hit_Successful"):
-		body.Hit_Successful(Damage)
+		body.Hit_Successful(damage)
 		Hit_Successfull.emit()
 
 	Load_Decal(_proj.get_position(),_norm)

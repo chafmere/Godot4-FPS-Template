@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://cd8msvjysh2uv"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_4ro7h"]
+[ext_resource type="PackedScene" uid="uid://brvfyahytwd8m" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/shotgun_projectile.tscn" id="1_qi0jo"]
+[ext_resource type="PackedScene" uid="uid://x8nhs2cer2to" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_m.tscn" id="3_5hojr"]
+[ext_resource type="PackedScene" uid="uid://ceuaamuau8pl8" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_3.tscn" id="4_5jfrh"]
+
+[resource]
+script = ExtResource("1_4ro7h")
+weapon_name = "blasterM"
+pick_up_animation = "blasterM_activate"
+shoot_animation = "blasterM_Shoot"
+reload_animation = "blasterM_Reload"
+change_animation = "blasterM_Deactive"
+drop_animation = "blasterM_Drop"
+out_of_ammo_animation = "blasterM_ OOA"
+melee_animation = "blasterM_Melee"
+magazine = 9
+max_ammo = 36
+damage = 5
+melee_damage = 1.0
+auto_fire = true
+fire_range = 50
+can_be_dropped = true
+weapon_drop = ExtResource("3_5hojr")
+weapon_spray = ExtResource("4_5jfrh")
+projectile_to_load = ExtResource("1_qi0jo")
+incremental_reload = true

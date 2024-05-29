@@ -2,11 +2,11 @@ extends RigidBody3D
 
 signal Hit_Successfull
 
-var Damage: int = 0
+var damage: int = 0
 
 func _on_body_entered(body):
 	if body.is_in_group("Target") && body.has_method("Hit_Successful"):
-		body.Hit_Successful(Damage)
+		body.Hit_Successful(damage)
 		emit_signal("Hit_Successfull")
 
 	queue_free()

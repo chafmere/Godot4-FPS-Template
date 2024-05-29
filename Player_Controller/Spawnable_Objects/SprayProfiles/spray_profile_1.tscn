@@ -13,9 +13,8 @@ point_count = 30
 [node name="Spray_Profile" type="Node" node_paths=PackedStringArray("Spray_Path")]
 script = ExtResource("1_60v4d")
 Spray_Noise = SubResource("FastNoiseLite_4msk4")
-Random_Spray_Multiplier = 1.324
 Spray_Path = NodePath("Path2D")
-Path_Spray_Multiplier = 3.111
+Path_Spray_Multiplier = 0.58
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_0vouc")

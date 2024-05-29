@@ -1,6 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgt2lt4ultlaq"]
+[gd_scene load_steps=11 format=3 uid="uid://cgt2lt4ultlaq"]
 
 [ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/PickUp Weapons/Weapon_Pick_Up.gd" id="1_qqhy0"]
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/WeaponSlot.gd" id="2_ybq5e"]
+[ext_resource type="Resource" uid="uid://cd8msvjysh2uv" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterM.tres" id="3_parqs"]
+
+[sub_resource type="Resource" id="Resource_jnsso"]
+resource_local_to_scene = true
+script = ExtResource("2_ybq5e")
+weapon = ExtResource("3_parqs")
+current_ammo = 9
+reserve_ammo = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eh6a"]
 resource_name = "metal"
@@ -100,8 +109,7 @@ size = Vector3(0.166504, 0.159378, 0.162319)
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_qqhy0")
-_weapon_name = "blasterM"
-_current_ammo = 6
+weapon = SubResource("Resource_jnsso")
 TYPE = "Ammo"
 
 [node name="clipA2" type="MeshInstance3D" parent="."]

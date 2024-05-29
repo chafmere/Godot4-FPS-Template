@@ -2,7 +2,7 @@ extends Projectile
 
 @onready var shotgun_pattern: Path2D = $shotgun_pattern
 @export_range(0.0,20.0) var Randomness = 10.0
-@export var Split_Damage: bool = false
+@export var Split_damage: bool = false
 var Spray_Vector
 
 # Called when the node enters the scene tree for the first time.
@@ -10,9 +10,9 @@ func _ready() -> void:
 	Spray_Vector = shotgun_pattern.get_curve()
 	return super._ready()
 
-func _Set_Projectile(_Damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: int = 1000):
+func _Set_Projectile(_damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: int = 1000):
 	randomize()
-	Damage = _Damage/(max(Spray_Vector.get_point_count()*float(Split_Damage),1))
+	damage = _damage/(max(Spray_Vector.get_point_count()*float(Split_damage),1))
 	
 	for point in Spray_Vector.get_point_count():
 		var SprayPoint:Vector2 = Spray_Vector.get_point_position(point)
