@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://6rfh1ejt4m6m"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Projectiles/melee_weapon_projectile.gd" id="1_qlmbe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q86ac"]
+
+[node name="MeleeProjectile" type="Node3D"]
+script = ExtResource("1_qlmbe")
+Projectile_Type = "over_ride"
+
+[node name="MeleeHitbox" type="ShapeCast3D" parent="."]
+shape = SubResource("BoxShape3D_q86ac")
+target_position = Vector3(0, 0, -1)
+collision_mask = 37

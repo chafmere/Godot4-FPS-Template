@@ -15,6 +15,7 @@ change_animation = "Global/blasterL De-Activate"
 drop_animation = "Global/blasterL Drop"
 out_of_ammo_animation = "Global/blasterL OOA"
 melee_animation = "Global/blasterL Melee"
+has_ammo = true
 magazine = 30
 max_ammo = 60
 damage = 1

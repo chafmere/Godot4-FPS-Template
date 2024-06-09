@@ -24,13 +24,17 @@ var shot_tween
 var current_weapon_slot: WeaponSlot = null
 
 func _ready() -> void:
-	animation_player.animation_finished.connect(_on_animation_finished)
-	for i in weapon_stack:
-		initialize(i) #current starts on the first weapon in the stack
-	current_weapon_slot = weapon_stack[0]
-	enter()
-	update_weapon_stack.emit(weapon_stack)
-	
+	if weapon_stack.is_empty():
+		push_error("Weapon Stack is empty, please populate with weapons")
+	else:
+		animation_player.animation_finished.connect(_on_animation_finished)
+		for i in weapon_stack:
+			initialize(i) #current starts on the first weapon in the stack
+		current_weapon_slot = weapon_stack[0]
+		if check_valid_weapon_slot():
+			enter()
+			update_weapon_stack.emit(weapon_stack)
+		
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
@@ -42,32 +46,49 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("WeaponUp"):
-		var weapon_index = weapon_stack.find(current_weapon_slot)
-		weapon_index = min(weapon_index+1,weapon_stack.size()-1)
-		exit(weapon_stack[weapon_index])
+		if check_valid_weapon_slot():
+			var weapon_index = weapon_stack.find(current_weapon_slot)
+			weapon_index = min(weapon_index+1,weapon_stack.size()-1)
+			exit(weapon_stack[weapon_index])
 
 	if event.is_action_pressed("WeaponDown"):
-		var weapon_index = weapon_stack.find(current_weapon_slot)
-		weapon_index = max(weapon_index-1,0)
-		exit(weapon_stack[weapon_index])
-	
+		if check_valid_weapon_slot():
+			var weapon_index = weapon_stack.find(current_weapon_slot)
+			weapon_index = max(weapon_index-1,0)
+			exit(weapon_stack[weapon_index])
+		
 	if event.is_action_pressed("Shoot"):
-		shoot()
+		if check_valid_weapon_slot():
+			shoot()
 	
 	if event.is_action_released("Shoot"):
-		shot_count_update()
+		if check_valid_weapon_slot():
+			shot_count_update()
 	
 	if event.is_action_pressed("Reload"):
-		reload()
+		if check_valid_weapon_slot():
+			reload()
 		
 	if event.is_action_pressed("Drop_Weapon"):
-		drop(current_weapon_slot)
+		if check_valid_weapon_slot():
+			drop(current_weapon_slot)
 		
 	if event.is_action_pressed("Melee"):
-		melee()
-		
+		if check_valid_weapon_slot():
+			melee()
+
+func check_valid_weapon_slot()->bool:
+	if current_weapon_slot:
+		if current_weapon_slot.weapon:
+			return true
+		else:
+			push_warning("No Weapon Resource active on the weapon controler.")
+	else:
+		push_warning("No Current Weapon slot active on the weapon controler.")
+	return false
+
 func initialize(_weapon_slot: WeaponSlot):
-	if !_weapon_slot:
+	if !_weapon_slot or !_weapon_slot.weapon:
 		return
 	if _weapon_slot.weapon.weapon_spray:
 		spray_profiles[_weapon_slot.weapon.weapon_name] = _weapon_slot.weapon.weapon_spray.instantiate()
@@ -94,13 +115,15 @@ func shot_count_update() -> void:
 	shot_tween.tween_property(self,"_count",0,1)
 	
 func shoot() -> void:
-	if current_weapon_slot.current_ammo != 0:
+	if current_weapon_slot.current_ammo != 0 or not current_weapon_slot.weapon.has_ammo:
 		if current_weapon_slot.weapon.incremental_reload and animation_player.current_animation == current_weapon_slot.weapon.reload_animation:
 			animation_player.stop()
 			
 		if not animation_player.is_playing():
 			animation_player.play(current_weapon_slot.weapon.shoot_animation)
-			current_weapon_slot.current_ammo -= 1
+			if current_weapon_slot.weapon.has_ammo:
+				current_weapon_slot.current_ammo -= 1
+				
 			update_ammo.emit([current_weapon_slot.current_ammo, current_weapon_slot.reserve_ammo])
 			
 			if shot_tween:

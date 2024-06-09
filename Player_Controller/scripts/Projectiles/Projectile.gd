@@ -4,7 +4,7 @@ class_name Projectile
 signal Hit_Successfull
 
 ## Can Be Either A Hit Scan or Rigid Body Projectile. If Rigid body is select a Rigid body must be provided.
-@export_enum ("Hitscan","Rigidbody_Projectile") var Projectile_Type: String = "Hitscan"
+@export_enum ("Hitscan","Rigidbody_Projectile","over_ride") var Projectile_Type: String = "Hitscan"
 @export var Display_Debug_Decal: bool = true
 
 @export_category("Rigid Body Projectile Properties")
@@ -33,6 +33,11 @@ func Fire_Projectile(_spread,_range, _proj):
 			Hit_Scan_Collision(Camera_Collision, damage)
 		"Rigidbody_Projectile":
 			Launch_Rigid_Body_Projectile(Camera_Collision, _proj)
+		"over_ride":
+			_over_ride_collision(Camera_Collision, damage)
+
+func _over_ride_collision(_camera_collision:Array, _damage: float) -> void:
+	pass
 
 func Camera_Ray_Cast(_spread: Vector2 = Vector2.ZERO, _range: float = 1000):
 	var _Camera = get_viewport().get_camera_3d()

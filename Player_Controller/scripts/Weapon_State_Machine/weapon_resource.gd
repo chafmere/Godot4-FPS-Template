@@ -25,10 +25,8 @@ signal Zoom
 @export var melee_animation: String
 
 @export_group("Weapon Stats")
-## The Current Ammo of the weapon. Only needs a value if is a starting weapon. Otherwise is set on pick up.
-#@export var Current_Ammo: int
-## The Amount in Reserve. Only needs a value if is a starting weapon. Otherwise is set on pick up.
-#@export var Reserve_Ammo: int
+## If Uncheck Shoot Function Will skip ammo check
+@export var has_ammo: bool = true
 ## The Maximum amount that you will reload if zero
 @export var magazine: int
 ## The Maximum ammo that can be held in reserve.

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=4 format=3 uid="uid://dgayjkjx4mckc"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_321c1"]
+[ext_resource type="PackedScene" uid="uid://ddfiivxgnakti" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/rocket_launcher_projectile.tscn" id="1_xi5nj"]
+[ext_resource type="PackedScene" uid="uid://dwgt7gwe3gfyy" path="res://Player_Controller/Spawnable_Objects/Weapons/blasterQ.tscn" id="2_kih88"]
+
+[resource]
+script = ExtResource("1_321c1")
+weapon_name = "blasterQ"
+pick_up_animation = "Global/blasterQ Active"
+shoot_animation = "Global/blasterQ Shoot"
+reload_animation = "Global/blasterQ Reload"
+change_animation = "Global/blasterQ Deactivate"
+drop_animation = "Global/blasterQ Deactivate"
+out_of_ammo_animation = "Global/blasterQ OOA"
+melee_animation = "Global/blasterQ Melee"
+has_ammo = true
+magazine = 2
+max_ammo = 6
+damage = 20
+melee_damage = 2.0
+auto_fire = false
+fire_range = 100
+can_be_dropped = true
+weapon_drop = ExtResource("2_kih88")
+projectile_to_load = ExtResource("1_xi5nj")
+incremental_reload = false

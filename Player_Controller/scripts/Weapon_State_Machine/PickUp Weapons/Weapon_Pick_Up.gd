@@ -1,5 +1,5 @@
 extends RigidBody3D
-class_name Weapon_Pick_Up
+class_name WeaponPickUp
 
 @export var weapon: WeaponSlot
 @export_enum("Weapon","Ammo") var TYPE = "Weapon"

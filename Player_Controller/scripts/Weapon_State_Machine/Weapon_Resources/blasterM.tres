@@ -15,6 +15,7 @@ change_animation = "blasterM_Deactive"
 drop_animation = "blasterM_Drop"
 out_of_ammo_animation = "blasterM_ OOA"
 melee_animation = "blasterM_Melee"
+has_ammo = true
 magazine = 9
 max_ammo = 36
 damage = 5

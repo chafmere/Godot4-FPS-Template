@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dniyrkkdwf3cb"]
+[gd_scene load_steps=48 format=3 uid="uid://dniyrkkdwf3cb"]
 
 [ext_resource type="PackedScene" uid="uid://bwc28g513sfim" path="res://Example World/Objects/World/box_1.tscn" id="2_a2qm0"]
 [ext_resource type="PackedScene" uid="uid://bo6viygofawpl" path="res://Example World/Objects/World/target.tscn" id="3_11x65"]
@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://cgt2lt4ultlaq" path="res://Player_Controller/Spawnable_Objects/Clips/blaster_m_clip.tscn" id="11_7y05e"]
 [ext_resource type="PackedScene" uid="uid://br6g3dtbytwpu" path="res://Player_Controller/Spawnable_Objects/Clips/blaster_L_clip.tscn" id="11_xavrm"]
 [ext_resource type="Texture2D" uid="uid://bkppki07fuifu" path="res://Example World/Models/Textures/prototype texture/Dark/texture_01.png" id="12_7osse"]
+[ext_resource type="PackedScene" uid="uid://dwgt7gwe3gfyy" path="res://Player_Controller/Spawnable_Objects/Weapons/blasterQ.tscn" id="12_x6ydo"]
+[ext_resource type="Resource" uid="uid://dgayjkjx4mckc" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterQ.tres" id="13_xqfky"]
 
 [sub_resource type="Resource" id="Resource_t8nnn"]
 script = ExtResource("5_khw4j")
@@ -42,6 +44,12 @@ script = ExtResource("5_khw4j")
 weapon = ExtResource("10_xtha2")
 current_ammo = 9
 reserve_ammo = 9
+
+[sub_resource type="Resource" id="Resource_ntxxd"]
+script = ExtResource("5_khw4j")
+weapon = ExtResource("13_xqfky")
+current_ammo = 2
+reserve_ammo = 4
 
 [sub_resource type="Resource" id="Resource_0jna6"]
 resource_local_to_scene = true
@@ -315,6 +323,10 @@ sleeping = true
 freeze = true
 weapon = SubResource("Resource_7xmcw")
 
+[node name="BlasterQ" parent="Weapons" instance=ExtResource("12_x6ydo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.0079, 1.92516, 11.5924)
+weapon = SubResource("Resource_ntxxd")
+
 [node name="ammo" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.9044, 0, 0)
 
@@ -471,6 +483,11 @@ material = SubResource("StandardMaterial3D_yv2ts")
 [node name="CSGBox3D13" type="CSGBox3D" parent="level_geometry"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9315, 2.36819, 12.5924)
 size = Vector3(2, 2, 14)
+material = SubResource("StandardMaterial3D_yv2ts")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="level_geometry"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9315, 11.6163, 3.32557)
+size = Vector3(9.26416, 0.80957, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
 [node name="CSGBox3D14" type="CSGBox3D" parent="level_geometry"]

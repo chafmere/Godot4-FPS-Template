@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddfiivxgnakti"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Projectiles/rocket_launcher_projectile.gd" id="1_dkmt1"]
+[ext_resource type="PackedScene" uid="uid://cqhlfy6ccomm3" path="res://Player_Controller/Spawnable_Objects/rocket.tscn" id="2_u24w0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqjlt"]
+radius = 5.0
+
+[node name="Projectile" type="Node3D" node_paths=PackedStringArray("explosion")]
+script = ExtResource("1_dkmt1")
+explosion = NodePath("ExplosionRadias")
+Projectile_Type = "Rigidbody_Projectile"
+Projectile_Velocity = 20
+Expirey_Time = 20
+Rigid_Body_Projectile = ExtResource("2_u24w0")
+
+[node name="ExplosionRadias" type="ShapeCast3D" parent="."]
+top_level = true
+shape = SubResource("SphereShape3D_wqjlt")
+target_position = Vector3(0, 0, 0)
+collision_mask = 36

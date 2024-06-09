@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://ckwagka0u7opy"]
+
+[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_2o2yi"]
+[ext_resource type="PackedScene" uid="uid://6rfh1ejt4m6m" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/melee_projectile.tscn" id="1_pf8fu"]
+
+[resource]
+script = ExtResource("1_2o2yi")
+weapon_name = "MeleeWeapon"
+pick_up_animation = "blasterP_activate"
+shoot_animation = "blasterP_strike"
+reload_animation = ""
+change_animation = "blasterP_deactivate"
+drop_animation = ""
+out_of_ammo_animation = ""
+melee_animation = "blasterP_strike"
+has_ammo = false
+magazine = 0
+max_ammo = 0
+damage = 2
+melee_damage = 1.0
+auto_fire = true
+fire_range = 1
+can_be_dropped = false
+projectile_to_load = ExtResource("1_pf8fu")
+incremental_reload = false
