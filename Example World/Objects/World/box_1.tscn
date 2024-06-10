@@ -45,7 +45,7 @@ shadow_mesh = SubResource("ArrayMesh_iaqc5")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ecanc"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
-[node name="box1" type="RigidBody3D" groups=["Target"]]
+[node name="box1" type="RigidBody3D" groups=["Pass Through", "Target"]]
 collision_layer = 4
 collision_mask = 23
 script = ExtResource("1_kuesi")
@@ -56,3 +56,15 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_ecanc")
+
+[node name="HealthCounter" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.873865, 0)
+visible = false
+billboard = 1
+text = "Health: 999"
+
+[node name="HitCounter" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09805, 0.725388, 0)
+visible = false
+billboard = 1
+text = " Time Hit: 1"

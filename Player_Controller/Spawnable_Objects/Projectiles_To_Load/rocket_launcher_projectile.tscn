@@ -13,9 +13,10 @@ Projectile_Type = "Rigidbody_Projectile"
 Projectile_Velocity = 20
 Expirey_Time = 20
 Rigid_Body_Projectile = ExtResource("2_u24w0")
+pass_through = true
 
 [node name="ExplosionRadias" type="ShapeCast3D" parent="."]
 top_level = true
 shape = SubResource("SphereShape3D_wqjlt")
 target_position = Vector3(0, 0, 0)
-collision_mask = 36
+collision_mask = 37

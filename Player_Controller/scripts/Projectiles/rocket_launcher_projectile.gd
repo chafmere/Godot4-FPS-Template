@@ -11,11 +11,10 @@ func _on_body_entered(_body, _proj, _norm):
 	
 	for t in targets:
 		var damage_target = explosion.get_collider(t)
-		var damage_direction : Vector3 = (damage_target.global_position-collision_location ).normalized()
 		var collision_point: Vector3 = explosion.get_collision_point(t)
-		if damage_target.is_in_group("Target") && damage_target.has_method("Hit_Successful"):
-			damage_target.Hit_Successful(damage, damage_direction,collision_point)
-			Hit_Successfull.emit()
+		var collision_normal: Vector3 = explosion.get_collision_normal(t)
+		var hit_scan_array = [damage_target,collision_point,collision_normal]
+		Hit_Scan_Collision(hit_scan_array,damage,collision_location)
 	
 	_proj.queue_free()
 	Projectiles_Spawned.erase(_proj)

@@ -10,7 +10,7 @@ func _ready() -> void:
 	Spray_Vector = shotgun_pattern.get_curve()
 	return super._ready()
 
-func _Set_Projectile(_damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: int = 1000):
+func _Set_Projectile(_damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: int = 1000, origin_point: Vector3 = Vector3.ZERO):
 	randomize()
 	damage = _damage/(max(Spray_Vector.get_point_count()*float(Split_damage),1))
 	
@@ -20,4 +20,4 @@ func _Set_Projectile(_damage: int = 0,_spread:Vector2 = Vector2.ZERO, _Range: in
 		SprayPoint.x = SprayPoint.x + randf_range(-Randomness, Randomness)
 		SprayPoint.y = SprayPoint.y + randf_range(-Randomness, Randomness)
 		
-		Fire_Projectile(SprayPoint,_Range,Rigid_Body_Projectile)
+		Fire_Projectile(SprayPoint,_Range,Rigid_Body_Projectile, origin_point)

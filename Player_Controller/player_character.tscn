@@ -2196,7 +2196,6 @@ skeleton = NodePath("")
 
 [node name="blasterI" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, -0.148, 1.379, -0.398)
-visible = false
 
 [node name="blasterD2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
@@ -2248,7 +2247,7 @@ skeleton = NodePath("")
 
 [node name="BulletPoint" type="Marker3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.340847, -0.213043, -0.801062)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.313352, -0.240567, -0.907474)
 gizmo_extents = 0.21
 
 [node name="Melee_Hitbox" type="ShapeCast3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager"]

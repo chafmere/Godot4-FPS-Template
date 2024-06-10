@@ -143,7 +143,8 @@ func load_projectile(_spread):
 	var _projectile:Projectile = current_weapon_slot.weapon.projectile_to_load.instantiate()
 	bullet_point.add_child(_projectile)
 	add_signal_to_hud.emit(_projectile)
-	_projectile._Set_Projectile(current_weapon_slot.weapon.damage,_spread,current_weapon_slot.weapon.fire_range)
+	var bullet_point_origin = bullet_point.global_position
+	_projectile._Set_Projectile(current_weapon_slot.weapon.damage,_spread,current_weapon_slot.weapon.fire_range, bullet_point_origin)
 
 func reload() -> void:
 	if current_weapon_slot.current_ammo == current_weapon_slot.weapon.magazine:
