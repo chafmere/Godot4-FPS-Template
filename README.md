@@ -35,7 +35,8 @@ Here are some of the main features:
   - lean - 'q' and 'e' in demo scene
   - crouch - 'c' in demo scene
   - drop - 'g' in demo scene
-  - coyote sprint - 'shift + move' in demo scene
+  - sprint - 'shift + move' in demo scene
+  - coyote timer -- to reduce frustration around cliff edges, allowing 'jump' in the tenth of a second the player's foot leaves an edge
   - walk - 'ctrl + move' in demo scene
 
 - Several Preset Weapon Types: [directory](Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources)
