@@ -18,7 +18,7 @@ The template utilizes components very heavily. All can be swapped and changed wi
 
 [![Patreon](https://img.shields.io/badge/Patreon-Support%20this%20Project-%23f1465a?style=for-the-badge)](https://patreon.com/ChaffGames) [![Discord](https://img.shields.io/discord/865048184160911421?style=for-the-badge&logo=Discord&label=Discord)](https://discord.gg/Exzd8QmKrU) [itch.io](https://chafmere.itch.io/godot-4-fps-controller)
 
-Need help understanding?
+### Need help understanding?
 
 Check out the [Documentation](https://docs.chaffgames.com/docs/fpstemplate/table_of_contents/)
 
@@ -38,8 +38,16 @@ Here are some of the main features:
   - sprint - 'shift + move' in demo scene
   - coyote timer -- to reduce frustration around cliff edges, allowing 'jump' in the tenth of a second the player's foot leaves an edge
   - walk - 'ctrl + move' in demo scene
-
+ 
 - Several Preset Weapon Types: [directory](Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources)
 ![Currently 4 Weapons](media/weapon%20range.png)
+
+### Want more?
+
+This is a free template. A "Pro" _paid version_ is available with:
+* camera reacting to the weapon spray in a fluid and dynamic way
+* customizable head bob and strafe sway
+
+[Find this on itch.io](https://chafmere.itch.io/godot-4-fps-pro).
 
 
