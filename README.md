@@ -48,6 +48,6 @@ This is a free template. A "Pro" _paid version_ is available with:
 * camera reacting to the weapon spray in a fluid and dynamic way
 * customizable head bob and strafe sway
 
-[Find this on itch.io](https://chafmere.itch.io/godot-4-fps-pro).
+[Find that on itch.io](https://chafmere.itch.io/godot-4-fps-pro).
 
 
