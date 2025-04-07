@@ -28,10 +28,17 @@ Here are some of the main features:
 ![Resource Based](docs/images/Promo/Weapon%20Resources.png) 
 
 - State Machine to manage current weapon: [source](Player_Controller/scripts/Weapon_State_Machine/Weapon_State_Machine.gd)
-![State Machine](docs/images/Promo/Weapon%20Statemachine.png) 
+![State Machine](docs/images/Promo/Weapon%20Statemachine.png)
+  - '1' through '9' in demo scene
+  - reload - 'r' in demo scene 
 
-- Movement Options, including "lean": [source](Player_Controller/scripts/Player_Character/player_character.gd) 
+- Movement Options: [source](Player_Controller/scripts/Player_Character/player_character.gd) 
 ![Movement Options](docs/images/Promo/Movement.png)
+  - lean - 'q' and 'e' in demo scene
+  - crouch - 'c' in demo scene
+  - drop - 'g' in demo scene
+  - coyote sprint - 'shift + move' in demo scene
+  - walk - 'ctrl + move' in demo scene
 
 - Several Preset Weapon Types: [directory](Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources)
 ![Currently 4 Weapons](docs/images/Promo/weapon%20range.png)
