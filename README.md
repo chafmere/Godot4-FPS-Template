@@ -25,15 +25,13 @@ Check out the [Documentation](https://docs.chaffgames.com/docs/fpstemplate/table
 Here are some of the main features:
 
 - Resource Based: [docs](https://docs.chaffgames.com/docs/fpstemplate/creating_a_new_weapon/#create-a-resource)
-![Resource Based](docs/images/Promo/Weapon%20Resources.png) 
 
 - State Machine to manage current weapon: [source](Player_Controller/scripts/Weapon_State_Machine/Weapon_State_Machine.gd)
-![State Machine](docs/images/Promo/Weapon%20Statemachine.png)
   - '1' through '9' in demo scene
   - reload - 'r' in demo scene 
 
 - Movement Options: [source](Player_Controller/scripts/Player_Character/player_character.gd) 
-![Movement Options](docs/images/Promo/Movement.png)
+![Movement Options](media/player%20movement.png)
   - lean - 'q' and 'e' in demo scene
   - crouch - 'c' in demo scene
   - drop - 'g' in demo scene
@@ -41,6 +39,6 @@ Here are some of the main features:
   - walk - 'ctrl + move' in demo scene
 
 - Several Preset Weapon Types: [directory](Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources)
-![Currently 4 Weapons](docs/images/Promo/weapon%20range.png)
+![Currently 4 Weapons](media/weapon%20range.png)
 
 
