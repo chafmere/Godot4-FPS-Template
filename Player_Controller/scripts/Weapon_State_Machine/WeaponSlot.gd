@@ -5,4 +5,3 @@ class_name WeaponSlot
 
 @export var current_ammo: int
 @export var reserve_ammo: int
-

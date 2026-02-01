@@ -3,7 +3,9 @@ extends Resource
 
 class_name WeaponResource
 
+@warning_ignore("unused_signal")
 signal update_overlay
+@warning_ignore("unused_signal")
 signal Zoom
 
 @export_group("Weapon Animations")
@@ -52,4 +54,3 @@ signal Zoom
 ## Incremental Reload is for shotgun or sigle item loaded weapons where you can interupt the reload process. If true the Calculate_Reload function on the weapon_state_machine must be called indepently. 
 ## For Example: at each step of a shotgun reload the function is called via the animation player.
 @export var incremental_reload: bool = false
-

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://ckwagka0u7opy"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_2o2yi"]
+[ext_resource type="Script" uid="uid://ca7h24lxxrtvx" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_2o2yi"]
 [ext_resource type="PackedScene" uid="uid://6rfh1ejt4m6m" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/melee_projectile.tscn" id="1_pf8fu"]
 
 [resource]

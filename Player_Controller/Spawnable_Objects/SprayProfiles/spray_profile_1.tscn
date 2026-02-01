@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ciu0xkaw0ioef"]
 
-[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_60v4d"]
+[ext_resource type="Script" uid="uid://dvcpsronqmkmr" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_60v4d"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4msk4"]
 

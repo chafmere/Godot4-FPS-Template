@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://c1jg0ifn7yvve"]
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://c1jg0ifn7yvve"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_oxrhl"]
+[ext_resource type="Script" uid="uid://ca7h24lxxrtvx" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_oxrhl"]
 [ext_resource type="PackedScene" uid="uid://dc48o4niy1mok" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/basic_hitscan_projectile.tscn" id="1_xr7bm"]
 [ext_resource type="PackedScene" uid="uid://gtthejj2wmyj" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="3_c38hr"]
 [ext_resource type="PackedScene" uid="uid://3mb12hvruajh" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_2.tscn" id="4_rk8dx"]
@@ -15,15 +15,12 @@ change_animation = "Global/blasterN De-Activate"
 drop_animation = "Global/blasterN Drop"
 out_of_ammo_animation = "Global/blasterN OOA"
 melee_animation = "Global/blasterN Melee"
-has_ammo = true
 magazine = 5
 max_ammo = 15
 damage = 1
 melee_damage = 1.0
-auto_fire = false
 fire_range = 100
 can_be_dropped = true
 weapon_drop = ExtResource("3_c38hr")
 weapon_spray = ExtResource("4_rk8dx")
 projectile_to_load = ExtResource("1_xr7bm")
-incremental_reload = false

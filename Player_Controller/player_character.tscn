@@ -1,12 +1,12 @@
-[gd_scene load_steps=94 format=4 uid="uid://oc13h3au02ro"]
+[gd_scene format=4 uid="uid://oc13h3au02ro"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_h0t42"]
-[ext_resource type="Script" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_tvwwj"]
+[ext_resource type="Script" uid="uid://cfdt8t4r8pxel" path="res://Player_Controller/scripts/Player_Character/player_character.gd" id="1_h0t42"]
+[ext_resource type="Script" uid="uid://cc3t6vk7qpwey" path="res://Player_Controller/scripts/Player_Character/HUD.gd" id="2_tvwwj"]
 [ext_resource type="Texture2D" uid="uid://bjh5ic6qy4jtl" path="res://Player_Controller/HUD ASSETS/crosshair001.png" id="3_7f0mw"]
 [ext_resource type="Texture2D" uid="uid://uidicgaojgdi" path="res://Player_Controller/HUD ASSETS/crosshair046.png" id="4_l32wb"]
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_State_Machine.gd" id="5_wuueu"]
+[ext_resource type="Script" uid="uid://cxxpp8cfxb8jp" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_State_Machine.gd" id="5_wuueu"]
 [ext_resource type="Resource" uid="uid://yc1f2j7pl4vr" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterI.tres" id="6_tpjp5"]
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/WeaponSlot.gd" id="6_wj0qi"]
+[ext_resource type="Script" uid="uid://bw4j1fbww4k8s" path="res://Player_Controller/scripts/Weapon_State_Machine/WeaponSlot.gd" id="6_wj0qi"]
 [ext_resource type="AnimationLibrary" uid="uid://uybino34n0sj" path="res://Player_Controller/weapon_animation.res" id="13_lmhsg"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_rj3p7"]
@@ -25,34 +25,106 @@ thickness = 10
 [sub_resource type="Resource" id="Resource_4pcyg"]
 script = ExtResource("6_wj0qi")
 weapon = ExtResource("6_tpjp5")
-current_ammo = 30
 reserve_ammo = 60
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifhgq"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.43137255, 0.47843137, 0.5254902, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fswt"]
 resource_name = "dark"
+next_pass = SubResource("StandardMaterial3D_ifhgq")
 albedo_color = Color(0.432587, 0.480096, 0.526319, 1)
 metallic = 1.0
+stencil_mode = 2
+stencil_flags = 2
+stencil_color = Color(0.43137255, 0.47843137, 0.5254902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_giihu"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.90588236, 0.9137255, 0.94509804, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbdhu"]
 resource_name = "metal"
+next_pass = SubResource("StandardMaterial3D_giihu")
 albedo_color = Color(0.904365, 0.914141, 0.944534, 1)
 metallic = 1.0
+stencil_mode = 2
+stencil_flags = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3ia4"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1, 0.5058824, 0.6745098, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45i0f"]
 resource_name = "pink"
+next_pass = SubResource("StandardMaterial3D_n3ia4")
 albedo_color = Color(0.998274, 0.505969, 0.673936, 1)
 metallic = 1.0
+stencil_mode = 2
+stencil_flags = 2
+stencil_color = Color(1, 0.5058824, 0.6745098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiyg7"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.7921569, 0.81960785, 0.8901961, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2ge3"]
 resource_name = "darkMetal"
+next_pass = SubResource("StandardMaterial3D_aiyg7")
 albedo_color = Color(0.793075, 0.81829, 0.89044, 1)
 metallic = 1.0
+stencil_mode = 2
+stencil_flags = 2
+stencil_color = Color(0.7921569, 0.81960785, 0.8901961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oggu"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8p85"]
 resource_name = "_defaultMat"
+next_pass = SubResource("StandardMaterial3D_5oggu")
 metallic = 1.0
+stencil_mode = 2
+stencil_flags = 2
+stencil_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_t1mwa"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ifhgq"]
 _surfaces = [{
 "aabb": AABB(-0.07, -0.15375, -0.29, 0.14, 0.3075, 0.58),
 "format": 34896613377,
@@ -106,7 +178,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4dame"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_giihu"]
 resource_name = "blasterN_Mesh blasterN"
 _surfaces = [{
 "aabb": AABB(-0.07, -0.15375, -0.29, 0.14, 0.3075, 0.58),
@@ -170,7 +242,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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/39Fsiv3VNX/f0Wy//9U1f9/RbIr91TVgYe4sv//VNWBh7iyK/dU1YGHuLL//1TVgYe4siv3VNWAjgq0//9U1YCOCrQr91TVgI4KtP//VNWAjgq0K/dU1YKUI7b//1TVgpQjtiv3VNV8ayO2//9U1eBm37j//1TVfGsjtiv3VNXgZt+4K/dU1YGHO8wr91TVgYc7zP//VNWAjurKK/dU1YCO6sr//1TVHpnfuP//VNWClCO2//9U1R6Z37gr91TVgpQjtiv3VNUEnA68//9U1R6Z37j//1TVBJwOvCv3VNUemd+4K/dU1QGder///1TVBJwOvP//VNUBnXq/K/dU1QScDrwr91TV/39Fsiv3//99eLiyK/f//4GHuLIr9///gI4KtCv3//9+cQq0K/f//3xrI7Yr9///gpQjtiv3//8emd+4K/f//+Bm37gr9///BJwOvCv3///6Yw68K/f//wGder8r9////WJ6vyv3///6Y+XCK/f//wSc5cIr9///4GYUxiv3//8emRTGK/f//3xr0Mgr9///gpTQyCv3//+AjurKK/f//35x6sor9///fXg7zCv3//+BhzvMK/f///9/rswr9///gpTQyP//VNUemRTG//9U1YKU0Mgr91TVHpkUxiv3VNX/f4Cm7en//zKOWqft6f//zHFap+3p//+RZNip7en//22b2Knt6f//NVnRre3p///JptGt7en///9/067t6f//iHZkr+3p//99UP2y7en//7ZtDrHt6f//I2a0s+3p//8CSwO57en//1NgJrft6f//rFwqu+3p//8kSXq/7en//21ber/t6f//Akvwxe3p//+sXMnD7en//1Ngzcft6f//fVD2y+3p//8jZkDL7en//7Zt5c3t6f//NVkj0e3p//+Ido/P7en///9/INDt6f//yaYj0e3p//92iY/P7en//0iS5c3t6f//ga/2y+3p///bmUDL7en//6ufzcft6f///LTwxe3p//9So8nD7en//9q2er/t6f//kaR6v+3p//9Soyq77en///y0A7nt6f//q58mt+3p///bmbSz7en//4Gv/bLt6f//SJIOse3p//92iWSv7en//5FkG9Xt6f//bZsb1e3p///McZnX7en//zKOmdft6f///39z2O3p//+AjurKK/dU1YCO6sr//1TVgpTQyCv3VNWClNDI//9U1QSc5cL//1TVAZ16v///VNUEnOXCK/dU1QGder8r91TVHpkUxv//VNUEnOXC//9U1R6ZFMYr91TVBJzlwiv3VNX/f67MK/dU1f9/rsz//1TVgYc7zCv3VNWBhzvM//9U1dq2EGgcegrBJEkQaBx6CsHatuB8yn0KwSRJ4HzKfQrB2rYAALhnCsEkSQAAuGcKwdq2QFNvdgrBJElAU292CsEkSQAAuGdU1dq2AAC4Z1TVJEkAAGlEVNW2bQAAlTtU1UiSAACVO1TV2rYAAGlEVNXatuB8yn1U1dq24Hx7WlTV2rYQaBx6VNXatkBTb3ZU1dq2AAC4Z1TV2rYAAGlEVNUkSeB8e1rw6CRJAABpRPDotm3gfKdR8Oi2bQAAlTvw6LZtAACVO7/2SJIAAJU7v/a2beB8p1G/9kiS4HynUb/2SJIAAJU78OjatgAAaUTw6EiS4HynUfDo2rbgfHta8OgkSeB8yn1U1SRJEGgcelTVJEngfHtaVNUkSUBTb3ZU1SRJAAC4Z1TVJEkAAGlEVNUkSS2enkZU1SRJho2eRlTVJEnTrj0NVNUkSS2ePQ1U1SRJLZ49DQHZJEmGjZ5GAdnati2ePQ0B2dq2ho2eRgHZ2raGjZ5GVNXati2enkZU1dq2LZ49DVTV2rbTrj0NVNUkSXq/PQ1U1SRJer+eRlTV2rZ6vz0NVNXatnq/nkZU1dq2er+eRlTV2rYg0J5GVNXatnq/PQ1U1dq2INA9DVTVJEkg0J5GVNUkSSDQPQ1U1dq2INCeRlTV2rYg0D0NVNUkSS2enkbV0SRJ0649DdXR2rYtnp5G1dHattOuPQ3V0SRJINCeRlTVJEl6v55GVNUkSSDQPQ1U1SRJer89DVTVI8mApnqa///atoCmepr//yPJJrd6mv//2rYmt3qa///atia3eppU1dq2JrfTiFTVI8kmt3qaVNUjySa304hU1WzbJrenkVTV2raAptOIVNXatoCmeppU1SPJgKbTiFTVI8mApnqaVNVs24Cmp5FU1ZIkgKankVTV2zaApnqaVNXbNoCm04hU1SRJgKbTiFTVJEmApnqaVNXatoCm04j//yPJgKbTiP//2rYmt9OI//8jySa304j//5IkJrenkVTV2zYmt9OIVNXbNia3eppU1SRJJrd6mlTVJEkmt9OIVNXbNoCm04j//yRJgKbTiP//2zYmt9OI//8kSSa304j//yRJgKZ6mv//2zaApnqa//8kSSa3epr//9s2Jrd6mv//kiQtnv//VNWSJCDQ//9U1ZIkLZ4Z4VTVkiQg0BnhVNUAACDQ9rRU1ZIkIND2tFTVSRIg0P//VNWSJCDQ//9U1ZIkINAZ4VTVAAAtnva0//+SJC2e9rT//wAAIND2tP//kiQg0Pa0///JptGt//////9/RbL/////ga/9sv////+Bh7iy/////4COCrT//////LQDuf////+ClCO2/////x6Z37j/////BJwOvP/////atnq//////wGder///////LTwxf////8EnOXC/////x6ZFMb/////ga/2y/////+ClNDI/////4CO6sr/////gYc7zP/////JpiPR//////9/rsz/////NVkj0f////+RZBvV/////22bG9X/////Mo6Z1//////McZnX//////9/c9j/////fXg7zP////99UPbL/////35x6sr/////fGvQyP/////gZhTG/////wJL8MX/////+mPlwv////8kSXq///////1ier//////+mMOvP////8CSwO5/////+Bm37j/////fGsjtv////9+cQq0/////31Q/bL/////fXi4sv////81WdGt/////5Fk2Kn/////bZvYqf/////McVqn/////zKOWqf//////3+Apv////9JEi2e/////0kSIND/////kiQtnv////+SJCDQ/////yRJ4HzknlTVJEkQaOSeVNUkSeB83JNU1SRJQFPck1TVJEkQaNyTVNX/fyDQ7elU1f9/INAZ4VTVdomPz+3pVNV2iY/PGeFU1aufzcft6VTV25lAy+3pVNWrn83HGeFU1duZQMsZ4VTVkaR6v+3pVNVSo8nD7elU1ZGker8Z4VTVUqPJwxnhVNWrnya37elU1VKjKrvt6VTVq58mtxnhVNVSoyq7GeFU1XaJZK8Z4VTVdolkr+3pVNVIkg6xGeFU1UiSDrHt6VTVrFzJw+3pVNVtW3q/7elU1axcycMZ4VTVbVt6vxnhVNWIdo/P7elU1Yh2j88Z4VTV/38g0O3pVNX/fyDQGeFU1VNgzcft6VTVrFzJw+3pVNVTYM3HGeFU1axcycMZ4VTVI2ZAy+3pVNVTYM3H7elU1SNmQMsZ4VTVU2DNxxnhVNVtW3q/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/3//f/9//3//f/9//3//fwAA/38AAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//fwAA/38AAP9/AAD/fwAA/3//f////3////9/////f////3////9/////f////3////9/////f////3////9////ZLtmu2S7ZrgwbDJsMGwyb////f////3////9/////f/9/AAAMmwwb/38AAAybDBvyZAwb/38AAPJkDBv/fwAAJVHZLvJkDBslUdku8mQMGwyb8uT/f///DJvy5P9////y5PJk8uTyZCXRJVEl0SVR2a7ZLv+//z/Zrtku/7//P/8//z8lUdku/z//PyVR2S7ZLiVR2S4lUf8//z//P/8/DBvyZAwb8mTZLiVR2S4lUQAA/38AAP9/DBvyZAwb8mTyZPLkJVEl0fJk8uQlUSXR/z//v/8//7/ZLtmu2S7ZriVRJdH/P/+/JVEl0f8//7//f///8mTy5P9////yZPLk2a4l0Qyb8uTZriXRDJvy5P+//7//v/+/JdHZriXR2a4l0dmuJdHZrvLkDJvy5Ayb8uQMm/LkDJv///9/////f////3////9/8uTyZPLk8mT/v/+/2a4l0f+//7/ZriXRJdElUSXRJVH/v/8//7//PwybDBvZrtkuDJsMG9mu2S4MG/JkDBvyZAAA/38AAP9//z//P/8//z/ZLiVR2S4lUfJkDBslUdku8mQMGyVR2S7ZrtkuDJsMG9mu2S4MmwwbDBsMmwwbDJsAAP9/AAD/f/9/AADyZAwb/38AAPJkDBslUdku/z//PyVR2S7/P/8//7//P/+//z8l0SVRJdElUdkuJVHZLiVRDBvyZAwb8mQMmwwb/38AAAybDBv/fwAAJdElUSXRJVHy5PJk8uTyZPLk8mTy5PJk////f////3////9/////f/LkDJvy5Ayb8uQMm/LkDJsl0dmuJdHZriXR2a4l0dmu/7//v/+//7//v/8/2a7ZLv+//z/ZrtkuDBsMmwwbDJvZLtmu2S7ZrtmuJdH/v/+/2a4l0f+//78Mm/Lk2a4l0Qyb8uTZriXR/3///wyb8uT/f///DJvy5P9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/8//78lUSXR/z//vyVRJdH/f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9////ZLtmu2S7Zrv8//7//P/+/8mTy5P9////yZPLk/3///yVRJdHyZPLkJVEl0fJk8uQAAP9/AAD/fwwbDJsMGwybAAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/n//f/5//3/+f/9//n//f////f////3////9/////f/+f/x//n/8f/5//H/+f/x//f////3////9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/AAD/fwAA/38AAP9/AAAAAP9/AAD/fwAA/38AAP9//38AAP9/AAD/fwAA/38AAP///3////9/////f////3////9/////f////3////9//3////9/////f////3////9//3//f/9//3//f/9//3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3//f////3////9/////f///////f////3////9/////f////3//f////3////9/////f////3//f/9//3//f/9//3//f/9/AAD/fwAA/38AAP9/AAD///9/////f////3////9/////f/9/////f////3////9/////f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3////9/////f////3////9///////9/////f/Lk8mTy5PJk2a7ZLv+//z/Zrtku/7//P/9/AAAMmwwb/38AAAybDBslUdku8mQMGyVR2S7yZAwbDBvyZAwb8mTZLiVR2S4lUQyb8uT/f///DJvy5P9////y5Ayb8uQMm////3////9/2a4l0Qyb8uTZriXRDJvy5P+//7/ZriXR/7//v9muJdH/f///8mTy5P9////yZPLk/7//v/+//78l0dmuJdHZrvJk8uQlUSXR8mTy5CVRJdH/P/8/JVHZLv8//z8lUdkuAAD/fwAA/38MG/JkDBvyZP8//7//P/+/2S7Zrtku2a4lUSXR/z//vyVRJdH/P/+/JdElUSXRJVH/v/8//7//P/Lk8mTy5PJkJdElUSXRJVHyZAwb/38AAPJkDBv/fwAA2S4lUdkuJVH/P/8//z//P9ku2a7ZLtmuDBsMmwwbDJsMmwwb2a7ZLgybDBvZrtkuJdHZriXR2a7y5Ayb8uQMmwwbDJsMGwybAAD/fwAA/3//f////3////9/////f///////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9//3//f/9//3//f/9//3//f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3//f/9//3//f/9//3//f/9//3////9/////f////3////9/////f////3////9///////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f/9/AAD/fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9//3//f/9//3//f/9//3////9/////f////3////9//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD///9/////f////3////9/AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3///wAA/38AAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA/7//P/+//z//v/8//7//P/+//z//v/8//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAAAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//38AAP9/AAD/fwAA/38AAP9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/+//7//v/+//7//v/+//7//v/+//7//v/9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3///////3////9/////f////3////9/////f////3////9/////f////3////9/////fwAA/3//f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA////f////3////9/////f1TVVNVU1VTVVNVU1QthFsILYRbCC2EWwv9/////f////3////9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_t1mwa")
+shadow_mesh = SubResource("ArrayMesh_ifhgq")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paj24"]
 resource_name = "metal"
@@ -1267,17 +1339,17 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ys4uk"]
 _data = {
-"RESET": SubResource("Animation_tvd50"),
-"blasterM_Deactive": SubResource("Animation_gqwbi"),
-"blasterM_Drop": SubResource("Animation_3ckq2"),
-"blasterM_Melee": SubResource("Animation_fjnab"),
-"blasterM_OOA": SubResource("Animation_pwqu6"),
-"blasterM_Reload": SubResource("Animation_sx31e"),
-"blasterM_Shoot": SubResource("Animation_3ky4l"),
-"blasterM_activate": SubResource("Animation_t03yb"),
-"blasterP_activate": SubResource("Animation_utruj"),
-"blasterP_deactivate": SubResource("Animation_7qiib"),
-"blasterP_strike": SubResource("Animation_w5ji1")
+&"RESET": SubResource("Animation_tvd50"),
+&"blasterM_Deactive": SubResource("Animation_gqwbi"),
+&"blasterM_Drop": SubResource("Animation_3ckq2"),
+&"blasterM_Melee": SubResource("Animation_fjnab"),
+&"blasterM_OOA": SubResource("Animation_pwqu6"),
+&"blasterM_Reload": SubResource("Animation_sx31e"),
+&"blasterM_Shoot": SubResource("Animation_3ky4l"),
+&"blasterM_activate": SubResource("Animation_t03yb"),
+&"blasterP_activate": SubResource("Animation_utruj"),
+&"blasterP_deactivate": SubResource("Animation_7qiib"),
+&"blasterP_strike": SubResource("Animation_w5ji1")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bn0g3"]
@@ -1987,15 +2059,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ity6x"]
 _data = {
-"RESET": SubResource("Animation_6o48i"),
-"crouch_air": SubResource("Animation_wh4u2"),
-"crouch_ground": SubResource("Animation_k4k07"),
-"crouch_reset": SubResource("Animation_6o8hu"),
-"lean_left": SubResource("Animation_v5xwa"),
-"lean_left_collision": SubResource("Animation_0c5qk"),
-"lean_reset": SubResource("Animation_5qee8"),
-"lean_right": SubResource("Animation_5n858"),
-"lean_right_collision": SubResource("Animation_2fwsm")
+&"RESET": SubResource("Animation_6o48i"),
+&"crouch_air": SubResource("Animation_wh4u2"),
+&"crouch_ground": SubResource("Animation_k4k07"),
+&"crouch_reset": SubResource("Animation_6o8hu"),
+&"lean_left": SubResource("Animation_v5xwa"),
+&"lean_left_collision": SubResource("Animation_0c5qk"),
+&"lean_reset": SubResource("Animation_5qee8"),
+&"lean_right": SubResource("Animation_5n858"),
+&"lean_right_collision": SubResource("Animation_2fwsm")
 }
 
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_ryreg"]
@@ -2033,6 +2105,7 @@ animation = &"lean_right_collision"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nrrb5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5pepu"]
+nodes/output/position = Vector2(1100, 240)
 nodes/Crouch_Blend/node = SubResource("AnimationNodeBlend3_ryreg")
 nodes/Crouch_Blend/position = Vector2(500, 140)
 nodes/air/node = SubResource("AnimationNodeAnimation_lnag4")
@@ -2042,30 +2115,30 @@ nodes/air/position = Vector2(60, 340)
 nodes/ground/node = SubResource("AnimationNodeAnimation_0yifg")
 nodes/ground/position = Vector2(140, 60)
 nodes/lean/node = SubResource("AnimationNodeAdd2_qco06")
-nodes/lean/position = Vector2(740, 200)
+nodes/lean/position = Vector2(880, 200)
 nodes/lean_blend/node = SubResource("AnimationNodeBlend3_cydo6")
-nodes/lean_blend/position = Vector2(600, 600)
+nodes/lean_blend/position = Vector2(800, 620)
 nodes/lean_left/node = SubResource("AnimationNodeAnimation_jgpsf")
 nodes/lean_left/position = Vector2(60, 780)
 nodes/lean_left_collision/node = SubResource("AnimationNodeAnimation_vo3cl")
 nodes/lean_left_collision/position = Vector2(0, 900)
 nodes/lean_reset/node = SubResource("AnimationNodeAnimation_ms17y")
-nodes/lean_reset/position = Vector2(380, 680)
+nodes/lean_reset/position = Vector2(380, 660)
 nodes/lean_right/node = SubResource("AnimationNodeAnimation_cd2xa")
 nodes/lean_right/position = Vector2(100, 500)
 nodes/lean_right_collision/node = SubResource("AnimationNodeAnimation_rlexb")
 nodes/lean_right_collision/position = Vector2(40, 640)
 nodes/left_collision_blend/node = SubResource("AnimationNodeBlend2_otrul")
 nodes/left_collision_blend/position = Vector2(360, 820)
-nodes/output/position = Vector2(980, 260)
 nodes/right_collision_blend/node = SubResource("AnimationNodeBlend2_nrrb5")
-nodes/right_collision_blend/position = Vector2(394.107, 494.395)
-node_connections = [&"Crouch_Blend", 0, &"ground", &"Crouch_Blend", 1, &"crouch reset", &"Crouch_Blend", 2, &"air", &"lean", 0, &"Crouch_Blend", &"lean", 1, &"lean_blend", &"lean_blend", 0, &"right_collision_blend", &"lean_blend", 1, &"lean_reset", &"lean_blend", 2, &"left_collision_blend", &"left_collision_blend", 0, &"lean_left", &"left_collision_blend", 1, &"lean_left_collision", &"output", 0, &"lean", &"right_collision_blend", 0, &"lean_right", &"right_collision_blend", 1, &"lean_right_collision"]
+nodes/right_collision_blend/position = Vector2(360, 460)
+node_connections = [&"output", 0, &"lean", &"Crouch_Blend", 0, &"ground", &"Crouch_Blend", 1, &"crouch reset", &"Crouch_Blend", 2, &"air", &"lean", 0, &"Crouch_Blend", &"lean", 1, &"lean_blend", &"lean_blend", 0, &"right_collision_blend", &"lean_blend", 1, &"lean_reset", &"lean_blend", 2, &"left_collision_blend", &"left_collision_blend", 0, &"lean_left", &"left_collision_blend", 1, &"lean_left_collision", &"right_collision_blend", 0, &"lean_right", &"right_collision_blend", 1, &"lean_right_collision"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cx3sy"]
 radius = 0.45
 
-[node name="Player_Character" type="CharacterBody3D" node_paths=PackedStringArray("subviewport_camera", "main_camera", "animation_tree", "crouch_collision", "right_lean_collision", "left_lean_collision", "sprint_timer", "coyote_timer")]
+[node name="Player_Character" type="CharacterBody3D" unique_id=1930488979 node_paths=PackedStringArray("subviewport_camera", "main_camera", "animation_tree", "crouch_collision", "right_lean_collision", "left_lean_collision", "sprint_timer", "coyote_timer")]
+disable_mode = 1
 collision_layer = 2
 floor_max_angle = 0.872665
 script = ExtResource("1_h0t42")
@@ -2081,12 +2154,11 @@ acceleration = 20.0
 coyote_timer = NodePath("CoyoteTimer")
 metadata/_edit_group_ = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1746877117]
 unique_name_in_owner = true
 script = ExtResource("2_tvwwj")
 
-[node name="Overlay" type="TextureRect" parent="CanvasLayer"]
-visible = false
+[node name="Overlay" type="TextureRect" parent="CanvasLayer" unique_id=1480971344]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2096,42 +2168,42 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="debug_hud" type="VBoxContainer" parent="CanvasLayer"]
+[node name="debug_hud" type="VBoxContainer" parent="CanvasLayer" unique_id=1273329344]
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/debug_hud"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/debug_hud" unique_id=1270679337]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer" unique_id=511066385]
 layout_mode = 2
 text = "Current Weapon: "
 
-[node name="CurrentWeapon" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer"]
+[node name="CurrentWeapon" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer" unique_id=1914307984]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/debug_hud"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/debug_hud" unique_id=719618350]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer2"]
+[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer2" unique_id=2111135313]
 layout_mode = 2
 text = "Ammo:"
 
-[node name="CurrentAmmo" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer2"]
+[node name="CurrentAmmo" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer2" unique_id=1310381806]
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/debug_hud"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/debug_hud" unique_id=26783440]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer3"]
+[node name="Label" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer3" unique_id=720441406]
 layout_mode = 2
 text = "Weapon Stack:"
 
-[node name="WeaponStack" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer3"]
+[node name="WeaponStack" type="Label" parent="CanvasLayer/debug_hud/HBoxContainer3" unique_id=146785852]
 layout_mode = 2
 
-[node name="MainSight" type="TextureRect" parent="CanvasLayer"]
+[node name="MainSight" type="TextureRect" parent="CanvasLayer" unique_id=1237019041]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2141,7 +2213,7 @@ mouse_filter = 2
 texture = ExtResource("3_7f0mw")
 stretch_mode = 3
 
-[node name="HitSight" type="TextureRect" parent="CanvasLayer"]
+[node name="HitSight" type="TextureRect" parent="CanvasLayer" unique_id=2016761054]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -2152,11 +2224,11 @@ mouse_filter = 2
 texture = ExtResource("4_l32wb")
 stretch_mode = 3
 
-[node name="HitSightTimer" type="Timer" parent="CanvasLayer/HitSight"]
+[node name="HitSightTimer" type="Timer" parent="CanvasLayer/HitSight" unique_id=651597527]
 wait_time = 0.05
 one_shot = true
 
-[node name="SprintBar" type="HSlider" parent="CanvasLayer"]
+[node name="SprintBar" type="HSlider" parent="CanvasLayer" unique_id=1987921148]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -2176,7 +2248,7 @@ value = 100.0
 editable = false
 scrollable = false
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=79080726]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2184,141 +2256,139 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=535768346]
 transparent_bg = true
 handle_input_locally = false
+positional_shadow_atlas_size = 4096
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=2017217588]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5451, 0)
 cull_mask = 524288
 
-[node name="Camera" type="Node3D" parent="."]
+[node name="Camera" type="Node3D" parent="." unique_id=912256861]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
 
-[node name="LeanPivot" type="Node3D" parent="Camera"]
+[node name="LeanPivot" type="Node3D" parent="Camera" unique_id=1503677092]
 
-[node name="MainCamera" type="Camera3D" parent="Camera/LeanPivot"]
+[node name="MainCamera" type="Camera3D" parent="Camera/LeanPivot" unique_id=381153550]
 unique_name_in_owner = true
 cull_mask = 524287
 current = true
 
-[node name="Weapons_Manager" type="Node3D" parent="Camera/LeanPivot/MainCamera" node_paths=PackedStringArray("animation_player", "melee_hitbox")]
+[node name="Weapons_Manager" type="Node3D" parent="Camera/LeanPivot/MainCamera" unique_id=1982237883 node_paths=PackedStringArray("animation_player", "melee_hitbox")]
 script = ExtResource("5_wuueu")
 animation_player = NodePath("Weapons_Models/AnimationPlayer")
 melee_hitbox = NodePath("Melee_Hitbox")
 weapon_stack = Array[ExtResource("6_wj0qi")]([SubResource("Resource_4pcyg")])
 
-[node name="Weapons_Models" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager"]
+[node name="Weapons_Models" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager" unique_id=79488914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54919, 0)
 
-[node name="blasterN" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0.193, 1.255, -0.643)
+[node name="blasterN" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=436844680]
+transform = Transform3D(-1, 0, 2.5351817e-06, 0, 1, 0, -2.5351817e-06, 0, -1, 0.193, 1.255, -0.643)
 visible = false
 
-[node name="blasterN2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterN"]
+[node name="blasterN2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterN" unique_id=313141132]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
-layers = 524288
-mesh = SubResource("ArrayMesh_4dame")
+mesh = SubResource("ArrayMesh_giihu")
 skeleton = NodePath("")
 
-[node name="blasterI" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, -0.148, 1.379, -0.398)
+[node name="blasterI" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=81407248]
+transform = Transform3D(-1, 0, -2.5351817e-06, 0, 1, 0, 2.5351817e-06, 0, -1, -0.148, 1.379, -0.398)
 visible = false
 
-[node name="blasterD2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterI"]
+[node name="blasterD2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterI" unique_id=954580676]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 layers = 524288
 mesh = SubResource("ArrayMesh_eo1ub")
 skeleton = NodePath("")
 
-[node name="blasterL" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0.117, 1.16, -0.512)
+[node name="blasterL" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=1976288082]
+transform = Transform3D(-1, 0, -2.5351817e-06, 0, 1, 0, 2.5351817e-06, 0, -1, 0.117, 1.16, -0.512)
 visible = false
 
-[node name="blasterA2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterL"]
+[node name="blasterA2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterL" unique_id=1037198183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 layers = 524288
 mesh = SubResource("ArrayMesh_33sn6")
 skeleton = NodePath("")
 
-[node name="blasterM" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
+[node name="blasterM" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=308547132]
 visible = false
 
-[node name="blasterM2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterM"]
+[node name="blasterM2" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterM" unique_id=646697989]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.15)
 layers = 524288
 mesh = SubResource("ArrayMesh_kn6m3")
 skeleton = NodePath("")
 
-[node name="blasterP2" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-0.97237, -0.233408, -0.00407487, 0, 0.0174555, -0.999848, 0.233443, -0.972222, -0.0169732, 0.32, 1.014, -0.35)
+[node name="blasterP2" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=708907406]
+transform = Transform3D(-0.97236997, -0.23340762, -0.0040748655, 0, 0.01745548, -0.999848, 0.23344313, -0.97222215, -0.016973201, 0.32, 1.014, -0.35)
 visible = false
 
-[node name="blasterP" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterP2"]
+[node name="blasterP" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterP2" unique_id=816589054]
+layers = 524288
 mesh = SubResource("ArrayMesh_xefgr")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=190666]
 unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_ys4uk"),
-"Global": ExtResource("13_lmhsg")
-}
+libraries/ = SubResource("AnimationLibrary_ys4uk")
+libraries/Global = ExtResource("13_lmhsg")
 
-[node name="blasterQ2" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models"]
-transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
+[node name="blasterQ2" type="Node3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models" unique_id=1793390834]
+transform = Transform3D(-1, 0, 2.5351817e-06, 0, 1, 0, -2.5351817e-06, 0, -1, 0, 0, 0)
 visible = false
 
-[node name="blasterQ" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterQ2"]
+[node name="blasterQ" type="MeshInstance3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager/Weapons_Models/blasterQ2" unique_id=1537373267]
+layers = 524288
 mesh = SubResource("ArrayMesh_8tvdw")
 skeleton = NodePath("")
 
-[node name="BulletPoint" type="Marker3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager"]
+[node name="BulletPoint" type="Marker3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager" unique_id=785176848]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.266143, -0.288234, -0.779217)
 gizmo_extents = 0.21
 
-[node name="Melee_Hitbox" type="ShapeCast3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager"]
+[node name="Melee_Hitbox" type="ShapeCast3D" parent="Camera/LeanPivot/MainCamera/Weapons_Manager" unique_id=51698041]
 shape = SubResource("BoxShape3D_to3sp")
 target_position = Vector3(0, 0, -0.7)
 collision_mask = 36
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
-[node name="LeanLeftCollision" type="ShapeCast3D" parent="Camera"]
+[node name="LeanLeftCollision" type="ShapeCast3D" parent="Camera" unique_id=1115599186]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 shape = SubResource("SphereShape3D_24b8y")
 target_position = Vector3(-0.85, 0, 0)
 collision_mask = 5
 debug_shape_custom_color = Color(0, 0, 1, 1)
 
-[node name="LeanRighCollision" type="ShapeCast3D" parent="Camera"]
+[node name="LeanRighCollision" type="ShapeCast3D" parent="Camera" unique_id=2041225994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 shape = SubResource("SphereShape3D_24b8y")
 target_position = Vector3(0.85, 0, 0)
 collision_mask = 5
 debug_shape_custom_color = Color(0, 0, 1, 1)
 
-[node name="BodyCollision" type="CollisionShape3D" parent="."]
+[node name="BodyCollision" type="CollisionShape3D" parent="." unique_id=1076506851]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_73v4a")
 
-[node name="PickUpDetection" type="Area3D" parent="."]
+[node name="PickUpDetection" type="Area3D" parent="." unique_id=236933219]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUpDetection"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUpDetection" unique_id=207042379]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015625, 0.271729, 0.085144)
 shape = SubResource("BoxShape3D_mvomp")
 
-[node name="CharacterAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ity6x")
-}
+[node name="CharacterAnimationPlayer" type="AnimationPlayer" parent="." unique_id=309883760]
+libraries/ = SubResource("AnimationLibrary_ity6x")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1596529671]
 tree_root = SubResource("AnimationNodeBlendTree_5pepu")
 anim_player = NodePath("../CharacterAnimationPlayer")
 parameters/Crouch_Blend/blend_amount = 0.0
@@ -2327,16 +2397,16 @@ parameters/lean_blend/blend_amount = 0.0
 parameters/left_collision_blend/blend_amount = 0.0
 parameters/right_collision_blend/blend_amount = 0.0
 
-[node name="CrouchCollider" type="ShapeCast3D" parent="."]
+[node name="CrouchCollider" type="ShapeCast3D" parent="." unique_id=35840513]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("SphereShape3D_cx3sy")
 target_position = Vector3(0, 0.4, 0)
 
-[node name="SprintTimer" type="Timer" parent="."]
+[node name="SprintTimer" type="Timer" parent="." unique_id=962046205]
 wait_time = 2.0
 one_shot = true
 
-[node name="CoyoteTimer" type="Timer" parent="."]
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=530751673]
 
 [connection signal="timeout" from="CanvasLayer/HitSight/HitSightTimer" to="CanvasLayer" method="_on_hit_sight_timer_timeout"]
 [connection signal="add_signal_to_hud" from="Camera/LeanPivot/MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_add_signal_to_hud"]

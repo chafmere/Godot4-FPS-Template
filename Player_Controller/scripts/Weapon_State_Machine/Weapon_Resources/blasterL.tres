@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://bwrs8ensewkgc"]
 
 [ext_resource type="PackedScene" uid="uid://bpxa3je174q43" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/basic_rigid_body_projectile.tscn" id="1_1tllq"]
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="2_gpxoe"]
+[ext_resource type="Script" uid="uid://ca7h24lxxrtvx" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="2_gpxoe"]
 [ext_resource type="PackedScene" uid="uid://gtthejj2wmyj" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="3_5a5l8"]
 [ext_resource type="PackedScene" uid="uid://3mb12hvruajh" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_2.tscn" id="4_p50xh"]
 

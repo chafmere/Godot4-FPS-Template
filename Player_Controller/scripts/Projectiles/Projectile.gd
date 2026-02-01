@@ -46,13 +46,13 @@ func Camera_Ray_Cast(_spread: Vector2 = Vector2.ZERO, _range: float = 1000):
 	var _Viewport = get_viewport().get_size()
 	
 	var Ray_Origin = _Camera.project_ray_origin(_Viewport/2)
-	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(_spread))*_range)
+	var Ray_End = (Ray_Origin + _Camera.project_ray_normal((_Viewport/2)+Vector2i(_spread)) *_range)
 	var New_Intersection:PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(Ray_Origin,Ray_End)
-	New_Intersection.set_collision_mask(0b11101111)
+	New_Intersection.set_collision_mask(0b11101101)
 	New_Intersection.set_hit_from_inside(false) # In Jolt this is set to true by defualt
 	
 	var Intersection = get_world_3d().direct_space_state.intersect_ray(New_Intersection)
-	
+
 	if not Intersection.is_empty():
 		var Collision = [Intersection.collider,Intersection.position,Intersection.normal]
 		return Collision
@@ -69,7 +69,7 @@ func Hit_Scan_Collision(Collision: Array,_damage: float, origin_point: Vector3):
 
 			var Bullet_Direction = (Point - origin_point).normalized()
 			var New_Intersection = PhysicsRayQueryParameters3D.create(origin_point,Point+Bullet_Direction*2)
-			New_Intersection.set_collision_mask(0b11101111)
+			New_Intersection.set_collision_mask(0b11101101)
 			New_Intersection.set_hit_from_inside(false)
 			New_Intersection.set_exclude(hit_objects)
 			var Bullet_Collision = Bullet.intersect_ray(New_Intersection)

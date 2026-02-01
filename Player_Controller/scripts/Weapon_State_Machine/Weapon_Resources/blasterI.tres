@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://yc1f2j7pl4vr"]
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://yc1f2j7pl4vr"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_jgxyc"]
+[ext_resource type="Script" uid="uid://ca7h24lxxrtvx" path="res://Player_Controller/scripts/Weapon_State_Machine/weapon_resource.gd" id="1_jgxyc"]
 [ext_resource type="PackedScene" uid="uid://dc48o4niy1mok" path="res://Player_Controller/Spawnable_Objects/Projectiles_To_Load/basic_hitscan_projectile.tscn" id="1_l4j8x"]
 [ext_resource type="PackedScene" uid="uid://cvbk5bxenpxey" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="3_y2nwe"]
 [ext_resource type="PackedScene" uid="uid://ciu0xkaw0ioef" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile_1.tscn" id="4_xc0or"]
@@ -15,7 +15,6 @@ change_animation = "Global/blasterI De-Activate"
 drop_animation = "Global/blasterI Drop"
 out_of_ammo_animation = "Global/blasterI OOA"
 melee_animation = "Global/blasterI Melee"
-has_ammo = true
 magazine = 30
 max_ammo = 60
 damage = 10
@@ -26,4 +25,3 @@ can_be_dropped = true
 weapon_drop = ExtResource("3_y2nwe")
 weapon_spray = ExtResource("4_xc0or")
 projectile_to_load = ExtResource("1_l4j8x")
-incremental_reload = false

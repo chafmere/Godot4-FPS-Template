@@ -34,5 +34,3 @@ func load_over_lay_texture(Active:bool, txtr: Texture2D = null):
 
 func _on_weapons_manager_connect_weapon_to_hud(_weapon_resouce: WeaponResource):
 	_weapon_resouce.update_overlay.connect(load_over_lay_texture)
-
-

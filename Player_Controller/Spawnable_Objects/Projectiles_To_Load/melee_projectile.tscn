@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6rfh1ejt4m6m"]
 
-[ext_resource type="Script" path="res://Player_Controller/scripts/Projectiles/melee_weapon_projectile.gd" id="1_qlmbe"]
+[ext_resource type="Script" uid="uid://bfn8eu00l4btq" path="res://Player_Controller/scripts/Projectiles/melee_weapon_projectile.gd" id="1_qlmbe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q86ac"]
 

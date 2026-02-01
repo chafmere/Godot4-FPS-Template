@@ -5,7 +5,6 @@ extends CharacterBody3D
 @export var main_camera:Camera3D
 @export var animation_tree: AnimationTree
 
-
 var camera_rotation: Vector2 = Vector2(0.0,0.0)
 var mouse_sensitivity = 0.001
 var crouched: bool = false
@@ -101,16 +100,16 @@ func _input(event: InputEvent) -> void:
 			lean(RIGHT)
 		
 	if enable_sprint:
-		if Input.is_action_just_released("sprint") or Input.is_action_just_released("walk"):
-			if !(Input.is_action_pressed("walk") or Input.is_action_pressed("sprint")):
-				speed_modifier = NORMAL_speed
-				exit_sprint()
-
 		if Input.is_action_just_pressed("sprint") and !crouched:
 			if !sprint_on_cooldown:
 				speed_modifier = sprint_speed
 				sprint_timer.start(sprint_time_remaining)
-
+				
+		if Input.is_action_just_released("sprint") or Input.is_action_just_released("walk"):
+			if !(Input.is_action_pressed("walk") or Input.is_action_pressed("sprint")):
+				speed_modifier = NORMAL_speed
+				exit_sprint()
+				
 		if Input.is_action_just_pressed("walk") and !crouched:
 			speed_modifier = walk_speed
 
@@ -184,7 +183,6 @@ func sprint_replenish(delta) -> void:
 	else:
 		sprint_bar_Value = (sprint_timer.time_left/sprint_time)*100
 	
-	#sprint_bar_Value = ((int(Sprint)*sprint_time_remaining)+(int(!Sprint)*sprint_timer.time_left)/sprint_time)*100
 	sprint_bar.value = sprint_bar_Value
 	
 	if sprint_bar_Value == 100:
@@ -195,7 +193,8 @@ func sprint_replenish(delta) -> void:
 func _process(_delta: float) -> void:
 	if subviewport_camera:
 		subviewport_camera.global_transform = main_camera.global_transform
-		
+
+
 func _physics_process(_delta: float) -> void:
 	sprint_replenish(_delta)
 	lean_collision()

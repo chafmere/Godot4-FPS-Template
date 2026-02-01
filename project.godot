@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Godot 4 Fps Controller"
 run/main_scene="res://Example World/Objects/World/world.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Title.png"
 
 [filesystem]
@@ -142,6 +146,11 @@ right={
 3d_physics/layer_4="Weapons"
 3d_physics/layer_5="Rigid Body Projectiles"
 3d_physics/layer_6="Enemys"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 [rendering]
 

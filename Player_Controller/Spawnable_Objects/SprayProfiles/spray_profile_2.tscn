@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3mb12hvruajh"]
 
-[ext_resource type="Script" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_35g6m"]
+[ext_resource type="Script" uid="uid://dvcpsronqmkmr" path="res://Player_Controller/Spawnable_Objects/SprayProfiles/spray_profile.gd" id="1_35g6m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4msk4"]
 seed = 145

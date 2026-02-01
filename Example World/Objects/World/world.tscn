@@ -1,14 +1,13 @@
-[gd_scene load_steps=51 format=3 uid="uid://dniyrkkdwf3cb"]
+[gd_scene format=3 uid="uid://dniyrkkdwf3cb"]
 
 [ext_resource type="PackedScene" uid="uid://bwc28g513sfim" path="res://Example World/Objects/World/box_1.tscn" id="2_a2qm0"]
 [ext_resource type="PackedScene" uid="uid://bo6viygofawpl" path="res://Example World/Objects/World/target.tscn" id="3_11x65"]
 [ext_resource type="PackedScene" uid="uid://gtthejj2wmyj" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_n.tscn" id="4_jtbxf"]
 [ext_resource type="PackedScene" uid="uid://cvbk5bxenpxey" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_I.tscn" id="4_olwnw"]
 [ext_resource type="Resource" uid="uid://c1jg0ifn7yvve" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterN.tres" id="4_u04vv"]
-[ext_resource type="Script" path="res://Player_Controller/scripts/Weapon_State_Machine/WeaponSlot.gd" id="5_khw4j"]
+[ext_resource type="Script" uid="uid://bw4j1fbww4k8s" path="res://Player_Controller/scripts/Weapon_State_Machine/WeaponSlot.gd" id="5_khw4j"]
 [ext_resource type="PackedScene" uid="uid://catx2kysw47d8" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_L.tscn" id="5_nih8h"]
 [ext_resource type="Resource" uid="uid://yc1f2j7pl4vr" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterI.tres" id="6_fjphs"]
-[ext_resource type="Environment" uid="uid://bqp54syxqnqww" path="res://Player_Controller/world_environment.tres" id="7_tfq4t"]
 [ext_resource type="PackedScene" uid="uid://x8nhs2cer2to" path="res://Player_Controller/Spawnable_Objects/Weapons/blaster_m.tscn" id="7_tjj4i"]
 [ext_resource type="Resource" uid="uid://bwrs8ensewkgc" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterL.tres" id="8_38tmb"]
 [ext_resource type="PackedScene" uid="uid://dl236agqx8rjp" path="res://Player_Controller/Spawnable_Objects/Clips/blaster_i_clip.tscn" id="9_764ue"]
@@ -22,168 +21,156 @@
 [ext_resource type="Resource" uid="uid://dgayjkjx4mckc" path="res://Player_Controller/scripts/Weapon_State_Machine/Weapon_Resources/blasterQ.tres" id="13_xqfky"]
 [ext_resource type="Shader" uid="uid://kfuretb65505" path="res://Example World/Objects/World/world.tres" id="19_cthwv"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8purj"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_gqn1n"]
+sky_material = SubResource("ProceduralSkyMaterial_8purj")
+
+[sub_resource type="Environment" id="Environment_qwr1n"]
+background_mode = 2
+sky = SubResource("Sky_gqn1n")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="Resource" id="Resource_t8nnn"]
 script = ExtResource("5_khw4j")
 weapon = ExtResource("4_u04vv")
-current_ammo = 9
 reserve_ammo = 9
 
 [sub_resource type="Resource" id="Resource_wewep"]
 script = ExtResource("5_khw4j")
 weapon = ExtResource("6_fjphs")
-current_ammo = 30
 reserve_ammo = 30
 
 [sub_resource type="Resource" id="Resource_qhfra"]
 script = ExtResource("5_khw4j")
 weapon = ExtResource("8_38tmb")
-current_ammo = 30
 reserve_ammo = 30
 
 [sub_resource type="Resource" id="Resource_7xmcw"]
 script = ExtResource("5_khw4j")
 weapon = ExtResource("10_xtha2")
-current_ammo = 9
 reserve_ammo = 9
 
 [sub_resource type="Resource" id="Resource_ntxxd"]
 script = ExtResource("5_khw4j")
 weapon = ExtResource("13_xqfky")
-current_ammo = 2
 reserve_ammo = 4
 
-[sub_resource type="Resource" id="Resource_0jna6"]
+[sub_resource type="Resource" id="Resource_8purj"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("6_fjphs")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_bqb6c"]
+[sub_resource type="Resource" id="Resource_gqn1n"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("6_fjphs")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_pf457"]
+[sub_resource type="Resource" id="Resource_qwr1n"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("6_fjphs")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_nr4e5"]
+[sub_resource type="Resource" id="Resource_mjfr4"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("6_fjphs")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_tgytl"]
+[sub_resource type="Resource" id="Resource_dsok1"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("6_fjphs")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_gfpck"]
+[sub_resource type="Resource" id="Resource_kxg2o"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("4_u04vv")
-current_ammo = 5
-reserve_ammo = 0
+current_ammo = 9
 
-[sub_resource type="Resource" id="Resource_x0ees"]
+[sub_resource type="Resource" id="Resource_r8gv3"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("4_u04vv")
-current_ammo = 5
-reserve_ammo = 0
+current_ammo = 9
 
-[sub_resource type="Resource" id="Resource_vq4ga"]
+[sub_resource type="Resource" id="Resource_glh4a"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("4_u04vv")
-current_ammo = 5
-reserve_ammo = 0
+current_ammo = 9
 
-[sub_resource type="Resource" id="Resource_fetp6"]
+[sub_resource type="Resource" id="Resource_q7at6"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("4_u04vv")
-current_ammo = 5
-reserve_ammo = 0
+current_ammo = 9
 
-[sub_resource type="Resource" id="Resource_mmli4"]
+[sub_resource type="Resource" id="Resource_bcyq2"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("4_u04vv")
-current_ammo = 5
-reserve_ammo = 0
+current_ammo = 9
 
-[sub_resource type="Resource" id="Resource_3na3o"]
+[sub_resource type="Resource" id="Resource_21bmr"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("8_38tmb")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_dj6ib"]
+[sub_resource type="Resource" id="Resource_fst20"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("8_38tmb")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_sd74u"]
+[sub_resource type="Resource" id="Resource_mt2ev"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("8_38tmb")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_lsbx3"]
+[sub_resource type="Resource" id="Resource_tu1aa"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("8_38tmb")
 current_ammo = 30
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_xy0jw"]
+[sub_resource type="Resource" id="Resource_1vrs5"]
+resource_local_to_scene = true
+script = ExtResource("5_khw4j")
+weapon = ExtResource("10_xtha2")
+
+[sub_resource type="Resource" id="Resource_wy8i3"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("10_xtha2")
 current_ammo = 9
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_rw2qw"]
+[sub_resource type="Resource" id="Resource_gt2t5"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("10_xtha2")
 current_ammo = 9
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_ymnwq"]
+[sub_resource type="Resource" id="Resource_kuldh"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("10_xtha2")
 current_ammo = 9
-reserve_ammo = 0
 
-[sub_resource type="Resource" id="Resource_l0ryq"]
+[sub_resource type="Resource" id="Resource_choul"]
 resource_local_to_scene = true
 script = ExtResource("5_khw4j")
 weapon = ExtResource("10_xtha2")
 current_ammo = 9
-reserve_ammo = 0
-
-[sub_resource type="Resource" id="Resource_5dj0g"]
-resource_local_to_scene = true
-script = ExtResource("5_khw4j")
-weapon = ExtResource("10_xtha2")
-current_ammo = 9
-reserve_ammo = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xbow4"]
 render_priority = 0
@@ -205,436 +192,436 @@ uv1_triplanar = true
 albedo_texture = ExtResource("12_7osse")
 uv1_triplanar = true
 
-[node name="World" type="Node3D" groups=["World"]]
+[node name="World" type="Node3D" unique_id=2024862255 groups=["World"]]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("7_tfq4t")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.843573, -0.446602, -0.298213, -0.283274, -0.101708, 0.953631, -0.456224, 0.888933, -0.0407129, 0, 5.80189, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1348733882]
+transform = Transform3D(0.051746484, -0.7900156, -0.6108991, -0.039040063, -0.6128512, 0.7892333, -0.9978969, -0.016990522, -0.062555164, 0, 4.406297, 0)
 layers = 524289
-light_color = Color(1, 1, 0.780392, 1)
 shadow_enabled = true
+shadow_caster_mask = 4294443009
 
-[node name="Enemy" type="Node3D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1437468791]
+environment = SubResource("Environment_qwr1n")
+
+[node name="Enemy" type="Node3D" parent="." unique_id=1880106425]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15.8799, 0, 14.0176)
 
-[node name="Target" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target" parent="Enemy" unique_id=364268002 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 8.01964)
 
-[node name="Target2" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target2" parent="Enemy" unique_id=920321307 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 7.4464)
 
-[node name="Target3" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target3" parent="Enemy" unique_id=1141943246 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 6.71841)
 
-[node name="Target4" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target4" parent="Enemy" unique_id=1922563984 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 5.99316)
 
-[node name="Target5" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target5" parent="Enemy" unique_id=1744049536 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 5.27576)
 
-[node name="Target6" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target6" parent="Enemy" unique_id=178837010 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 8.01964)
 
-[node name="Target7" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target7" parent="Enemy" unique_id=339021900 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 7.4464)
 
-[node name="Target8" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target8" parent="Enemy" unique_id=184917377 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 6.71841)
 
-[node name="Target9" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target9" parent="Enemy" unique_id=1838847825 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 5.99316)
 
-[node name="Target10" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target10" parent="Enemy" unique_id=225915734 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 5.27576)
 
-[node name="Target11" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target11" parent="Enemy" unique_id=253393722 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 4.58913)
 
-[node name="Target12" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target12" parent="Enemy" unique_id=154983509 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 4.01589)
 
-[node name="Target13" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target13" parent="Enemy" unique_id=865976739 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 3.2879)
 
-[node name="Target14" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target14" parent="Enemy" unique_id=611171865 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 2.56265)
 
-[node name="Target15" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target15" parent="Enemy" unique_id=1432762463 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 1.84525)
 
-[node name="Target16" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target16" parent="Enemy" unique_id=1338398077 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 4.58913)
 
-[node name="Target17" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target17" parent="Enemy" unique_id=2058000010 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 4.01589)
 
-[node name="Target18" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target18" parent="Enemy" unique_id=1004039181 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 3.2879)
 
-[node name="Target19" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target19" parent="Enemy" unique_id=618583562 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 2.56265)
 
-[node name="Target20" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target20" parent="Enemy" unique_id=262387310 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 1.84525)
 
-[node name="Target21" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target21" parent="Enemy" unique_id=241743012 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 1.24738)
 
-[node name="Target22" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target22" parent="Enemy" unique_id=1304347101 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, 0.674143)
 
-[node name="Target23" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target23" parent="Enemy" unique_id=158234228 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, -0.0538473)
 
-[node name="Target24" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target24" parent="Enemy" unique_id=291816323 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, -0.779098)
 
-[node name="Target25" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target25" parent="Enemy" unique_id=89533884 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 3.28587, -1.4965)
 
-[node name="Target26" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target26" parent="Enemy" unique_id=1229426470 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 1.24738)
 
-[node name="Target27" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target27" parent="Enemy" unique_id=281001958 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, 0.674143)
 
-[node name="Target28" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target28" parent="Enemy" unique_id=1795459715 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, -0.0538473)
 
-[node name="Target29" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target29" parent="Enemy" unique_id=1245825169 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, -0.779098)
 
-[node name="Target30" parent="Enemy" instance=ExtResource("3_11x65")]
+[node name="Target30" parent="Enemy" unique_id=1456764555 instance=ExtResource("3_11x65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80966, 2.5638, -1.4965)
 
-[node name="Weapons" type="Node3D" parent="."]
+[node name="Weapons" type="Node3D" parent="." unique_id=1259216028]
 
-[node name="blasterN" parent="Weapons" instance=ExtResource("4_jtbxf")]
+[node name="blasterN" parent="Weapons" unique_id=327254162 instance=ExtResource("4_jtbxf")]
 transform = Transform3D(-0.00543903, 0.00995553, -0.999936, 0.0236036, 0.999673, 0.00982454, 0.999706, -0.0235486, -0.00567224, 21.2958, 1.83198, 11.6068)
 freeze = true
 weapon = SubResource("Resource_t8nnn")
 
-[node name="blasterI2" parent="Weapons" instance=ExtResource("4_olwnw")]
+[node name="blasterI2" parent="Weapons" unique_id=558364595 instance=ExtResource("4_olwnw")]
 transform = Transform3D(-4.36023e-08, -3.08644e-09, -1, -0.0706095, 0.997504, 0, 0.997504, 0.0706095, -4.37114e-08, 22.2535, 1.85956, 11.7285)
 freeze = true
 weapon = SubResource("Resource_wewep")
 
-[node name="blasterL2" parent="Weapons" instance=ExtResource("5_nih8h")]
+[node name="blasterL2" parent="Weapons" unique_id=391270177 instance=ExtResource("5_nih8h")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19.9483, 1.94057, 11.4826)
 freeze = true
 weapon = SubResource("Resource_qhfra")
 
-[node name="blasterM" parent="Weapons" instance=ExtResource("7_tjj4i")]
+[node name="blasterM" parent="Weapons" unique_id=353384611 instance=ExtResource("7_tjj4i")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.1838, 1.99763, 11.5761)
 sleeping = true
 freeze = true
 weapon = SubResource("Resource_7xmcw")
 
-[node name="BlasterQ" parent="Weapons" instance=ExtResource("12_x6ydo")]
+[node name="BlasterQ" parent="Weapons" unique_id=320595937 instance=ExtResource("12_x6ydo")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.3823, 1.92516, 11.5924)
 freeze = true
 weapon = SubResource("Resource_ntxxd")
 
-[node name="ammo" type="Node3D" parent="."]
+[node name="ammo" type="Node3D" parent="." unique_id=150361743]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.9044, 0, 0)
 
-[node name="blasterI_Clip" parent="ammo" instance=ExtResource("9_764ue")]
+[node name="blasterI_Clip" parent="ammo" unique_id=22057903 instance=ExtResource("9_764ue")]
 transform = Transform3D(-0.0581563, 0.998308, -1.59995e-08, 5.86793e-08, 1.9445e-08, 1, 0.998308, 0.0581563, -5.97109e-08, 11.9669, 2.51447, -9.74606)
-weapon = SubResource("Resource_0jna6")
+weapon = SubResource("Resource_8purj")
 
-[node name="blasterI_Clip2" parent="ammo" instance=ExtResource("9_764ue")]
+[node name="blasterI_Clip2" parent="ammo" unique_id=985349913 instance=ExtResource("9_764ue")]
 transform = Transform3D(-0.0581562, 0.998308, -1.59995e-08, 5.86793e-08, 1.9445e-08, 1, 0.998308, 0.0581562, -5.97109e-08, 11.8789, 2.51447, -9.48588)
-weapon = SubResource("Resource_bqb6c")
+weapon = SubResource("Resource_gqn1n")
 
-[node name="blasterI_Clip3" parent="ammo" instance=ExtResource("9_764ue")]
+[node name="blasterI_Clip3" parent="ammo" unique_id=2054087606 instance=ExtResource("9_764ue")]
 transform = Transform3D(-0.0581562, 0.998308, -1.59995e-08, 5.86793e-08, 1.9445e-08, 1, 0.998308, 0.0581562, -5.97109e-08, 11.8524, 2.51447, -9.10553)
-weapon = SubResource("Resource_pf457")
+weapon = SubResource("Resource_qwr1n")
 
-[node name="blasterI_Clip4" parent="ammo" instance=ExtResource("9_764ue")]
+[node name="blasterI_Clip4" parent="ammo" unique_id=1229914729 instance=ExtResource("9_764ue")]
 transform = Transform3D(-0.0581562, 0.998308, -1.59995e-08, 5.86793e-08, 1.9445e-08, 1, 0.998308, 0.0581562, -5.97109e-08, 11.8524, 2.51447, -8.98027)
-weapon = SubResource("Resource_nr4e5")
+weapon = SubResource("Resource_mjfr4")
 
-[node name="blasterI_Clip5" parent="ammo" instance=ExtResource("9_764ue")]
+[node name="blasterI_Clip5" parent="ammo" unique_id=2088763525 instance=ExtResource("9_764ue")]
 transform = Transform3D(-0.0581562, 0.998308, -1.59995e-08, 5.86793e-08, 1.9445e-08, 1, 0.998308, 0.0581562, -5.97109e-08, 11.8353, 2.51447, -9.26194)
-weapon = SubResource("Resource_tgytl")
+weapon = SubResource("Resource_dsok1")
 
-[node name="blasterN_Clip" parent="ammo" instance=ExtResource("9_qorrx")]
+[node name="blasterN_Clip" parent="ammo" unique_id=763459586 instance=ExtResource("9_qorrx")]
 transform = Transform3D(-0.5, 0.866025, 4.37114e-08, 5.97108e-08, -1.59995e-08, 1, 0.866025, 0.5, -4.37114e-08, 11.8557, 2.41896, -8.45054)
-weapon = SubResource("Resource_gfpck")
+weapon = SubResource("Resource_kxg2o")
 
-[node name="blasterN_Clip2" parent="ammo" instance=ExtResource("9_qorrx")]
+[node name="blasterN_Clip2" parent="ammo" unique_id=2141468744 instance=ExtResource("9_qorrx")]
 transform = Transform3D(-0.5, 0.866025, 4.37114e-08, 5.97108e-08, -1.59995e-08, 1, 0.866025, 0.5, -4.37114e-08, 11.8817, 2.45091, -8.30067)
-weapon = SubResource("Resource_x0ees")
+weapon = SubResource("Resource_r8gv3")
 
-[node name="blasterN_Clip3" parent="ammo" instance=ExtResource("9_qorrx")]
+[node name="blasterN_Clip3" parent="ammo" unique_id=1833491581 instance=ExtResource("9_qorrx")]
 transform = Transform3D(-0.5, 0.866025, 4.37114e-08, 5.97108e-08, -1.59995e-08, 1, 0.866025, 0.5, -4.37114e-08, 11.8817, 2.45091, -8.15514)
-weapon = SubResource("Resource_vq4ga")
+weapon = SubResource("Resource_glh4a")
 
-[node name="blasterN_Clip4" parent="ammo" instance=ExtResource("9_qorrx")]
+[node name="blasterN_Clip4" parent="ammo" unique_id=621080763 instance=ExtResource("9_qorrx")]
 transform = Transform3D(-0.5, 0.866025, 4.37114e-08, 5.97108e-08, -1.59995e-08, 1, 0.866025, 0.5, -4.37114e-08, 11.8817, 2.45091, -7.98603)
-weapon = SubResource("Resource_fetp6")
+weapon = SubResource("Resource_q7at6")
 
-[node name="blasterN_Clip5" parent="ammo" instance=ExtResource("9_qorrx")]
+[node name="blasterN_Clip5" parent="ammo" unique_id=976019678 instance=ExtResource("9_qorrx")]
 transform = Transform3D(-0.5, 0.866025, 4.37114e-08, 5.97108e-08, -1.59995e-08, 1, 0.866025, 0.5, -4.37114e-08, 11.8817, 2.45091, -7.80583)
-weapon = SubResource("Resource_mmli4")
+weapon = SubResource("Resource_bcyq2")
 
-[node name="blasterL_Clip" parent="ammo" instance=ExtResource("11_xavrm")]
+[node name="blasterL_Clip" parent="ammo" unique_id=663949425 instance=ExtResource("11_xavrm")]
 transform = Transform3D(-0.451749, 0.892145, 1.27005e-08, 5.97109e-08, 1.59995e-08, 1, 0.892145, 0.451749, -6.04985e-08, 11.9947, 2.48029, -7.47362)
-weapon = SubResource("Resource_3na3o")
+weapon = SubResource("Resource_21bmr")
 
-[node name="blasterL_Clip2" parent="ammo" instance=ExtResource("11_xavrm")]
+[node name="blasterL_Clip2" parent="ammo" unique_id=327414037 instance=ExtResource("11_xavrm")]
 transform = Transform3D(0.45382, 0.891093, -4.59471e-08, 1.59995e-08, -5.97109e-08, -1, -0.891093, 0.45382, -4.1355e-08, 11.9522, 2.44837, -7.28242)
-weapon = SubResource("Resource_dj6ib")
+weapon = SubResource("Resource_fst20")
 
-[node name="blasterL_Clip3" parent="ammo" instance=ExtResource("11_xavrm")]
+[node name="blasterL_Clip3" parent="ammo" unique_id=2090737656 instance=ExtResource("11_xavrm")]
 transform = Transform3D(0.5, 0.866025, -4.37114e-08, 1.59995e-08, -5.97109e-08, -1, -0.866025, 0.5, -4.37114e-08, 11.8852, 2.49294, -7.05531)
-weapon = SubResource("Resource_sd74u")
+weapon = SubResource("Resource_mt2ev")
 
-[node name="blasterL_Clip4" parent="ammo" instance=ExtResource("11_xavrm")]
+[node name="blasterL_Clip4" parent="ammo" unique_id=690658669 instance=ExtResource("11_xavrm")]
 transform = Transform3D(-0.258819, 0.965926, -7.96526e-15, 5.97108e-08, 1.59995e-08, 1, 0.965926, 0.258819, -6.18172e-08, 11.8581, 2.5402, -6.8148)
-weapon = SubResource("Resource_lsbx3")
+weapon = SubResource("Resource_tu1aa")
 
-[node name="blasterM_clip" parent="ammo" instance=ExtResource("11_7y05e")]
+[node name="blasterM_clip" parent="ammo" unique_id=1347036028 instance=ExtResource("11_7y05e")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.7864, 2.51904, -5.86928)
-weapon = SubResource("Resource_xy0jw")
+weapon = SubResource("Resource_1vrs5")
 
-[node name="blasterM_clip2" parent="ammo" instance=ExtResource("11_7y05e")]
+[node name="blasterM_clip2" parent="ammo" unique_id=742484200 instance=ExtResource("11_7y05e")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.7864, 2.51904, -5.62425)
-weapon = SubResource("Resource_rw2qw")
+weapon = SubResource("Resource_wy8i3")
 
-[node name="blasterM_clip3" parent="ammo" instance=ExtResource("11_7y05e")]
+[node name="blasterM_clip3" parent="ammo" unique_id=390165754 instance=ExtResource("11_7y05e")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.7864, 2.51904, -5.32416)
-weapon = SubResource("Resource_ymnwq")
+weapon = SubResource("Resource_gt2t5")
 
-[node name="blasterM_clip4" parent="ammo" instance=ExtResource("11_7y05e")]
+[node name="blasterM_clip4" parent="ammo" unique_id=1909881852 instance=ExtResource("11_7y05e")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.7864, 2.51904, -5.06811)
-weapon = SubResource("Resource_l0ryq")
+weapon = SubResource("Resource_kuldh")
 
-[node name="blasterM_clip5" parent="ammo" instance=ExtResource("11_7y05e")]
+[node name="blasterM_clip5" parent="ammo" unique_id=420236175 instance=ExtResource("11_7y05e")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.7864, 2.51904, -4.82932)
-weapon = SubResource("Resource_5dj0g")
+weapon = SubResource("Resource_choul")
 
-[node name="Player_Character" parent="." instance=ExtResource("10_nucft")]
+[node name="Player_Character" parent="." unique_id=2008253270 instance=ExtResource("10_nucft")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 14.9414, 2.36574, 6.10105)
 
-[node name="LevelGeometry" type="CSGCombiner3D" parent="."]
+[node name="LevelGeometry" type="CSGCombiner3D" parent="." unique_id=1871786503]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry" unique_id=1843700427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.86237, 0)
 size = Vector3(36, 12.7247, 50)
 material = SubResource("ShaderMaterial_xbow4")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelGeometry" unique_id=1363818971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17847, 6.80383, 0)
 operation = 2
 size = Vector3(34.2788, 10.8418, 48)
 material = SubResource("StandardMaterial3D_c868b")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelGeometry" unique_id=1860395147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.39544, -15.9147)
 size = Vector3(11, 5.40485, 17)
 material = SubResource("StandardMaterial3D_t62yf")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="LevelGeometry"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="LevelGeometry" unique_id=831589720]
 transform = Transform3D(-4.37114e-08, 0, 3.97416, 0, 1, 0, -1, 0, -1.73716e-07, -0.0259876, 1.31426, -2.51557)
 polygon = PackedVector2Array(0, 0, 0, 0, 1.25373, 1.03499, 4.24766, 3.22178, 4.91613, 3.80578, 5, 0, 1, 0)
 depth = 2.54
 material = SubResource("StandardMaterial3D_ov6po")
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="LevelGeometry"]
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="LevelGeometry" unique_id=983846767]
 transform = Transform3D(-4.37114e-08, 0, 3.97416, 0, 1, 0, -1, 0, -1.73716e-07, 24.4923, 1.31426, -5.5095)
 polygon = PackedVector2Array(0, 0, 0, 0, 1.25373, 1.03499, 4.24766, 3.22178, 4.91613, 3.80578, 5, 0, 1, 0)
 depth = 0.65
 material = SubResource("StandardMaterial3D_ov6po")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="LevelGeometry" unique_id=683882373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 1.86819, -7.91462)
 size = Vector3(2, 1, 1)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="LevelGeometry" unique_id=1066981527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 2.36819, -8.91462)
 size = Vector3(2, 2, 1)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="LevelGeometry" unique_id=1548680455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 2.86819, -9.91462)
 size = Vector3(2, 3, 1)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="LevelGeometry" unique_id=1867481495]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="LevelGeometry" unique_id=428663454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.93146, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="LevelGeometry" unique_id=466021484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.93146, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="LevelGeometry" unique_id=1660526046]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9315, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="LevelGeometry" unique_id=314575517]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9315, 2.36819, 18.5854)
 size = Vector3(2, 2, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D13" type="CSGBox3D" parent="LevelGeometry" unique_id=635998280]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9315, 2.36819, 12.5924)
 size = Vector3(2, 2, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D15" type="CSGBox3D" parent="LevelGeometry" unique_id=2037489389]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9315, 11.6163, 3.32557)
 size = Vector3(9.26416, 0.80957, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D14" type="CSGBox3D" parent="LevelGeometry" unique_id=1755009211]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19.0214, 3.44817, 12.557)
 operation = 2
 size = Vector3(2.4917, 2, 9.15033)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="LevelGeometry"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="LevelGeometry" unique_id=786588056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2508, 3.22879, -17.4146)
 size = Vector3(2.63867, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="ShadowGeometry" type="CSGCombiner3D" parent="."]
+[node name="ShadowLevelGeometry" type="CSGCombiner3D" parent="." unique_id=978811358]
 layers = 524288
 cast_shadow = 3
 
-[node name="CSGBox3D" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=497223280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.86237, 0)
 size = Vector3(36, 12.7247, 50)
-material = SubResource("StandardMaterial3D_t62yf")
+material = SubResource("ShaderMaterial_xbow4")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1249893392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17847, 6.80383, 0)
 operation = 2
 size = Vector3(34.2788, 10.8418, 48)
-material = SubResource("StandardMaterial3D_t62yf")
+material = SubResource("StandardMaterial3D_c868b")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=137816964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.39544, -15.9147)
 size = Vector3(11, 5.40485, 17)
 material = SubResource("StandardMaterial3D_t62yf")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="ShadowGeometry"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="ShadowLevelGeometry" unique_id=400064827]
 transform = Transform3D(-4.37114e-08, 0, 3.97416, 0, 1, 0, -1, 0, -1.73716e-07, -0.0259876, 1.31426, -2.51557)
 polygon = PackedVector2Array(0, 0, 0, 0, 1.25373, 1.03499, 4.24766, 3.22178, 4.91613, 3.80578, 5, 0, 1, 0)
 depth = 2.54
 material = SubResource("StandardMaterial3D_ov6po")
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="ShadowGeometry"]
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="ShadowLevelGeometry" unique_id=250587106]
 transform = Transform3D(-4.37114e-08, 0, 3.97416, 0, 1, 0, -1, 0, -1.73716e-07, 24.4923, 1.31426, -5.5095)
 polygon = PackedVector2Array(0, 0, 0, 0, 1.25373, 1.03499, 4.24766, 3.22178, 4.91613, 3.80578, 5, 0, 1, 0)
 depth = 0.65
 material = SubResource("StandardMaterial3D_ov6po")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1249947020]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 1.86819, -7.91462)
 size = Vector3(2, 1, 1)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=312858858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 2.36819, -8.91462)
 size = Vector3(2, 2, 1)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=195908070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 2.86819, -9.91462)
 size = Vector3(2, 3, 1)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1891312107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931463, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=2077244416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.93146, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1053583177]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.93146, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=2050049052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9315, 3.22879, -17.4146)
 size = Vector3(2, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=981011968]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9315, 2.36819, 18.5854)
 size = Vector3(2, 2, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D13" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1652881862]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9315, 2.36819, 12.5924)
 size = Vector3(2, 2, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D15" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1762225633]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9315, 11.6163, 3.32557)
 size = Vector3(9.26416, 0.80957, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D14" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=1910577577]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19.0214, 3.44817, 12.557)
 operation = 2
 size = Vector3(2.4917, 2, 9.15033)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="ShadowGeometry"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="ShadowLevelGeometry" unique_id=601156347]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2508, 3.22879, -17.4146)
 size = Vector3(2.63867, 3.72119, 14)
 material = SubResource("StandardMaterial3D_yv2ts")
 
-[node name="physics_objects" type="Node3D" parent="."]
+[node name="physics_objects" type="Node3D" parent="." unique_id=2036821081]
 
-[node name="box1" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box1" parent="physics_objects" unique_id=1161267121 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.703171, 2.06818, 20.9151)
 
-[node name="box2" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box2" parent="physics_objects" unique_id=964858979 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8627, 2.06818, 20.9151)
 
-[node name="box3" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box3" parent="physics_objects" unique_id=1485145198 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01581, 2.06818, 20.9151)
 
-[node name="box4" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box4" parent="physics_objects" unique_id=846670034 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33112, 3.06818, 20.9151)
 
-[node name="box5" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box5" parent="physics_objects" unique_id=1096343090 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1989, 3.06818, 20.9151)
 
-[node name="box11" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box11" parent="physics_objects" unique_id=438829899 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79602, 4.06818, 20.4102)
 
-[node name="box6" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box6" parent="physics_objects" unique_id=2313642 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.703171, 2.06818, 19.9151)
 
-[node name="box7" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box7" parent="physics_objects" unique_id=1356442411 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8627, 2.06818, 19.9151)
 
-[node name="box8" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box8" parent="physics_objects" unique_id=518366461 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01581, 2.06818, 19.9151)
 
-[node name="box9" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box9" parent="physics_objects" unique_id=413847640 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33112, 3.06818, 19.9151)
 
-[node name="box10" parent="physics_objects" instance=ExtResource("2_a2qm0")]
+[node name="box10" parent="physics_objects" unique_id=1969785636 instance=ExtResource("2_a2qm0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1989, 3.06818, 19.9151)

@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://kfuretb65505"]
+[gd_resource type="VisualShader" format=3 uid="uid://kfuretb65505"]
 
 [ext_resource type="Texture2D" uid="uid://clnfpevxcym48" path="res://Example World/Models/Textures/prototype texture/Green/texture_01.png" id="1_1d3md"]
 [ext_resource type="Texture2D" uid="uid://ir78fctnwldw" path="res://Example World/Models/Textures/prototype texture/Red/texture_01.png" id="2_1nc8b"]
@@ -13,33 +13,6 @@ texture = ExtResource("2_1nc8b")
 operator = 7
 
 [resource]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
-
-uniform sampler2D tex_frg_2;
-uniform sampler2D tex_frg_3;
-
-
-
-void fragment() {
-// Texture2D:2
-	vec4 n_out2p0 = texture(tex_frg_2, UV);
-
-
-// Texture2D:3
-	vec4 n_out3p0 = texture(tex_frg_3, UV);
-
-
-// FloatOp:4
-	float n_out4p0 = min(n_out2p0.x, n_out3p0.x);
-
-
-// Output:0
-	ALBEDO = vec3(n_out4p0);
-
-
-}
-"
 nodes/fragment/0/position = Vector2(840, -60)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_4v8y4")
 nodes/fragment/2/position = Vector2(120, -60)
